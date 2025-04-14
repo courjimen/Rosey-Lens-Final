@@ -16,7 +16,7 @@ The app visually represents the user's potential mood through a rose that either
 Access my [wireframe and user flow](https://www.figma.com/design/JAbLEYMxwfi37iejMv9sdQ/Blog-App?node-id=56-2&p=f&t=cYaNSO1sJNm9Mv6F-0) directly on Figma for a closer look.
 What you can expect to see:
 
-![](./images/Wireframe.png)
+![](./images/wireframe.png)
 
 Select prototype tab then click the frame to highlight the user flow 
 

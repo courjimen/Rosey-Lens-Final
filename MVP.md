@@ -1,6 +1,6 @@
 # ROSY LENS 🌹 🥀
 
-Rosy Lens uplifts people with positive affirmations who need a boost of happiness and encouragement (with the option to link to music or a bible verse).
+Rosy Lens uplifts people who need a boost of happiness and encouragement with a positive affirmation, bible verse, or peaceful lofi song.
 
 ## MVP 
 The app visually represents the user's potential mood through a rose that either strengthens in vibrancy or wilts. Based on a mood assessment, the user "waters" the rose (engaging interaction) to reveal a personalized affirmation, song snippet, or bible verse, reflecting a moment of self-care.

@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "name": "rosey-lens-final",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "type": "module",
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run start",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/courjimen/Rosey-Lens-Final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/courjimen/Rosey-Lens-Final/issues"
+  },
+  "homepage": "https://github.com/courjimen/Rosey-Lens-Final#readme",
+  "description": ""
+}

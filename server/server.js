@@ -38,7 +38,11 @@ const moodQuestions = [
     score: {'Calm and clear': 2, 'Restless and worried': 0, 'Anxious and sad': -2}
   },
 ]
-//write routes
+
+//GET QUESTION
+app.get('/question', (req, res) => {
+  res.json(moodQuestions)
+})
 
 app.use(express.json())
 app.use(cors())

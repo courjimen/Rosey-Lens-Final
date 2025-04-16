@@ -33,7 +33,11 @@ function CreateAccount() {
         placeholder='Confirm Password'
         required
         />
+
+        <div>
         <button type='submit'>Create Account</button>
+        </div>
+        
       </form>
       </div>
 

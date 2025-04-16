@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "react-router-dom": "^7.5.0"
   },
   "name": "rosey-lens-final",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "type": "module",
     "client": "cd client && npm run dev",

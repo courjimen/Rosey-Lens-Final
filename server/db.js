@@ -4,6 +4,6 @@ import pg from 'pg'
 const pool = new pg.Pool({
     user: 'tpl1122_12',
     host: '/tmp',
-    database: 'users',
+    database: 'rosy',
     port: 5432
 })

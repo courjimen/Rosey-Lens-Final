@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/RevealRose.css'
 
 function RevealRose() {
   return (

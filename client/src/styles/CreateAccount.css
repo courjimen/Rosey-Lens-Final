@@ -1,6 +1,7 @@
 /* CreateAccount.css */
 
 .create-account {
+    background-image: url('./images/rosePetal.jpg');
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,14 +64,14 @@
   }
   
   .link-container a {
-    color: #f08080;
+    color: #fbfbfb;
     text-decoration: none;
     font-size: 16px;
     transition: color 0.3s ease;
   }
   
   .link-container a:hover {
-    color: #e06868; 
+    color: #f7f7f7; 
     text-decoration: underline;
   }
   

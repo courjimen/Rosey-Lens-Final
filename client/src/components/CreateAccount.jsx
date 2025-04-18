@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import '../styles/CreateAccount.css'
 
 function CreateAccount() {
@@ -41,7 +41,7 @@ function CreateAccount() {
       </form>
       </div>
 
-      <Link to='/guest'>Return Home</Link>
+      {/* <Link to='/guest'>Return Home</Link> */}
     </div>
   )
 }

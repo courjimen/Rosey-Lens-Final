@@ -1,5 +1,6 @@
 import React from 'react'
-import { render, expect, describe, it } from '@testing-library/react'
+import { render } from '@testing-library/react'
+import { describe, it } from 'vitest'
 import App from '../App'
 
 describe('App component', () => {

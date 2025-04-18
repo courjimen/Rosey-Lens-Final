@@ -10,7 +10,8 @@
     "type": "module",
     "client": "cd client && npm run dev",
     "server": "cd server && npm run start",
-    "dev": "concurrently \"npm run client\" \"npm run server\""
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "build": "npm run dev"
   },
   "repository": {
     "type": "git",

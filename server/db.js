@@ -7,3 +7,5 @@ const pool = new pg.Pool({
     database: 'rosy',
     port: 5432
 })
+
+export default pool

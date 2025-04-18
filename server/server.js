@@ -8,7 +8,7 @@ const app = express()
 const port = 3000
 
 //POST NEW USER
-app.post('/new', async () => {
+app.post('/new', async (req, res) => {
   const {username, email, phone, password} = req.body
 
   try {

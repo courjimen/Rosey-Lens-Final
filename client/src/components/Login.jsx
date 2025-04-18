@@ -3,7 +3,24 @@ import '../styles/Login.css'
 
 function Login() {
   return (
-    <div>Login</div>
+    <div>
+      <h2>Login</h2>
+      <form>
+        <input
+          type='text'
+          placeholder='Username'
+          required
+        />
+
+        <input
+          type='text'
+          placeholder='Password'
+          required
+        />
+
+        <button type='submit'>Login</button>
+      </form>
+    </div>
   )
 }
 

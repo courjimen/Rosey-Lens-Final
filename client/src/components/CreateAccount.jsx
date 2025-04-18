@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/Forms.css'
 
 function CreateAccount() {
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmP, setConfirmP] = useState('')
+  const [error, setError] = useState('')
+
   return (
     <div className='create-account'>
       <h2>Create Your Account</h2>

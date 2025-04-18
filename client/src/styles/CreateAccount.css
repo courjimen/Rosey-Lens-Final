@@ -1,6 +1,6 @@
 /* CreateAccount.css */
 
-.create-account {
+.create-account, .login-container {
     background-image: url('./images/rosePetal.jpg');
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
     text-align: center; 
   }
   
-  .input-form {
+  .input-form, .login-form {
     background-color: #ffe0e0;
     padding: 20px;
     border-radius: 8px;

@@ -3,20 +3,22 @@ import '../styles/Login.css'
 
 function Login() {
   return (
-    <div>
+    <div className='login-container'>
       <h2>Login</h2>
-      <form>
+      <form className='login-form'>
+        <div>
         <input
           type='text'
           placeholder='Username'
           required
-        />
+        /></div>
 
+        <div>
         <input
           type='text'
           placeholder='Password'
           required
-        />
+        /></div>
 
         <button type='submit'>Login</button>
       </form>

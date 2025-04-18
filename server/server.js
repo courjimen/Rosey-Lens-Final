@@ -12,7 +12,11 @@ app.post('/new', async () => {
   const {username, email, phone, password} = req.body
 
   try {
-    const result = await pool.query('INSERT INTO user (username, email, phone, password) VALUES ($1, $2, $3, $4) RETURNING *')
+    const result = await pool.query('INSERT INTO user (username, email, phone, password) VALUES ($1, $2, $3, $4) RETURNING *', [username, email, phone, password])
+    res.json(result.rows[0])
+  } catch (err) {
+    console.error('Error creating contact: ', err)
+    res.sendStatus(500)
   }
 })
 //GET QUESTIONS

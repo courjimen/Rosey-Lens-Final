@@ -5,10 +5,10 @@ import Login from './components/Login'
 import MoodHistory from './components/MoodHistory'
 import RevealRose from './components/RevealRose'
 import Faves from './components/Faves'
+import Quiz from './components/Quiz'
 
 function App() {
   
-
   return (
     <Router>
       <Routes>
@@ -17,6 +17,7 @@ function App() {
         <Route path="/history" element={<MoodHistory />} />
         <Route path="/reveal" element={<RevealRose />} />
         <Route path="/favorites" element={<Faves />} />
+        <Route path="/quiz" element={<Quiz />} />
       </Routes>
     </Router>
   )

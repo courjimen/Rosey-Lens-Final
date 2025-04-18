@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../styles/CreateAccount.css'
+import '../styles/Forms.css'
 
 function CreateAccount() {
   return (

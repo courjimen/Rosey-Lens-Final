@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/Faves.css'
 
 function Faves() {
   return (

@@ -3,6 +3,7 @@ import cors from 'cors'
 import moodQuestions from './moodQuiz.js'
 import moodData from './currentMood.js'
 import pool from './db.js'
+import fetch from 'node-fetch'
 
 const app = express()
 const port = 3000
@@ -27,6 +28,20 @@ app.get('/question', (req, res) => {
 //GET Current Mood Data
 app.get('/mood', (req, res) => {
   res.json(moodData)
+})
+
+//GET BIBLE VERSE
+app.get('/bible-verse', async (req, res) => {
+  const apiUrl = "https://api.biblesupersearch.com/api"
+  try {
+    const res = await fetch(apiUrl)
+
+    const data = await res.json()
+    res.json(data)
+  } catch (err) {
+    console.error('Error fetching Bible verse: ', err)
+    res.status(500).send('Error retrieving Bible verse')
+  }
 })
 
 app.use(express.json())

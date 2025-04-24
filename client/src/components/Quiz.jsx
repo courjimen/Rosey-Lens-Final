@@ -39,7 +39,11 @@ function Quiz() {
   const handleAnswerChange = (e) => {
     setSelectedAnswer(e.target.value)
   }
-  
+
+  const handleSubmit = () => {
+    if (!selectedAnswer) return //prevents submitting empty answer
+  }
+
   return (
     <div>Quiz</div>
   )

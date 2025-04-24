@@ -44,6 +44,26 @@ function Quiz() {
     if (!selectedAnswer) return //prevents submitting empty answer
   }
 
+  setAnswers({
+    ...answers,
+    [questionData[currentQuestionIndex].id]: selectedAnswer,
+  })
+
+  //navigates to next question
+  if (currentQuestionIndex < questionData.length - 1) {
+    setCurrentQuestionIndex(currentQuestionIndex + 1)
+    setSelectedAnswer('') //resets selected answer for next question
+  } else {
+    let score = 0
+      questionData.forEach(question => {
+        const selected = answers[question.id]
+        if (selected) {
+          score += question.score[selected] || 0
+        }
+      })
+      console.log("Final Score:", score)
+      setQuizCompleted(true)
+  }
   return (
     <div>Quiz</div>
   )

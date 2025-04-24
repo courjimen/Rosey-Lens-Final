@@ -52,7 +52,13 @@ app.post('/quiz', async (req, res) => {
   try {
     const { userId, answers } = req.body
     let totalScore= 0
-    
+
+    //Calculate score
+    for (const questionId in answers) {
+      const answer = answers[questionId]
+      const questionResult = await pool.query('SELECT score FROM questions WHERE id = $1', [questionId])
+//STOPPED HERE
+    }
   }
 })
 

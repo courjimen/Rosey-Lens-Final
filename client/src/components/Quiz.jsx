@@ -36,6 +36,10 @@ function Quiz() {
     fetchQuestions()
   }, [])
   
+  const handleAnswerChange = (e) => {
+    setSelectedAnswer(e.target.value)
+  }
+  
   return (
     <div>Quiz</div>
   )

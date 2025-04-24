@@ -33,7 +33,7 @@ app.get('/mood', (req, res) => {
   res.json(moodData)
 })
 
-//GET BIBLE VERSE
+//GET BIBLE VERSE (documentation listed here: https://api.biblesupersearch.com/#query_structures)
 app.get('/bible-verse', async (req, res) => {
   const apiUrl = "https://api.biblesupersearch.com/api"
   try {

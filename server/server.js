@@ -8,6 +8,9 @@ import pool from './db.js'
 const app = express()
 const port = 3000
 
+app.use(express.json())
+app.use(cors())
+
 //POST NEW USER
 app.post('/new', async (req, res) => {
   const {username, email, phone, password} = req.body
@@ -16,7 +19,7 @@ app.post('/new', async (req, res) => {
     const result = await pool.query('INSERT INTO user (username, email, phone, password) VALUES ($1, $2, $3, $4) RETURNING *', [username, email, phone, password])
     res.json(result.rows[0])
   } catch (err) {
-    console.error('Error creating contact: ', err)
+    console.error('Error creating user: ', err)
     res.sendStatus(500)
   }
 })
@@ -43,9 +46,6 @@ app.get('/bible-verse', async (req, res) => {
     res.status(500).send('Error retrieving Bible verse')
   }
 })
-
-app.use(express.json())
-app.use(cors())
 
 app.listen(port, () => {
   console.log(`Server started on ${port}`)

@@ -3,10 +3,10 @@
 **Rosy Lens uplifts people who need a boost of happiness and encouragement with a positive affirmation, bible verse, or peaceful lofi song.**
 
 ## Table of Contents
-- Prerequisites
-- Installation Instructions
-- Features
-- Demo
+- [Prerequisites](#what-youll-need)
+- [Installation Instructions](#installation-instructions)
+- [Features](#features)
+- [Demo](#demo)
 
 # What You'll Need 
 Prior to running this project, here are the pre-reqs you'll need. Please make sure you've got these installed on your computer:
@@ -14,10 +14,10 @@ Prior to running this project, here are the pre-reqs you'll need. Please make su
 * **Node.js:** This runs the app (you'll want version 16 or later)
 * **npm** Node Package Manager
 * **PostgreSQL** This is where we'll keep all our user's mood data. Make sure it's up and running! Mock data is provided in my db.sql file to get you started ✅
-* **Vitest** For running unit tests _use the command npm test to run your test files_
+* **Vitest** For running unit tests _cd into client and use the command **npm test** to run test files_
 
 # Installation Instructions
-Below is a step by step to setting up and running my project locally ⭐️
+Below is a step-by-step to run my project locally ⭐️
 
 ## Part One
 

@@ -14,7 +14,7 @@ Prior to running this project, here are the pre-reqs you'll need. Please make su
 * **Node.js:** This runs the app (you'll want version 16 or later)
 * **npm** Node Package Manager
 * **PostgreSQL** This is where we'll keep all our user's mood data. Make sure it's up and running! Mock data is provided in my db.sql file to get you started ✅
-* **Vitest** For running unit tests
+* **Vitest** For running unit tests _use the command npm test to run your test files_
 
 # Installation Instructions
 Below is a step by step to setting up and running my project locally ⭐️

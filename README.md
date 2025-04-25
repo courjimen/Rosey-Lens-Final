@@ -87,6 +87,10 @@ This will start both the server and the client. You should be able to see the ap
 # Demo
 We will be updating with visuals of the app soon! In the meantime, you're able to [checkout my wireframe]((https://www.figma.com/design/JAbLEYMxwfi37iejMv9sdQ/Blog-App?node-id=56-2&p=f&t=cYaNSO1sJNm9Mv6F-0)) directly on Figma.
 
+What you can expect to see:
+
+![](./images/wireframes.png)
+
 # Future Goals
 We are continuously working on improving and expanding the functionality of Rosy Lens to provide the best user experience for you! Here are some exciting upcoming features we plan to implement in the future: 
 

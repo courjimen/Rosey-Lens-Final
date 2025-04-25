@@ -82,10 +82,10 @@ This will start both the server and the client. You should be able to see the ap
 - ***Rose animation** e.g., color subtly changing to more vibrant/healthy and display of affirmation 
 - **Shareable Card** an option to share link or visual snippet to social media platforms
 
-*<uNice to haves:</u> Upcoming features that will be implemented at a later date
+*<u>Nice to haves:</u> Upcoming features that will be implemented at a later date
 
 # Demo
-We will be updating with visuals of the app soon!
+We will be updating with visuals of the app soon! In the meantime, you're able to [checkout my wireframe]((https://www.figma.com/design/JAbLEYMxwfi37iejMv9sdQ/Blog-App?node-id=56-2&p=f&t=cYaNSO1sJNm9Mv6F-0)) directly on Figma.
 
 # Future Goals
 We are continuously working on improving and expanding the functionality of Rosy Lens to provide the best user experience for you! Here are some exciting upcoming features we plan to implement in the future: 

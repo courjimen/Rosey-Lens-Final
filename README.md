@@ -3,12 +3,18 @@
 **Rosy Lens uplifts people who need a boost of happiness and encouragement with a positive affirmation, bible verse, or peaceful lofi song.**
 
 ## Table of Contents
-- Pre-reqs
+- Prerequisites
 - Installation Instructions
 - Features
 - Demo
 
 # What You'll Need 
+Prior to running this project, here are the pre-reqs you'll need. Please make sure you've got these installed on your computer:
+
+* **Node.js:** This runs the app (you'll want version 16 or later)
+* **npm** Node Package Manager
+* **PostgreSQL** This is where we'll keep all our user's mood data. Make sure it's up and running! Mock data is provided in my db.sql file to get you started ✅
+* **Vitest** For running unit tests
 
 # Installation Instructions
 Below is a step by step to setting up and running my project locally ⭐️
@@ -24,7 +30,7 @@ git clone https://github.com/courjimen/Rosy-Lens-Final.git
 
 1. Cd into client and run the following commands: 
 ```bash
-npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react @testing-library/react @testing-library/jest-dom
+npm install -D vitest @testing-library/react @testing-library/jest-dom
 ```
 
 ```bash

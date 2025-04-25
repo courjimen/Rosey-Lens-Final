@@ -9,6 +9,7 @@
 - [Demo](#demo)
 - [Upcoming Additions](#future-goals)
 - [FAQs](#faqs)
+- [Contribute](#have-an-idea-you-want-to-contribute)
 
 # What You'll Need 
 Prior to running this project, here are the pre-reqs you'll need. Please make sure you've got these installed on your computer:
@@ -102,3 +103,5 @@ We are continuously working on improving and expanding the functionality of Rosy
 | **Translation Options**                  | Access the Rosy Lens in different languages                                        |
 
 # FAQs
+
+# Have an idea you would like to contribute?

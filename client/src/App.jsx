@@ -21,6 +21,7 @@ function App() {
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/select" element={<Selection />} />
         <Route path="/mood" element={<CurrentMood />} />
+        <Route path="/affirmation" element={<Affirmation />} />
       </Routes>
     </Router>
   )

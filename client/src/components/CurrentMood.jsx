@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/CurrentMood.jsx'
+import '../styles/CurrentMood.css'
 
 function CurrentMood() {
   return (

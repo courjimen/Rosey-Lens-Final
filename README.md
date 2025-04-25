@@ -105,7 +105,7 @@ A: Absolutely! You can check out our [contribution guidelines](#have-an-idea-you
 # Future Goals
 We are continuously working on improving and expanding the functionality of Rosy Lens to provide the best user experience for you! Here are some exciting upcoming features we plan to implement in the future: 
 
-| Feature                                      | Description                                                                                  |
+| <u>Feature<u/>                                      | <u>Description<u/>                                                                                  |
 | -------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | **Youtube Videos**            | Add lofi songs with calming visuals as a deliverable                                                               |
 | **Sharing Capabilities** | Share your affirmations or songs on social platforms                                    |

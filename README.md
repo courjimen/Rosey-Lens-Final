@@ -66,6 +66,13 @@ Cd into server and open `db.js` and input your database connection details (user
 
 **5. Let's run it**
 
+Now we're ready to run the app! Navigate back into the root directory and run the following:
+
+```bash
+npm run dev
+```
+This will start both the server and the client. You should be able to see the app in your browser at `http://localhost:5173/` while the server will be running on `http://localhost:3000/`.
+
 # Features
 
 # Demo

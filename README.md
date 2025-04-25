@@ -75,14 +75,14 @@ npm run dev
 This will start both the server and the client. You should be able to see the app in your browser at `http://localhost:5173/` while the server will be running on `http://localhost:3000/`.
 
 # Key Features
-- **Mood reader** (gauges your mood from list of 3-5 questions)
-- **Positive deliverable** (provides affirmation, *song or bible verse based on user input/responses)
-- **Rose visual** (animation that changes vibrancy/health based on initial mood selection)
-- ***Watering interaction** (User selects which deliverable they would like to receive and this is the big reveal)
-- ***Rose animation** (e.g., color subtly changing to more vibrant/healthy) and display of affirmation 
+- **Mood reader** gauges your mood from list of 3-5 questions
+- **Positive deliverable** provides affirmation, *song or bible verse based on user input/responses
+- **Rose visual** animation that changes vibrancy/health based on initial mood selection
+- ***Watering interaction** User selects which deliverable they would like to receive and this is the big reveal
+- ***Rose animation** e.g., color subtly changing to more vibrant/healthy and display of affirmation 
 - **Shareable Card** an option to share link or visual snippet to social media platforms
 
-*<u>Nice to haves:</u> Upcoming features that will be implemented at a later date
+*<uNice to haves:</u> Upcoming features that will be implemented at a later date
 
 # Demo
 We will be updating with visuals of the app soon!

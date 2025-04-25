@@ -81,4 +81,9 @@ This will start both the server and the client. You should be able to see the ap
 # Future Goals
 We are continuously working on improving and expanding the functionality of Rosy Lens to provide the best user experience for you! Here are some exciting upcoming features we plan to implement in the future: 
 
+| Feature                                      | Description                                                                                  |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **Youtube Videos**            | Add lofi songs with calming visuals                                                               |
+| **Sharing Capabilities** | Share your affirmations or songs on social platforms                                    |
+| **New Translations**                  | Access the Rosy Lens in different languages                                        |
 

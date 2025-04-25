@@ -92,7 +92,7 @@ We are continuously working on improving and expanding the functionality of Rosy
 
 | Feature                                      | Description                                                                                  |
 | -------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **Youtube Videos**            | Add lofi songs with calming visuals                                                               |
+| **Youtube Videos**            | Add lofi songs with calming visuals as a deliverable                                                               |
 | **Sharing Capabilities** | Share your affirmations or songs on social platforms                                    |
-| **New Translations**                  | Access the Rosy Lens in different languages                                        |
+| **Translation Options**                  | Access the Rosy Lens in different languages                                        |
 

@@ -8,14 +8,21 @@
 - Features
 - Demo
 
-# Pre Requisites You'll Need
+# What You'll Need 
 
 # Installation Instructions
-Part One to get the app running you'll want to:
-1. **Clone my repo**
+Below is a step by step to setting up and running my project locally ⭐️
 
-2. **Install dependencies in the client and server directories**
-Cd into client and run the following commands: 
+## Part One
+
+**Clone my repo**
+```bash
+git clone https://github.com/courjimen/Rosy-Lens-Final.git
+```
+
+**Install dependencies in directories**
+
+1. Cd into client and run the following commands: 
 ```bash
 npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react @testing-library/react @testing-library/jest-dom
 ```
@@ -23,13 +30,14 @@ npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react @te
 ```bash
 npm install react-router-dom @mui/material @emotion/react @emotion/styled
 ```
+<br/>
 
-Cd into server and run the following command:
+2. Cd into server and run the following command:
 ```bash
 npm install pg cors express nodemon node-fetch && npm init -y
 ```
 
-Return to the root directory and run this command:
+3. Return to the root directory and run this command:
 ```bash
 npm init -y && npm install concurrently
 ```

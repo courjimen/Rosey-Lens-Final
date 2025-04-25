@@ -21,14 +21,14 @@ Below is a step-by-step to run my project locally ⭐️
 
 ## Part One
 
-**Clone my repo**
+**1. Clone my repo**
 ```bash
 git clone https://github.com/courjimen/Rosy-Lens-Final.git
 ```
 
-**Install dependencies in directories**
+**2. Install dependencies in directories**
 
-1. Cd into client and run the following commands:
+Cd into client and run the following commands:
 ```bash
 npm install -D vitest @testing-library/react @testing-library/jest-dom
 ```
@@ -38,19 +38,19 @@ npm install react-router-dom @mui/material @emotion/react @emotion/styled
 ```
 <br/>
 
-2. Cd into server and run the following command:
+Cd into server and run the following command:
 ```bash
 npm install pg cors express nodemon node-fetch && npm init -y
 ```
 
-3. Return to the root directory and run this command:
+Return to the root directory and run this command:
 ```bash
 npm init -y && npm install concurrently
 ```
 
 ## Part Two 
 
-**Set up database**
+**3. Set up database**
 
 You'll need to use `psql` to create your tables locally. Sign in _(make sure postgres is installed!)_ with the following command:
 
@@ -60,12 +60,11 @@ psql postgres
 
 Next, cd into server and follow the steps in my `db.sql` file. Copy/paste the code into your terminal.
 
-**Insert database credentials** 
+**4. Insert database credentials** 
 
 Cd into server and open `db.js` and input your database connection details (username, password, etc.) _**use `/conninfo` to find your database credentials if you are unsure**_
 
-
-**Let's run it**
+**5. Let's run it**
 
 # Features
 

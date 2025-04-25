@@ -77,6 +77,7 @@ This will start both the server and the client. You should be able to see the ap
 # Key Features
 
 # Demo
+We will be updating with visuals of the app soon!
 
 # Future Goals
 We are continuously working on improving and expanding the functionality of Rosy Lens to provide the best user experience for you! Here are some exciting upcoming features we plan to implement in the future: 

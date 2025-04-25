@@ -7,6 +7,7 @@
 - [Installation Instructions](#installation-instructions)
 - [Features](#features)
 - [Demo](#demo)
+- [Upcoming Additions](#future-goals)
 
 # What You'll Need 
 Prior to running this project, here are the pre-reqs you'll need. Please make sure you've got these installed on your computer:
@@ -73,8 +74,11 @@ npm run dev
 ```
 This will start both the server and the client. You should be able to see the app in your browser at `http://localhost:5173/` while the server will be running on `http://localhost:3000/`.
 
-# Features
+# Key Features
 
 # Demo
+
+# Future Goals
+We are continuously working on improving and expanding the functionality of Rosy Lens to provide the best user experience for you! Here are some exciting upcoming features we plan to implement in the future: 
 
 

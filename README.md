@@ -93,6 +93,15 @@ What you can expect to see:
 
 ![](./images/wireframes.png)
 
+# FAQs
+**Q: Am I able to see my history as a guest?**
+
+A: No, as of now that feature is only available to logged in users who create account.
+
+**Q: Can I make suggestions for affirmations or verses to add to the platform?**
+
+A: Absolutely! You can check out our [contribution guidelines](#have-an-idea-you-would-like-to-contribute) below
+
 # Future Goals
 We are continuously working on improving and expanding the functionality of Rosy Lens to provide the best user experience for you! Here are some exciting upcoming features we plan to implement in the future: 
 
@@ -101,8 +110,6 @@ We are continuously working on improving and expanding the functionality of Rosy
 | **Youtube Videos**            | Add lofi songs with calming visuals as a deliverable                                                               |
 | **Sharing Capabilities** | Share your affirmations or songs on social platforms                                    |
 | **Translation Options**                  | Access the Rosy Lens in different languages                                        |
-
-# FAQs
 
 # Have an idea you would like to contribute?
 We love positive contributions to enhance and expand Rosy Lens. To submit suggestions please open an issue on our GitHub repository. Feel free to submit a pull request as well! A contributing guide is under development ⚠️

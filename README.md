@@ -8,6 +8,7 @@
 - [Features](#features)
 - [Demo](#demo)
 - [Upcoming Additions](#future-goals)
+- [FAQs](#faqs)
 
 # What You'll Need 
 Prior to running this project, here are the pre-reqs you'll need. Please make sure you've got these installed on your computer:
@@ -100,3 +101,4 @@ We are continuously working on improving and expanding the functionality of Rosy
 | **Sharing Capabilities** | Share your affirmations or songs on social platforms                                    |
 | **Translation Options**                  | Access the Rosy Lens in different languages                                        |
 
+# FAQs

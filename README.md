@@ -105,3 +105,4 @@ We are continuously working on improving and expanding the functionality of Rosy
 # FAQs
 
 # Have an idea you would like to contribute?
+We love positive contributions to enhance and expand Rosy Lens. To submit suggestions please open an issue on our GitHub repository. Feel free to submit a pull request as well! A contributing guide is under development ⚠️

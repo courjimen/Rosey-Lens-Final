@@ -9,11 +9,14 @@ import Quiz from './components/Quiz'
 import CurrentMood from './components/CurrentMood'
 import Selection from './components/Selection'
 import Affirmation from './components/Affirmation'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 function App() {
   
   return (
+    
     <Router>
+      <GoogleOAuthProvider>
       <Routes>
         <Route path="/login" element={<Login/>} />
         <Route path="/new" element={<CreateAccount />} />
@@ -25,6 +28,7 @@ function App() {
         <Route path="/mood" element={<CurrentMood />} />
         <Route path="/affirmation" element={<Affirmation />} />
       </Routes>
+      </GoogleOAuthProvider>
     </Router>
   )
 }

@@ -10,7 +10,8 @@ function Quiz() {
   const [error, setError] = useState(null)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState({})
-  const [quizComplete, setQuizCompleted] = useState(false)
+  const [quizCompleted, setQuizCompleted] = useState(false)
+  const [quizResult, setQuizResult] = useState(null);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -23,10 +24,10 @@ function Quiz() {
         if (data && data.length > 0) {
           setQuestionData(data)
         } else {
-          setError('Error fetching questions')
+          setError('Server error fetching questions')
         }
       } catch (error) {
-        setError(error)
+        setError(error.message)
         console.error('Error fetching questions: ', error)
       }
       finally {
@@ -35,7 +36,7 @@ function Quiz() {
     }
     fetchQuestions()
   }, [])
-  
+
   const handleAnswerChange = (e) => {
     setSelectedAnswer(e.target.value)
   }
@@ -54,19 +55,43 @@ function Quiz() {
     setCurrentQuestionIndex(currentQuestionIndex + 1)
     setSelectedAnswer('') //resets selected answer for next question
   } else {
-    let score = 0
-      questionData.forEach(question => {
-        const selected = answers[question.id]
-        if (selected) {
-          score += question.score[selected] || 0
-        }
+    try {
+      const userId = 1
+      const response = await fetch('http://localhost:3000/quiz', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, answers }),
       })
-      console.log("Final Score:", score)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const responseData = await response.json()
+      setQuizResult(responseData)
       setQuizCompleted(true)
+    } catch (error) {
+      console.error('Error submitting quiz:', error)
+      setError('Could not submit quiz. Please try again')
+    }
   }
-  return (
-    <div>Quiz</div>
-  )
+}
+
+if 
+
+let score = 0
+questionData.forEach(question => {
+  const selected = answers[question.id]
+  if (selected) {
+    score += question.score[selected] || 0
+  }
+})
+console.log("Final Score:", score)
+setQuizCompleted(true)
+  }
+return (
+  <div>Quiz</div>
+)
 }
 
 export default Quiz

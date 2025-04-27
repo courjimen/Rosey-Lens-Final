@@ -1,14 +1,21 @@
 import React from 'react'
 import '../styles/Forms.css'
 import { GoogleLogin } from '@react-oauth/google'
+import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
 
 function Login() {
+  const navigate = useNavigate()
   return (
     <>
     <GoogleLogin onSuccess={(credentialResponse) => {
       console.log(credentialResponse)
+      console.log(jwtDecode(credentialResponse.credential))
+      navigate("/home")
     }} 
-    onError={() => console.log('Login failed')}/>
+    onError={() => console.log('Login failed')}
+    />
+
     </>
     // <div className='login-container'>
     //   <h2>Login</h2>

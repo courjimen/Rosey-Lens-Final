@@ -57,6 +57,7 @@ function Quiz() {
       setSelectedAnswer('') //resets selected answer for next question
     } else {
       try {
+        //need to set to user
         const userId = 1
         const response = await fetch('http://localhost:3000/quiz', {
           method: 'POST',

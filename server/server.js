@@ -13,7 +13,7 @@ app.use(cors())
 
 //POST NEW USER
 app.post('/new', async (req, res) => {
-  const {username, email, phone, password} = req.body
+  const { username, email, phone, password } = req.body
 
   try {
     const result = await pool.query('INSERT INTO user (username, email, phone, password) VALUES ($1, $2, $3, $4) RETURNING *', [username, email, phone, password])
@@ -33,14 +33,33 @@ app.get('/mood', (req, res) => {
   res.json(moodData)
 })
 
-//GET BIBLE VERSE (documentation listed here: https://api.biblesupersearch.com/#query_structures)
-app.get('/bible-verse', async (req, res) => {
-  const apiUrl = "https://api.biblesupersearch.com/api"
-  try {
-    const res = await fetch(apiUrl)
+//GET BIBLE VERSE
+app.get('/bible', async (req, res) => {
+  const searchTerm = req.query.search
+  const bibleVersion = 'asv'
 
-    const data = await res.json()
-    res.json(data)
+  if(!searchTerm) {
+    return res.status(400).send('Could not search verses')
+  }
+
+  const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&search=${searchTerm}`
+
+  try {
+    const apiResponse = await fetch(apiUrl)
+    if (!apiResponse.ok) {
+      return res.status(apiResponse.status).send(`Error from Bible API: ${apiResponse.statusText}`)
+    }
+    const data = await apiResponse.json()
+
+//selects random verse
+    if (data && data.results && data.results.length > 0) {
+      const randomIndex = Math.floor(Math.random() * data.results.length)
+      const randomVerse = data.results[randomIndex]
+      res.json({ verse:randomVerse })
+    } else {
+      res.status(404).send('No verses found')
+    }
+    
   } catch (err) {
     console.error('Error fetching Bible verse: ', err)
     res.status(500).send('Error retrieving Bible verse')
@@ -51,16 +70,53 @@ app.get('/bible-verse', async (req, res) => {
 app.post('/quiz', async (req, res) => {
   try {
     const { userId, answers } = req.body
-    let totalScore= 0
+    let totalScore = 0
 
     //Calculate score
     for (const questionId in answers) {
       const answer = answers[questionId]
       const questionResult = await pool.query('SELECT score FROM questions WHERE id = $1', [questionId])
-//STOPPED HERE
+
+      if (questionResult.rows.length > 0) {
+        const question = questionResult.rows[0]
+        const scoreData = question.scoreData
+        if (scoreData && scoreData[answer] !== undefined) {
+          totalScore += scoreData[answer]
+        }
+      }
     }
+
+    let moodCategory = ''
+    let message = ''
+
+    if (totalScore > 4) {
+      moodCategory = 'positive'
+      message = moodData.positve[Math.floor(Math.random() * moodData.positive.length)]
+    } else if (totalScore < 4 && totalScore > -2) {
+      moodCategory = 'neutral'
+      message = moodData.neutral[Math.floor(Math.random() * moodData.neutral.length)]
+    } else {
+      moodCategory = 'negative'
+      message = moodData.negative[Math.floor(Math.random() * moodData.negative.length)]
+    }
+
+    const result = await pool.query('INSERT INTO quiz (user_id, score, date_completed) VALUES ($1, $2, NOW()) RETURNING *',
+      [userId, totalScore]
+    );
+    const quizResultt = result.rows[0]
+
+    res.status(201).json({
+      message: 'Quiz submitted successfully',
+      totalScore,
+      mood: message,
+      quizResult: newQuizResult,
+    });
+
+  } catch (error) {
+    console.error('Error submitting quiz:', error);
+    res.status(500).json({ error: 'Failed to submit quiz' });
   }
-})
+});
 
 app.listen(port, () => {
   console.log(`Server started on ${port}`)

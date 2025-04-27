@@ -6,6 +6,9 @@ import MoodHistory from './components/MoodHistory'
 import RevealRose from './components/RevealRose'
 import Faves from './components/Faves'
 import Quiz from './components/Quiz'
+import CurrentMood from './components/CurrentMood'
+import Selection from './components/Selection'
+import Affirmation from './components/Affirmation'
 
 function App() {
   
@@ -18,6 +21,9 @@ function App() {
         <Route path="/reveal" element={<RevealRose />} />
         <Route path="/favorites" element={<Faves />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/select" element={<Selection />} />
+        <Route path="/mood" element={<CurrentMood />} />
+        <Route path="/affirmation" element={<Affirmation />} />
       </Routes>
     </Router>
   )

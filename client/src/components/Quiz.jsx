@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Button, RadioGroup, Radio, FormControlLabel } from '@mui/material'
 import { Card, CardContent, CardHeader, Typography } from '@mui/material'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
 
 function Quiz() {
@@ -41,8 +43,8 @@ function Quiz() {
     setSelectedAnswer(e.target.value)
   }
 
-  const handleSubmit = async () => {
-    if (!selectedAnswer) return //prevents submitting empty answer
+  const handleNextQuestion = async () => {
+    if (!selectedAnswer) return
 
     setAnswers({
       ...answers,
@@ -73,6 +75,13 @@ function Quiz() {
         console.error('Error submitting quiz:', error)
         setError('Could not submit quiz. Please try again')
       }
+    }
+  }
+
+  const handlePrevQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1)
+      setSelectedAnswer('')
     }
   }
 
@@ -139,12 +148,21 @@ function Quiz() {
           </RadioGroup>
           <div className='button-container'>
             <Button
+              disabled={currentQuestionIndex === 0}
+              className='prev-button'
+              onClick={handlePrevQuestion}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} />
+              Previous
+              </Button>
+              <Button
               disabled={!selectedAnswer}
               className='submit-button'
-              onClick={handleSubmit}
-            >
-              {currentQuestionIndex === questionData.length - 1 ? 'Finish Quiz' : 'Next Question'}
-            </Button>
+              onClick={handleNextQuestion}
+              >
+              {currentQuestionIndex === questionData.length - 1 ? 'Submit' : 'Next'}
+              {currentQuestionIndex !== questionData.length - 1 && <FontAwesomeIcon icon={faArrowRight} />}
+              </Button>
           </div>
         </CardContent>
       </Card>

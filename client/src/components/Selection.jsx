@@ -1,5 +1,5 @@
 import React from 'react'
-import Selection from '../styles/Selection.css'
+import '../styles/Selection.css'
 
 function Selection() {
   return (

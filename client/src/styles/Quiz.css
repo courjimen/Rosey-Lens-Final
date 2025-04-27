@@ -1,57 +1,140 @@
 .quiz-container {
     display: flex;
     justify-content: center;
-    margin-top: 32px;
-}
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8d2d2;
+  }
+  
+  .quiz-card {
+    max-width: 600px;
+    width: 95%;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background-color: #fff;
+  }
+  
+  .quiz-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .question-text {
+    font-size: 35px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+    color: #444;
+    background-color: #f8d2d2;
+  }
+  
+  .radio-label {
+    font-size: 16px;
+    margin-bottom: 12px;
+    display: block;
+    color: #0a0a0a;
+  }
+  
+  /* Style for the radio input*/
+  .radio-label span:first-child input[type="radio"] {
+      height: 30px; 
+      width: 30px;
+  }
+  
+  /* Space between the radio button and label text */
+  .radio-label span:last-child {
+      margin-left: 5px;
+  }
 
-.quiz-card {
-    width: 100%;
-    max-width: 448px;
-}
-
-.quiz-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1f2937;
-}
-
-.question-text {
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.button-container {
-    margin-top: 16px;
-}
-
-.submit-button {
-    width: 100%;
-}
-
-.loading-container {
+  .button-container {
     display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .prev-button,
+  .submit-button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .prev-button {
+    background-color: #f7cdcd;
+    color: #333;
+  }
+  
+  .prev-button:hover {
+    background-color: #f9c4c4;
+  }
+  
+  .submit-button {
+    background-color: #fca8e0;
+    color: white;
+  }
+  
+  .submit-button:hover {
+    background-color: #fca8e0;
+  }
+  
+  .submit-button:disabled {
+    background-color: #f7cdcd;
+    color: #f7cdcd;
+    cursor: not-allowed;
+    box-shadow: none; /* Remove shadow for disabled state */
+  }
+  
+  .submit-button:disabled:hover {
+    background-color: #f2afaf;
+  }
+  
+  
+  .loading-container,
+  .error-container,
+  .no-questions-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .quiz-completed-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-}
-
-.error-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.no-questions-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.quiz-completed-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .completed-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      max-width: 500px;
+      width: 95%;
+      margin-top: 20px;
+  }
+  
+  .completed-header{
+      color: #4caf50;
+      font-size: 24px;
+      margin-bottom: 10px;
+  }
+  
+  .completed-content {
+      font-size: 18px;
+      color: #333;
+  }
+  

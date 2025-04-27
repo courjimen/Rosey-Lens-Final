@@ -112,9 +112,13 @@ function Quiz() {
   if (quizCompleted) {
     return (
       <div className='quiz-completed-container'>
-        <h2>Quiz Completed!</h2>
-        <p>Your mood: {quizResult?.mood}</p>
-        <p>Your score: {quizResult?.totalScore}</p>
+        <Card className='completed-card'>
+          <CardHeader title="Quiz Completed!" className='completed-header' />
+          <CardContent className='completed-content'>
+            <Typography variant="body1">Your mood: {quizResult?.mood}</Typography>
+            <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
+          </CardContent>
+        </Card>
       </div>
     )
   }
@@ -154,15 +158,15 @@ function Quiz() {
             >
               <FontAwesomeIcon icon={faArrowLeft} />
               Previous
-              </Button>
-              <Button
+            </Button>
+            <Button
               disabled={!selectedAnswer}
               className='submit-button'
               onClick={handleNextQuestion}
-              >
+            >
               {currentQuestionIndex === questionData.length - 1 ? 'Submit' : 'Next'}
               {currentQuestionIndex !== questionData.length - 1 && <FontAwesomeIcon icon={faArrowRight} />}
-              </Button>
+            </Button>
           </div>
         </CardContent>
       </Card>

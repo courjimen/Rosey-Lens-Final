@@ -10,13 +10,14 @@ import CurrentMood from './components/CurrentMood'
 import Selection from './components/Selection'
 import Affirmation from './components/Affirmation'
 
+
 function App() {
   
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login/>} />
-        <Route path="/new" element={<CreateAccount />} />
+        <Route path="/home" element={<CreateAccount />} />
         <Route path="/history" element={<MoodHistory />} />
         <Route path="/reveal" element={<RevealRose />} />
         <Route path="/favorites" element={<Faves />} />

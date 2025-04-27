@@ -3,13 +3,17 @@ import cors from 'cors'
 import moodQuestions from './moodQuiz.js'
 import moodData from './currentMood.js'
 import pool from './db.js'
-// import fetch from 'node-fetch'
+import fetch from 'node-fetch'
 
 const app = express()
 const port = 3000
 
 app.use(express.json())
 app.use(cors())
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  next();
+});
 
 //POST NEW USER
 app.post('/new', async (req, res) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Affirmation from '../styles/Affirmation.css'
+import '../styles/Affirmation.css'
 
 function Affirmation() {
   return (

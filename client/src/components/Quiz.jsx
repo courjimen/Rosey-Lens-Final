@@ -41,10 +41,9 @@ function Quiz() {
     setSelectedAnswer(e.target.value)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!selectedAnswer) return //prevents submitting empty answer
-  }
-
+  
   setAnswers({
     ...answers,
     [questionData[currentQuestionIndex].id]: selectedAnswer,
@@ -77,21 +76,55 @@ function Quiz() {
   }
 }
 
-if 
-
-let score = 0
-questionData.forEach(question => {
-  const selected = answers[question.id]
-  if (selected) {
-    score += question.score[selected] || 0
-  }
-})
-console.log("Final Score:", score)
-setQuizCompleted(true)
-  }
-return (
-  <div>Quiz</div>
-)
+if (loading) {
+  return (
+    <div>
+    <h2>Loading...</h2>
+    </div>
+  )
 }
 
+if (error) {
+  return (
+    <div>
+    <h2>Error: {error}</h2>
+    </div>
+  )
+}
+
+if (!questionData || questionData.length === 0) {
+  return (
+    <div>
+    <h2>No questions to displaly</h2>
+    </div>
+  )
+}
+
+if (quizCompleted) {
+  return (
+    <div>
+    <h2>Quiz Completed!</h2>
+    <p>Your mood: {quizResult?.mood}</p>
+    <p>Your score: {quizResult?.totalScore}</p>
+    </div>
+  )
+}
+
+const currentQuestion = questionData[currentQuestionIndex]
+
+return (
+  <>
+  <div className='quiz-container'>
+    <Card className='quiz-card'>
+      <CardHeader>
+        <CardTitle className='quiz-title'>
+          Question {currentQuestionIndex + 1} / {questionData.length}
+        </CardTitle>
+      </CardHeader>
+    </Card>
+
+  </div>
+  </>
+)
+}
 export default Quiz

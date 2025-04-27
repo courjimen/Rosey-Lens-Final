@@ -17,7 +17,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login/>} />
-        <Route path="/new" element={<CreateAccount />} />
+        <Route path="/home" element={<CreateAccount />} />
         <Route path="/history" element={<MoodHistory />} />
         <Route path="/reveal" element={<RevealRose />} />
         <Route path="/favorites" element={<Faves />} />

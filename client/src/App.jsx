@@ -12,9 +12,13 @@ import Affirmation from './components/Affirmation'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 function App() {
-  
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
+
+  if (!clientId) {
+    return <div>Error: Check Google Client ID configurations</div>
+  }
   return (
-    <GoogleOAuthProvider>
+    <GoogleOAuthProvider clientId={clientId}>
     <Router>
       <Routes>
         <Route path="/login" element={<Login/>} />

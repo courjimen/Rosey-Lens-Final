@@ -14,9 +14,8 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 function App() {
   
   return (
-    
+    <GoogleOAuthProvider>
     <Router>
-      <GoogleOAuthProvider>
       <Routes>
         <Route path="/login" element={<Login/>} />
         <Route path="/new" element={<CreateAccount />} />
@@ -28,8 +27,8 @@ function App() {
         <Route path="/mood" element={<CurrentMood />} />
         <Route path="/affirmation" element={<Affirmation />} />
       </Routes>
-      </GoogleOAuthProvider>
     </Router>
+    </GoogleOAuthProvider>
   )
 }
 

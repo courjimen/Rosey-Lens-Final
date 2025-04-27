@@ -35,7 +35,7 @@ app.get('/mood', (req, res) => {
 
 //GET BIBLE VERSE
 app.get('/bible', async (req, res) => {
-  const searchTerm = "love"
+  const searchTerm = req.query.search
   const bibleVersion = 'asv'
 
   if(!searchTerm) {
@@ -50,7 +50,16 @@ app.get('/bible', async (req, res) => {
       return res.status(apiResponse.status).send(`Error from Bible API: ${apiResponse.statusText}`)
     }
     const data = await apiResponse.json()
-    res.json(data)
+
+//selects random verse
+    if (data && data.results && data.results.length > 0) {
+      const randomIndex = Math.floor(Math.random() * data.results.length)
+      const randomVerse = data.results[randomIndex]
+      res.json({ verse:randomVerse })
+    } else {
+      res.status(404).send('No verses found')
+    }
+    
   } catch (err) {
     console.error('Error fetching Bible verse: ', err)
     res.status(500).send('Error retrieving Bible verse')

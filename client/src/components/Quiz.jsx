@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, RadioGroup, Radio, FormControlLabel } from '@mui/material'
-import { Card, CardContent, CardHeader, CardTitle } from '@mui/material'
+import { Card, CardContent, CardHeader, Typography } from '@mui/material'
 import '../styles/Quiz.css'
 
 function Quiz() {
@@ -78,7 +78,7 @@ function Quiz() {
 
   if (loading) {
     return (
-      <div>
+      <div className='loading-container'>
         <h2>Loading...</h2>
       </div>
     )
@@ -86,7 +86,7 @@ function Quiz() {
 
   if (error) {
     return (
-      <div>
+      <div className='error-container'>
         <h2>Error: {error}</h2>
       </div>
     )
@@ -94,7 +94,7 @@ function Quiz() {
 
   if (!questionData || questionData.length === 0) {
     return (
-      <div>
+      <div className='no-questions-container'>
         <h2>No questions to displaly</h2>
       </div>
     )
@@ -102,7 +102,7 @@ function Quiz() {
 
   if (quizCompleted) {
     return (
-      <div>
+      <div className='quiz-completed-container'>
         <h2>Quiz Completed!</h2>
         <p>Your mood: {quizResult?.mood}</p>
         <p>Your score: {quizResult?.totalScore}</p>
@@ -116,9 +116,9 @@ function Quiz() {
     <div className='quiz-container'>
       <Card className='quiz-card'>
         <CardHeader>
-          <CardTitle className='quiz-title'>
+          <Typography className='quiz-title'>
             Question {currentQuestionIndex + 1} / {questionData.length}
-          </CardTitle>
+          </Typography>
         </CardHeader>
         <CardContent>
           <p className='question-text'>{currentQuestion.text}</p>

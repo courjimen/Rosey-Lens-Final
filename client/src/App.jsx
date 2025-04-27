@@ -9,7 +9,6 @@ import Quiz from './components/Quiz'
 import CurrentMood from './components/CurrentMood'
 import Selection from './components/Selection'
 import Affirmation from './components/Affirmation'
-import CurrentMood from './components/CurrentMood'
 
 function App() {
   

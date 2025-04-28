@@ -1,6 +1,9 @@
 .home-page-container {
     text-align: center;
 }
+.red-text {
+    color: red;
+}
 
 .rose {
     height: 200px;

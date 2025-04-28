@@ -16,6 +16,7 @@ function Quiz() {
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [quizResult, setQuizResult] = useState(null);
 
+ 
   const location = useLocation()
   const firstName = location.state?.firstName
 

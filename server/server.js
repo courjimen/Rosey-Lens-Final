@@ -15,8 +15,37 @@ app.use((req, res, next) => {
   next();
 });
 
-//POST NEW USER
-app.post('/users', async (req, res) => {
+//POST NEW USER (UPDATED)
+app.post('/newuser', async (req, res) => {
+  const { firstname, lastname, email } = req.body
+
+  try {
+    const userCheck = await pool.query('SELECT * FROM users WHERE email = $1', [email])
+    if (userCheck.rows.length > 0) {
+      return res.status(200).json({ message: 'User logged in', user: userCheck.rows[0] })
+    } else {
+    const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
+    res.status(201).json({ message: "User created", user: result.rows[0] })
+    }
+  } catch (err) {
+    console.error('Error creating user: ', err)
+    res.sendStatus(500)
+  }
+})
+
+//See users
+app.get('/users', async (req, res) => {
+  try {
+      const result = await pool.query('SELECT * FROM users')
+      res.json(result.rows)
+  } catch (err) {
+      console.error('Error :', err)
+      res.sendStatus(500)
+  }
+})
+
+//Google Login
+app.post('/login', async (req, res) => {
   const { firstname, lastname, email } = req.body
 
   try {
@@ -43,7 +72,7 @@ app.get('/mood', (req, res) => {
   res.json(moodData)
 })
 
-//GET BIBLE VERSE
+//GET BIBLE VERSE (UPDATED)
 app.get('/bible', async (req, res) => {
   const searchTerm = req.query.search
   const bibleVersion = 'asv'
@@ -76,7 +105,7 @@ app.get('/bible', async (req, res) => {
   }
 })
 
-//POST QUIZ SUBMISSION (CURRENT MOOD)
+//POST QUIZ SUBMISSION (UPDATED)
 app.post('/quiz', async (req, res) => {
   try {
     const { user_id, answers } = req.body
@@ -106,7 +135,7 @@ app.post('/quiz', async (req, res) => {
       message = moodData.negative[Math.floor(Math.random() * moodData.negative.length)]
     }
 
-    const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed, mood_catergory, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *', [user_id, totalScore, moodCategory, message]
+    const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *', [user_id, totalScore, moodCategory, message]
     );
     const quizResult = result.rows[0]
 
@@ -122,6 +151,17 @@ app.post('/quiz', async (req, res) => {
     res.status(500).json({ error: 'Failed to submit quiz', message: error.message });
   }
 });
+
+//See quiz scores
+app.get('/quiz', async (req, res) => {
+  try {
+      const result = await pool.query('SELECT * FROM quiz_scores')
+      res.json(result.rows)
+  } catch (err) {
+      console.error('Error :', err)
+      res.sendStatus(500)
+  }
+})
 
 app.listen(port, () => {
   console.log(`Server started on ${port}`)

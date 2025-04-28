@@ -18,6 +18,7 @@ function Quiz() {
 
  
   const location = useLocation()
+  const userId = location.state?.userId
   const firstName = location.state?.firstName
 
   useEffect(() => {
@@ -62,14 +63,16 @@ function Quiz() {
       setSelectedAnswer('') //resets selected answer for next question
     } else {
       try {
-        //need to set to user
-        const userId = 1
+        if (!userId) {
+          setError('User ID not provided')
+          return
+        }
         const response = await fetch('http://localhost:3000/quiz', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userId, answers }),
+          body: JSON.stringify({ user_id: userId, answers }),
         })
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)

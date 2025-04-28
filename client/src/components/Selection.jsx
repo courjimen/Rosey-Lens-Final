@@ -1,9 +1,15 @@
 import React from 'react'
 import '../styles/Selection.css'
 
+
 function Selection() {
   return (
-    <div>Selection</div>
+    <>
+    <div>
+      <h2>You're feeling...</h2>
+
+    </div>
+    </>
   )
 }
 

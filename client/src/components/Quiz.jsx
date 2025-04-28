@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
 import { useLocation, Link } from 'react-router-dom'
+import roseImage from '../images/roseImage.webp'
 
 function Quiz() {
   const [questionData, setQuestionData] = useState(null)
@@ -15,6 +16,7 @@ function Quiz() {
   const [answers, setAnswers] = useState({})
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [quizResult, setQuizResult] = useState(null);
+  const [moodCategory, setMoodCategory] = useState('')
 
 
   const location = useLocation()
@@ -124,6 +126,13 @@ function Quiz() {
 
   //QUIZ COMPLETE AND SUBMITTED
   if (quizCompleted) {
+    let imageOpacity = '99%'
+    if (moodCategory === 'neutral') {
+      imageOpacity = '50%'
+    } else if (moodCategory === 'negative') {
+      imageOpacity = '10%'
+    }
+
     return (
       <div className='quiz-completed-container'>
         <h2>Thank you for taking the Quiz! Submit score for your affirmation:</h2>
@@ -131,10 +140,16 @@ function Quiz() {
           <CardHeader title="Quiz Completed!" className='completed-header' />
           <CardContent className='completed-content'>
             <Typography variant="body1">Your mood: {quizResult?.mood}</Typography>
+            <img
+              className='quiz-rose'
+              src={roseImage}
+              style={{ opacity: imageOpacity }}
+              alt="Rose representing your mood"
+            />
             <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
           </CardContent>
         </Card>
-        <h2><Link to={{ pathname: '/select', state: { userId: userId, firstName: firstName, quizResult: quizResult}, }}>Submit Quiz</Link></h2>
+        <h2><Link to={{ pathname: '/select', state: { userId: userId, firstName: firstName, quizResult: quizResult }, }}>Submit Quiz</Link></h2>
       </div>
     )
   }

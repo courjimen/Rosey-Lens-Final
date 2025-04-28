@@ -32,7 +32,8 @@ function Login() {
           console.log(data.message)
           console.log('User data:', data.user)
           navigate('/user', { state: { userId: data.user.user_id, firstName: firstName } })
-          
+          //debugging
+          console.log('Login - Navigating to /user with state:', { userId: data.user.user_id, firstName });
           // navigate('/quiz', { state: { userId: data.user.user_id, firstName: firstName } })
 
         } catch (error) {

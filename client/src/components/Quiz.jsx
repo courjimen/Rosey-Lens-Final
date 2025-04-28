@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
+import { useLocation } from 'react-router-dom'
 
 function Quiz() {
   const [questionData, setQuestionData] = useState(null)
@@ -14,6 +15,11 @@ function Quiz() {
   const [answers, setAnswers] = useState({})
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [quizResult, setQuizResult] = useState(null);
+
+ 
+  const location = useLocation()
+  const userId = location.state?.userId
+  const firstName = location.state?.firstName
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -57,14 +63,16 @@ function Quiz() {
       setSelectedAnswer('') //resets selected answer for next question
     } else {
       try {
-        //need to set to user
-        const userId = 1
+        if (!userId) {
+          setError('User ID not provided')
+          return
+        }
         const response = await fetch('http://localhost:3000/quiz', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userId, answers }),
+          body: JSON.stringify({ user_id: userId, answers }),
         })
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
@@ -129,6 +137,8 @@ function Quiz() {
   return (
     <div className='quiz-container'>
       <Card className='quiz-card'>
+        <h1>Hi, {firstName}</h1>
+        <h3>Answer the questions below to rate your mood:</h3>
         <CardHeader>
           <Typography className='quiz-title'>
             Question {currentQuestionIndex + 1} / {questionData.length}

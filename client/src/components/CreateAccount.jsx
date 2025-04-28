@@ -3,11 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../styles/Forms.css'
 
 function CreateAccount() {
-  const [username, setUsername] = useState('')
+  const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmP, setConfirmP] = useState('')
+  const [lastName, setLastName] = useState('')
   const [error, setError] = useState('')
 
   const navigate = useNavigate()
@@ -15,37 +13,30 @@ function CreateAccount() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (password !== confirmP) {
-      setError('Passwords do not match. Please try again')
-      return
-    }
-
     try {
-      const res = await fetch('/new', {
+      const response = await fetch('http://localhost:3000/newuser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: username,
-          email: email,
-          phone: phone,
-          password: password,
-          confirmP: confirmP
+          firstname: firstName,
+          lastname: lastName,
+          email: email
         })
       })
-
-      const data = await res.json()
-
-      if (res.ok) {
-        console.log('Created Account: ', data.message)
-        navigate('/home')
-      } else {
-        setError('Account creation failed: ', data.message)
+      if (!response.ok) {
+        const errorText = await response.text() 
+        throw new Error(`Account creation failed: ${res.status} - ${errorText}`)
       }
-    } catch (err) {
-      console.error('Error creating new account: ', err)
+
+      const data = await response.json()
+      console.log('Created Account: ', data)
+      navigate('/user')
+    } catch (error) {
+      console.error('Error creating new account: ', error)
       setError('Failed to connect to server')
+      alert(error.message || 'Failed to connect to server')
     }
   }
 
@@ -58,10 +49,18 @@ function CreateAccount() {
           <div>
             <input
               type='text'
-              placeholder='Username'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder='first name'
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               required
+            /></div>
+
+          <div>
+            <input
+              type='text'
+              placeholder='last name'
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             /></div>
 
           <div>
@@ -70,32 +69,6 @@ function CreateAccount() {
               placeholder='Email address'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-            /></div>
-
-          <div>
-            <input
-              type='phone'
-              placeholder='Phone'
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            /></div>
-
-          <div>
-            <input
-              type='password'
-              placeholder='Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            /></div>
-
-          <div>
-            <input
-              type='password'
-              placeholder='Confirm Password'
-              value={confirmP}
-              onChange={(e) => setConfirmP(e.target.value)}
               required
             /></div>
 

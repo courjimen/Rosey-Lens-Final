@@ -152,6 +152,17 @@ app.post('/quiz', async (req, res) => {
   }
 });
 
+//See quiz scores
+app.get('/quiz', async (req, res) => {
+  try {
+      const result = await pool.query('SELECT * FROM quiz_scores')
+      res.json(result.rows)
+  } catch (err) {
+      console.error('Error :', err)
+      res.sendStatus(500)
+  }
+})
+
 app.listen(port, () => {
   console.log(`Server started on ${port}`)
 })

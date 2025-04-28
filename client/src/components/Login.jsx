@@ -10,14 +10,22 @@ function Login() {
     <div className='login-container'>
       <h2>Sign in below:</h2>
       <GoogleLogin onSuccess={(credentialResponse) => {
-        console.log(credentialResponse)
-        console.log(jwtDecode(credentialResponse.credential))
-        navigate("/home")
+        try {
+          const decoded = jwtDecode(credentialResponse.credential)
+          console.log(decoded)
+          const firstName = decoded.given_name
+          navigate('/home', { state: { firstName} })
+        } catch (error) {
+          console.error('Error decoding token:', error)
+          navigate('/home', { state: { firstName: 'User' } })
+        }
       }}
-        onError={() => console.log('Login failed')}
+        onError={() => { 
+        console.log('Login failed')
+        navigate('/home', { state: { firstName: 'User' } })
+    }}
       />
-
-    </div>
+</div>
   )
 }
 

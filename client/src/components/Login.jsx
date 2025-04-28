@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode'
 function Login() {
   const navigate = useNavigate()
   return (
-    <>
+    <div className='login-container'>
     <GoogleLogin onSuccess={(credentialResponse) => {
       console.log(credentialResponse)
       console.log(jwtDecode(credentialResponse.credential))
@@ -16,7 +16,7 @@ function Login() {
     onError={() => console.log('Login failed')}
     />
 
-    </>
+    </div>
   )
 }
 

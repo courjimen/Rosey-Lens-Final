@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/Home.css'
 import roseImage from '../images/roseImage.webp'
+import { Link } from 'react-router-dom'
 
 function Home() {
   return (
@@ -10,8 +11,8 @@ function Home() {
      <img className='rose' src={roseImage}/>
      <p className='description'>Based on your mood we give you positive <br/> uplifting affirmations, bible verses, or songs!</p>
      <div className='login-options'>
-     <p className='login'><text className='red-text'>Login</text> with Google</p>
-     <p className='guest'>Continue as <text className='red-text'>Guest</text></p>
+     <p className='login'><Link to="/login" className='red-text'>Login</Link> with Google</p>
+     <p className='guest'>Continue as <Link to='/guest' className='red-text'>Guest</Link></p>
      </div>
     </div>
   )

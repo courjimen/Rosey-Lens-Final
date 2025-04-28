@@ -10,6 +10,7 @@ import CurrentMood from './components/CurrentMood'
 import Selection from './components/Selection'
 import Affirmation from './components/Affirmation'
 import Home from './components/Home'
+import GuestHome from './components/GuestHome'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/mood" element={<CurrentMood />} />
         <Route path="/affirmation" element={<Affirmation />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/guest" element={<GuestHome />} />
       </Routes>
     </Router>
   )

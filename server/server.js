@@ -15,8 +15,8 @@ app.use((req, res, next) => {
   next();
 });
 
-//POST NEW USER
-app.post('/users', async (req, res) => {
+//POST NEW USER (UPDATED)
+app.post('/newuser', async (req, res) => {
   const { firstname, lastname, email } = req.body
 
   try {
@@ -33,6 +33,17 @@ app.post('/users', async (req, res) => {
   }
 })
 
+//See users
+app.get('/users', async (req, res) => {
+  try {
+      const result = await pool.query('SELECT * FROM users')
+      res.json(result.rows)
+  } catch (err) {
+      console.error('Error :', err)
+      res.sendStatus(500)
+  }
+})
+
 //GET QUESTIONS
 app.get('/question', (req, res) => {
   res.json(moodQuestions)
@@ -43,7 +54,7 @@ app.get('/mood', (req, res) => {
   res.json(moodData)
 })
 
-//GET BIBLE VERSE
+//GET BIBLE VERSE (UPDATED)
 app.get('/bible', async (req, res) => {
   const searchTerm = req.query.search
   const bibleVersion = 'asv'
@@ -76,7 +87,7 @@ app.get('/bible', async (req, res) => {
   }
 })
 
-//POST QUIZ SUBMISSION (CURRENT MOOD)
+//POST QUIZ SUBMISSION (UPDATED)
 app.post('/quiz', async (req, res) => {
   try {
     const { user_id, answers } = req.body
@@ -106,7 +117,7 @@ app.post('/quiz', async (req, res) => {
       message = moodData.negative[Math.floor(Math.random() * moodData.negative.length)]
     }
 
-    const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed, mood_catergory, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *', [user_id, totalScore, moodCategory, message]
+    const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *', [user_id, totalScore, moodCategory, message]
     );
     const quizResult = result.rows[0]
 

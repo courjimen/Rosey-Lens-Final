@@ -4,13 +4,15 @@ CREATE TABLE users (
     firstname TEXT NOT NULL, 
     lastname TEXT,
     email VARCHAR(125) UNIQUE NOT NULL);
-    
+
 --Table Quiz_Scores
 CREATE TABLE quiz_scores (
     id SERIAL PRIMARY KEY, 
     user_id INT NOT NULL REFERENCES users(user_id), 
     score INT NOT NULL, 
-    date_completed TIMESTAMP WITH TIME ZONE DEFAULT NOW());
+    date_completed TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    mood_category TEXT NOT NULL,
+    message TEXT NOT NULL);
 
 --Table of Favorites
 CREATE TABLE favorites (

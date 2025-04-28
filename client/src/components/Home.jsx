@@ -4,10 +4,10 @@ import roseImage from '../images/roseImage.webp'
 
 function Home() {
   return (
-    <div>
-      <h2>Welcome to Rosy Lens</h2>
-      <p>Self care is in the air!</p>
-     <img src={roseImage}/>
+    <div className='home-page-container'>
+      <h1>Welcome to Rosy Lens</h1>
+      <h2>Self care is in the air!</h2>
+     <img className='rose' src={roseImage}/>
     </div>
   )
 }

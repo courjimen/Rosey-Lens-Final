@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/LoginHome.css'
 import roseImage from '../images/roseImage.webp'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function LoginHome() {
   const location = useLocation()
@@ -13,6 +13,15 @@ function LoginHome() {
   const handleQuizClick = () => {
     navigate('/quiz', { state: { userId: userId, firstName: firstName } })
   }
+
+  const handleHistoryClick = () => {
+    navigate('/history', { state: { userId: userId, firstName: firstName } })
+  }
+
+  const handleFavesClick = () => {
+    navigate('/favorites', { state: { userId: userId, firstName: firstName } })
+  }
+  
   return (
     <div className='home-page-container'>
       <h1>Welcome to <span className='red-text'>Rosy Lens</span> {firstName}</h1>
@@ -20,11 +29,19 @@ function LoginHome() {
       <img className='rose' src={roseImage} />
       <p className='description'>Based on your mood we give you positive <br /> uplifting affirmations, bible verses, or songs!</p>
       <div className='login-options'>
-        {/* <p className='login'><Link to={{ pathname: "/history", state: { userId: userId, firstName: firstName} }} className='green-text' >View Mood History</Link></p>
-       <p className='guest'><Link to={{ pathname: '/favorites', state: { userId: userId, firstName: firstName} }} className='green-text'>View Favorites</Link></p> */}
 
-        <p className='quiz'> 
-          <button onClick={handleQuizClick} className='green-text' style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>Check My Mood </button>
+      {/* Mood History Link */}
+        <p className='login'>
+          <button onClick={handleHistoryClick} className='green-text' style={{ border: 'none', padding: 0, cursor: 'pointer'}}>View History</button>
+        </p>
+
+        {/* Favorites Link */}
+        <p className='guest'>
+          <button onClick={handleFavesClick} className='green-text' style={{ border: 'none', padding: 0, cursor: 'pointer' }}>View Favorites</button>
+        </p>
+
+        <p className='quiz'>
+          <button onClick={handleQuizClick} className='green-text' style={{ border: 'none', padding: 0, cursor: 'pointer' }}>Check My Mood</button>
         </p>
 
 

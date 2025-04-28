@@ -26,3 +26,8 @@
 .green-text {
     color: #138b3b;
 }
+
+button:hover {
+    font-size: 25px;
+    background-color: lightpink;
+}

@@ -1,13 +1,13 @@
 import React from 'react'
 import '../styles/Home.css'
-import ''
+import roseImage from '../images/roseImage.webp'
 
 function Home() {
   return (
     <div>
-      <h2>Welcome to <text color='red'>Rosy Lens</text></h2>
+      <h2>Welcome to Rosy Lens</h2>
       <p>Self care is in the air!</p>
-     <img></img>
+     <img src={roseImage}/>
     </div>
   )
 }

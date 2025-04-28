@@ -27,6 +27,13 @@
     color: #138b3b;
 }
 
+.button-link {
+    border: none;
+    padding: 0;
+    background: none;
+    font-size: inherit;
+}
+
 button:hover {
     font-size: 25px;
     background-color: lightpink;

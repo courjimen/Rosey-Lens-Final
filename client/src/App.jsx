@@ -11,6 +11,7 @@ import Selection from './components/Selection'
 import Affirmation from './components/Affirmation'
 import Home from './components/Home'
 import GuestHome from './components/GuestHome'
+import LoginHome from './components/LoginHome'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/affirmation" element={<Affirmation />} />
         <Route path="/home" element={<Home />} />
         <Route path="/guest" element={<GuestHome />} />
+        <Route path="/user" element={<LoginHome />} />
       </Routes>
     </Router>
   )

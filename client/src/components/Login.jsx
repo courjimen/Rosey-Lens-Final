@@ -14,7 +14,7 @@ function Login() {
           const decoded = jwtDecode(credentialResponse.credential)
           console.log(decoded)
           const firstName = decoded.given_name
-          navigate('/home', { state: { firstName} })
+          navigate('/user', { state: { firstName} })
         } catch (error) {
           console.error('Error decoding token:', error)
           navigate('/home', { state: { firstName: 'User' } })

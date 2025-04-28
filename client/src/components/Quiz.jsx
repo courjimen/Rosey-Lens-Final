@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
 function Quiz() {
   const [questionData, setQuestionData] = useState(null)
@@ -16,7 +16,7 @@ function Quiz() {
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [quizResult, setQuizResult] = useState(null);
 
- 
+
   const location = useLocation()
   const userId = location.state?.userId
   const firstName = location.state?.firstName
@@ -113,14 +113,16 @@ function Quiz() {
   if (!questionData || questionData.length === 0) {
     return (
       <div className='no-questions-container'>
-        <h2>No questions to displaly</h2>
+        <h2>No questions to display</h2>
       </div>
     )
   }
 
+  //QUIZ COMPLETE AND SUBMITTED
   if (quizCompleted) {
     return (
       <div className='quiz-completed-container'>
+        <h2>Thank you for taking the Quiz! Submit score for your affirmation:</h2>
         <Card className='completed-card'>
           <CardHeader title="Quiz Completed!" className='completed-header' />
           <CardContent className='completed-content'>
@@ -128,6 +130,7 @@ function Quiz() {
             <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
           </CardContent>
         </Card>
+        <h2><Link to='/select'>Submit Quiz</Link></h2>
       </div>
     )
   }

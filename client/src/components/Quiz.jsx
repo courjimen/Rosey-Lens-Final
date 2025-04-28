@@ -126,11 +126,23 @@ function Quiz() {
 
   //QUIZ COMPLETE AND SUBMITTED
   if (quizCompleted) {
-    let imageOpacity = '99%'
+    let imageOpacity = '100%'
+    let grayscale = '0%'
+    let contrast = '100%'
+
     if (moodCategory === 'neutral') {
       imageOpacity = '50%'
+      grayscale = '50%'
+      contrast = '80%'
     } else if (moodCategory === 'negative') {
       imageOpacity = '10%'
+      grayscale = '100%'
+      contrast ='60%'
+    }
+
+    const imageStyle = {
+      opacity: imageOpacity,
+      filter: `grayscale(${grayscale}) contrast(${contrast})`
     }
 
     return (

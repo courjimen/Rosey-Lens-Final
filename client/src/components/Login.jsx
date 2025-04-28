@@ -8,13 +8,14 @@ function Login() {
   const navigate = useNavigate()
   return (
     <div className='login-container'>
-    <GoogleLogin onSuccess={(credentialResponse) => {
-      console.log(credentialResponse)
-      console.log(jwtDecode(credentialResponse.credential))
-      navigate("/home")
-    }} 
-    onError={() => console.log('Login failed')}
-    />
+      <h2>Sign in below:</h2>
+      <GoogleLogin onSuccess={(credentialResponse) => {
+        console.log(credentialResponse)
+        console.log(jwtDecode(credentialResponse.credential))
+        navigate("/home")
+      }}
+        onError={() => console.log('Login failed')}
+      />
 
     </div>
   )

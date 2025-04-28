@@ -15,6 +15,7 @@ function Login() {
           console.log(decoded)
           const firstName = decoded.given_name
           navigate('/user', { state: { firstName} })
+          navigate('/quiz', { state: { firstName} })
         } catch (error) {
           console.error('Error decoding token:', error)
           navigate('/home', { state: { firstName: 'User' } })

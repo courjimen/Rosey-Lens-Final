@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
+import { useLocation } from 'react-router-dom'
 
 function Quiz() {
   const [questionData, setQuestionData] = useState(null)
@@ -14,6 +15,9 @@ function Quiz() {
   const [answers, setAnswers] = useState({})
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [quizResult, setQuizResult] = useState(null);
+
+  const location = useLocation()
+  const firstName = location.state?.firstName
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -129,6 +133,8 @@ function Quiz() {
   return (
     <div className='quiz-container'>
       <Card className='quiz-card'>
+        <h1>Hi, {firstName}</h1>
+        <h3>Answer the questions below to rate your mood:</h3>
         <CardHeader>
           <Typography className='quiz-title'>
             Question {currentQuestionIndex + 1} / {questionData.length}

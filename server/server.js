@@ -78,7 +78,7 @@ app.get('/bible', async (req, res) => {
 //POST QUIZ SUBMISSION (CURRENT MOOD)
 app.post('/quiz', async (req, res) => {
   try {
-    const { userId, answers } = req.body
+    const { user_id, score } = req.body
     let totalScore = 0
 
     //Calculate score
@@ -100,7 +100,7 @@ app.post('/quiz', async (req, res) => {
 
     if (totalScore > 4) {
       moodCategory = 'positive'
-      message = moodData.positve[Math.floor(Math.random() * moodData.positive.length)]
+      message = moodData.positive[Math.floor(Math.random() * moodData.positive.length)]
     } else if (totalScore < 4 && totalScore > -2) {
       moodCategory = 'neutral'
       message = moodData.neutral[Math.floor(Math.random() * moodData.neutral.length)]
@@ -109,10 +109,10 @@ app.post('/quiz', async (req, res) => {
       message = moodData.negative[Math.floor(Math.random() * moodData.negative.length)]
     }
 
-    const result = await pool.query('INSERT INTO quiz (user_id, score, date_completed) VALUES ($1, $2, NOW()) RETURNING *',
-      [userId, totalScore]
+    const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed) VALUES ($1, $2, NOW()) RETURNING *',
+      [user_id, score]
     );
-    const quizResultt = result.rows[0]
+    const quizResult = result.rows[0]
 
     res.status(201).json({
       message: 'Quiz submitted successfully',

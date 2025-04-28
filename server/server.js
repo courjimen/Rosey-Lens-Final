@@ -78,22 +78,18 @@ app.get('/bible', async (req, res) => {
 //POST QUIZ SUBMISSION (CURRENT MOOD)
 app.post('/quiz', async (req, res) => {
   try {
-    const { user_id, score } = req.body
+    const { user_id, answers } = req.body
     let totalScore = 0
 
     //Calculate score
     for (const questionId in answers) {
       const answer = answers[questionId]
-      const questionResult = await pool.query('SELECT score FROM questions WHERE id = $1', [questionId])
+      const question = moodQuestions.find(q => q.id === parseInt(questionId))
 
-      if (questionResult.rows.length > 0) {
-        const question = questionResult.rows[0]
-        const scoreData = question.scoreData
-        if (scoreData && scoreData[answer] !== undefined) {
-          totalScore += scoreData[answer]
+      if (question && question.score && question.score[answer] !== undefined) {
+          totalScore += question.score[answer]
         }
       }
-    }
 
     let moodCategory = ''
     let message = ''
@@ -109,8 +105,7 @@ app.post('/quiz', async (req, res) => {
       message = moodData.negative[Math.floor(Math.random() * moodData.negative.length)]
     }
 
-    const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed) VALUES ($1, $2, NOW()) RETURNING *',
-      [user_id, score]
+    const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed, mood_catergory, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *', [user_id, totalScore, moodCategory, message]
     );
     const quizResult = result.rows[0]
 
@@ -118,12 +113,12 @@ app.post('/quiz', async (req, res) => {
       message: 'Quiz submitted successfully',
       totalScore,
       mood: message,
-      quizResult: newQuizResult,
+      quizResult: quizResult,
     });
 
   } catch (error) {
     console.error('Error submitting quiz:', error);
-    res.status(500).json({ error: 'Failed to submit quiz' });
+    res.status(500).json({ error: 'Failed to submit quiz', message: error.message });
   }
 });
 

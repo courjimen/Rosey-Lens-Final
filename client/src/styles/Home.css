@@ -1,5 +1,6 @@
 .home-page-container {
     text-align: center;
+    border-color: red;
 }
 .red-text {
     color: red;
@@ -9,3 +10,15 @@
     height: 200px;
     width: 200px;
 }
+
+.description {
+    font-size: 30px;
+}
+.login-options {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 20px;
+}
+

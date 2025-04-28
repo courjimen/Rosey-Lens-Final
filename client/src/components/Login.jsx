@@ -33,7 +33,7 @@ function Login() {
           console.log('User data:', data.user)
           navigate('/user', { state: { userId: data.user.user_id, firstName: firstName } })
           
-          navigate('/quiz', { state: { userId: data.user.user_id, firstName: firstName } })
+          // navigate('/quiz', { state: { userId: data.user.user_id, firstName: firstName } })
 
         } catch (error) {
         console.error('Error decoding token:', error)

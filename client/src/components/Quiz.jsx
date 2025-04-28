@@ -85,6 +85,7 @@ function Quiz() {
         }
         const responseData = await response.json()
         setQuizResult(responseData)
+        setMoodCategory(responseData?.moodCategory || '')
         setQuizCompleted(true)
       } catch (error) {
         console.error('Error submitting quiz:', error)
@@ -139,12 +140,7 @@ function Quiz() {
       grayscale = '100%'
       contrast ='60%'
     }
-
-    const imageStyle = {
-      opacity: imageOpacity,
-      filter: `grayscale(${grayscale}) contrast(${contrast})`
-    }
-
+console.log(moodCategory)
     return (
       <div className='quiz-completed-container'>
         <h2>Thank you for taking the Quiz! Submit score for your affirmation:</h2>
@@ -153,9 +149,8 @@ function Quiz() {
           <CardContent className='completed-content'>
             <Typography variant="body1">Your mood: {quizResult?.mood}</Typography>
             <img
-              className='quiz-rose'
+              className={`quiz-rose mood-${moodCategory}`}
               src={roseImage}
-              style={{ opacity: imageOpacity }}
               alt="Rose representing your mood"
             />
             <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>

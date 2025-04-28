@@ -144,6 +144,7 @@ app.post('/quiz', async (req, res) => {
       totalScore,
       mood: message,
       quizResult: quizResult,
+      moodCategory: moodCategory,
     });
 
   } catch (error) {

@@ -1,14 +1,14 @@
 .home-page-container {
     text-align: center;
-    border-color: red;
+    border-color: #fc96da;
 }
 .red-text {
     color: red;
 }
 
 .rose {
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 300px;
 }
 
 .description {
@@ -16,9 +16,13 @@
 }
 .login-options {
     display: flex;
-    justify-content: space-around;
+    justify-content:space-around;
+    margin-left: 250px;
+    margin-right: 250px;
     align-items: center;
     margin-top: 10px;
     font-size: 20px;
 }
-
+.green-text {
+    color: #138b3b;
+}

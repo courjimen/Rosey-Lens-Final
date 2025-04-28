@@ -13,8 +13,9 @@ function LoginHome() {
        <img className='rose' src={roseImage}/>
        <p className='description'>Based on your mood we give you positive <br/> uplifting affirmations, bible verses, or songs!</p>
        <div className='login-options'>
-       <p className='login'><Link to="/login" className='red-text'>Login</Link> with Google</p>
-       <p className='guest'>Continue as <Link to='/guest' className='red-text'>Guest</Link></p>
+       <p className='login'><Link to="/history" className='red-text'>View Mood History</Link></p>
+       <p className='guest'><Link to='/favorites' className='red-text'>View Favorites</Link></p>
+       <p className='quiz'><Link to='/quiz' className='red-text'>Check My Mood</Link></p>
        </div>
       </div>
     )

@@ -9,6 +9,7 @@ import Quiz from './components/Quiz'
 import CurrentMood from './components/CurrentMood'
 import Selection from './components/Selection'
 import Affirmation from './components/Affirmation'
+import Home from './components/Home'
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login/>} />
-        <Route path="/home" element={<CreateAccount />} />
+        <Route path="/new" element={<CreateAccount />} />
         <Route path="/history" element={<MoodHistory />} />
         <Route path="/reveal" element={<RevealRose />} />
         <Route path="/favorites" element={<Faves />} />
@@ -25,6 +26,7 @@ function App() {
         <Route path="/select" element={<Selection />} />
         <Route path="/mood" element={<CurrentMood />} />
         <Route path="/affirmation" element={<Affirmation />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
   )

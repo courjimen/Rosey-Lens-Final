@@ -16,15 +16,15 @@ The app visually represents the user's potential mood through a rose that either
 Access my [wireframe and user flow](https://www.figma.com/design/JAbLEYMxwfi37iejMv9sdQ/Blog-App?node-id=56-2&p=f&t=cYaNSO1sJNm9Mv6F-0) directly on Figma for a closer look.
 What you can expect to see:
 
-![](./images/wireframes.png)
+![](./client/src/images/wireframes.png)
 
 Select prototype tab then click the frame to highlight the user flow 
 
-![](./images/userflow.png)
+![](./client/src/images/userflow.png)
 
 You can also click the play button and it will simulate the user flow as if it were on a laptop
 
-![](./images/macuser.png)
+![](./client/src/images/macuser.png)
 
 **Tools/Frameworks Needed**
 - YouTube API 

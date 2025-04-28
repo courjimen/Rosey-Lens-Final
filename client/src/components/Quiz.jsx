@@ -21,6 +21,10 @@ function Quiz() {
   const userId = location.state?.userId
   const firstName = location.state?.firstName
 
+  console.log('Quiz - Location:', location);
+  console.log('Quiz - userId:', userId);
+  console.log('Quiz - firstName:', firstName);
+
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -130,7 +134,7 @@ function Quiz() {
             <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
           </CardContent>
         </Card>
-        <h2><Link to='/select'>Submit Quiz</Link></h2>
+        <h2><Link to={{ pathname: '/select', state: { userId: userId, firstName: firstName, quizResult: quizResult}, }}>Submit Quiz</Link></h2>
       </div>
     )
   }

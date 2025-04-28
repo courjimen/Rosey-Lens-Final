@@ -24,5 +24,17 @@
     font-size: 20px;
 }
 .green-text {
-    color: #138b3b;
+    color: #127b37;
+}
+
+.button-link {
+    border: none;
+    padding: 0;
+    background: none;
+    font-size: inherit;
+}
+
+button:hover {
+    font-size: 25px;
+    background-color: lightpink;
 }

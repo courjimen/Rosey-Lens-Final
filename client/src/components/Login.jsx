@@ -14,6 +14,9 @@ function Login() {
           const decoded = jwtDecode(credentialResponse.credential)
           console.log(decoded)
           const firstName = decoded.given_name
+          const lastName = decoded.family_name
+          const email = decoded.email
+          
           navigate('/user', { state: { firstName} })
           navigate('/quiz', { state: { firstName} })
         } catch (error) {

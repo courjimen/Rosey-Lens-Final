@@ -4,6 +4,7 @@ CREATE TABLE users (
     firstname TEXT NOT NULL, 
     lastname TEXT,
     email VARCHAR(125) UNIQUE NOT NULL);
+    
 --Table Quiz_Scores
 CREATE TABLE quiz_scores (
     id SERIAL PRIMARY KEY, 

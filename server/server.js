@@ -16,12 +16,17 @@ app.use((req, res, next) => {
 });
 
 //POST NEW USER
-app.post('/new', async (req, res) => {
-  const { username, email, phone, password } = req.body
+app.post('/users', async (req, res) => {
+  const { firstname, lastname, email } = req.body
 
   try {
-    const result = await pool.query('INSERT INTO user (username, email, phone, password) VALUES ($1, $2, $3, $4) RETURNING *', [username, email, phone, password])
-    res.json(result.rows[0])
+    const userCheck = await pool.query('SELECT * FROM users WHERE email = $1', [email])
+    if (userCheck.rows.length > 0) {
+      return res.status(400).json({ message: 'User already exists' })
+    }
+
+    const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
+    res.status(201).json({ message: "User created", user: result.rows[0] })
   } catch (err) {
     console.error('Error creating user: ', err)
     res.sendStatus(500)

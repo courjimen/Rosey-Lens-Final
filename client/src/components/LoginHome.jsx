@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 function LoginHome() {
     const location = useLocation()
+    const userId = location.state?.userId
     const firstName = location.state?.firstName
 
     return (
@@ -14,9 +15,9 @@ function LoginHome() {
        <img className='rose' src={roseImage}/>
        <p className='description'>Based on your mood we give you positive <br/> uplifting affirmations, bible verses, or songs!</p>
        <div className='login-options'>
-       <p className='login'><Link to="/history" className='green-text'>View Mood History</Link></p>
-       <p className='guest'><Link to='/favorites' className='green-text'>View Favorites</Link></p>
-       <p className='quiz'><Link to='/quiz' className='green-text'>Check My Mood</Link></p>
+       <p className='login'><Link to={{ pathname: "/history", state: { userId: userId, firstName: firstName} }} className='green-text'>View Mood History</Link></p>
+       <p className='guest'><Link to={{ pathname: '/favorites', state: { userId: userId, firstName: firstName} }} className='green-text'>View Favorites</Link></p>
+       <p className='quiz'><Link to={{ pathname: '/quiz', state: { userId: userId, firstName: firstName} }} className='green-text'>Check My Mood</Link></p>
        </div>
       </div>
     )

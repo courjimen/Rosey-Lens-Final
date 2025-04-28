@@ -127,7 +127,7 @@ app.post('/quiz', async (req, res) => {
     if (totalScore > 4) {
       moodCategory = 'positive'
       message = moodData.positive[Math.floor(Math.random() * moodData.positive.length)]
-    } else if (totalScore < 4 && totalScore > -2) {
+    } else if (totalScore < 4 && totalScore > -10) {
       moodCategory = 'neutral'
       message = moodData.neutral[Math.floor(Math.random() * moodData.neutral.length)]
     } else {
@@ -144,6 +144,7 @@ app.post('/quiz', async (req, res) => {
       totalScore,
       mood: message,
       quizResult: quizResult,
+      moodCategory: moodCategory,
     });
 
   } catch (error) {

@@ -7,7 +7,7 @@ const moodData = {
     "You're feeling like pure sunshine."
   ],
   neutral: [
-    "You're feeling okay, and a little extra brightness is on its way.",
+    "You're feeling a bit strained, and a little extra brightness is on its way.",
     "You're feeling well, let's add some positive energy to your mood.",
     "You're feeling alright, and a touch of joy is coming your way.",
     "You're feeling neutral, grab a sprinkle of good vibes.",

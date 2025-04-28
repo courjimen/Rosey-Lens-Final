@@ -156,7 +156,7 @@ console.log(moodCategory)
             <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
           </CardContent>
         </Card>
-        <h2><Link to={{ pathname: '/select', state: { userId: userId, firstName: firstName, quizResult: quizResult }, }}>Submit Quiz</Link></h2>
+        <h2><Link to={{ pathname: '/select', state: { userId: userId, firstName: firstName, quizResult: quizResult }, }}>Pick Affirmation</Link></h2>
       </div>
     )
   }

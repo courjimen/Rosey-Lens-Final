@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/GuestHome.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 function GuestHome() {
+    const [guestName, setGuestName] = useState('')
+    const navigate = useNavigate()
+    
     return (
         <div className='guest-home'>
 
@@ -12,6 +15,7 @@ function GuestHome() {
             Please enter your name:
             <input 
             type='text'
+
             />
             </div>
 

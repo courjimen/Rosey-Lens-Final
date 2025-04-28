@@ -32,16 +32,16 @@ function LoginHome() {
 
       {/* Mood History Link */}
         <p className='login'>
-          <button onClick={handleHistoryClick} className='green-text' style={{ border: 'none', padding: 0, cursor: 'pointer'}}>View History</button>
+          <button onClick={handleHistoryClick} className='green-text'>View History</button>
         </p>
 
         {/* Favorites Link */}
         <p className='guest'>
-          <button onClick={handleFavesClick} className='green-text' style={{ border: 'none', padding: 0, cursor: 'pointer' }}>View Favorites</button>
+          <button onClick={handleFavesClick} className='green-text'>View Favorites</button>
         </p>
 
         <p className='quiz'>
-          <button onClick={handleQuizClick} className='green-text' style={{ border: 'none', padding: 0, cursor: 'pointer' }}>Check My Mood</button>
+          <button onClick={handleQuizClick} className='green-text'>Check My Mood</button>
         </p>
 
 

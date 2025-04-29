@@ -85,7 +85,7 @@ app.get('/affirmation/:category', (req, res) => {
 
   if (affirmations[category]) {
     const randomIndex = Math.floor(Math.random() * affirmations[category].length)
-    res.json({ affirmation: [category][randomIndex] })
+    res.json({ affirmation: affirmations[category][randomIndex] })
   } else {
     res.status(400).json({ error: 'Invalid mood category' })
   }

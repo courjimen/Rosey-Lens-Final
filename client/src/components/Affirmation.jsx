@@ -9,7 +9,7 @@ function Affirmation() {
 
   const location = useLocation()
   const moodCategory = location.state?.quizResult?.moodCategory
-  console.log(moodCategory)
+  console.log('Mood category in affirmation:', moodCategory)
 
   useEffect(() => {
     const fetchAffirmation = async () => {

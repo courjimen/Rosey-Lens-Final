@@ -1,3 +1,27 @@
+.selection-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
 .affirmation-options {
     display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.affirmation-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border: 2px;
+    border-radius: 8px;
+    border-style: dashed;
+    background-color: rgb(249, 204, 211);
+}
+
+.affirmation-card:hover {
+    color: rgb(236, 0, 47);
 }

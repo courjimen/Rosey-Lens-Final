@@ -4,7 +4,7 @@ import moodQuestions from './moodQuiz.js'
 import moodData from './currentMood.js'
 import pool from './db.js'
 import fetch from 'node-fetch'
-import moodAffirmations from './currentMood.js'
+import { positve, neutral, negative } from './currentMood.js'
 
 
 const app = express()
@@ -75,8 +75,21 @@ app.get('/mood', (req, res) => {
 })
 
 //GET Mood Affirmations
-app.get('/affirmation', (req, res) => {
-  res.json(moodAffirmations)
+app.get('/affirmation/:category', (req, res) => {
+  const { category } = req.params
+  const affirmations = {
+    positive: positive,
+    neutral: neutral,
+    negative: negative,
+  }
+
+  if (affirmations[category]) {
+    const randomAffirmation = Math.floor(Math.random() * affirmations[category].length)
+    res.json({ affirmation: [category][randomAffirmation] })
+  } else {
+    res.status(400).json({ error: 'Invalid mood category' })
+  }
+  
 })
 
 //GET BIBLE VERSE (UPDATED)

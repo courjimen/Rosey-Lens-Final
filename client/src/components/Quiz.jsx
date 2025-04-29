@@ -22,6 +22,7 @@ function Quiz() {
   const location = useLocation()
   const userId = location.state?.userId
   const firstName = location.state?.firstName
+  
 
   console.log('Quiz - Location:', location);
   console.log('Quiz - userId:', userId);

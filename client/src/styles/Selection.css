@@ -23,5 +23,23 @@
 }
 
 .affirmation-card:hover {
-    color: rgb(236, 0, 47);
+    color: rgb(190, 23, 51);
+}
+
+.affirmation-card a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.affirmation-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.affirmation-card p {
+    font-size: 17px;
 }

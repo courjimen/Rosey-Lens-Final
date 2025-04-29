@@ -26,12 +26,21 @@
     color: rgb(190, 23, 51);
 }
 
+
 .affirmation-card a {
     text-decoration: none;
     color: inherit;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.affirmation-card img {
+    height: 100px;
+}
+
+.song-image {
+    height: 100px;
 }
 
 .affirmation-card h3 {

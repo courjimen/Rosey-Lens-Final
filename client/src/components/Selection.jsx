@@ -1,14 +1,43 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../styles/Selection.css'
 
 
 function Selection() {
   return (
     <>
-    <div>
-      <h2>You're feeling...</h2>
+      <div className='selection-container'>
+        <h2>Pick one option for a sweet surprise</h2>
+        <div className='affirmation-options'>
 
-    </div>
+          {/* affirmation */}
+          <div className='affirmation-card'>
+            <Link to='/affirmation'>
+              <h3>Affirmation</h3>
+              <img src='' />
+              <p>Enjoy this uplifting message</p>
+            </Link>
+          </div>
+
+          {/* Bible Verse */}
+          <div className='affirmation-card'>
+            <Link to='/verse'>
+              <h3>Bible Verse</h3>
+              <img src='' />
+              <p>Receive an encouraging verse</p>
+            </Link>
+          </div>
+
+          {/* Peaceful Song */}
+          <div className='affirmation-card'>
+            <Link to='/song'>
+              <h3>Song</h3>
+              <img src='' />
+              <p>Find a song with a peaceful vibe </p>
+            </Link>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

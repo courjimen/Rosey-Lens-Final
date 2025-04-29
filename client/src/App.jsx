@@ -11,6 +11,8 @@ import Affirmation from './components/Affirmation'
 import Home from './components/Home'
 import GuestHome from './components/GuestHome'
 import LoginHome from './components/LoginHome'
+import Verse from './components/Verse'
+import Song from './components/Song'
 
 function App() {
   
@@ -28,6 +30,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/guest" element={<GuestHome />} />
         <Route path="/user" element={<LoginHome />} />
+        <Route path="/verse" element={<Verse />} />
+        <Route path="/song" element={<Song />} />
       </Routes>
     </Router>
   )

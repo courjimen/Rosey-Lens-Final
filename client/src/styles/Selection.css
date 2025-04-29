@@ -1,0 +1,54 @@
+.selection-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.affirmation-options {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.affirmation-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border: 2px;
+    border-radius: 8px;
+    border-style: dashed;
+    background-color: rgb(249, 204, 211);
+}
+
+.affirmation-card:hover {
+    color: rgb(190, 23, 51);
+}
+
+
+.affirmation-card a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.affirmation-card img {
+    height: 100px;
+}
+
+.song-image {
+    height: 100px;
+}
+
+.affirmation-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.affirmation-card p {
+    font-size: 17px;
+}

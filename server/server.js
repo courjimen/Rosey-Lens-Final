@@ -4,6 +4,8 @@ import moodQuestions from './moodQuiz.js'
 import moodData from './currentMood.js'
 import pool from './db.js'
 import fetch from 'node-fetch'
+import moodAffirmations from './currentMood.js'
+
 
 const app = express()
 const port = 3000
@@ -70,6 +72,11 @@ app.get('/question', (req, res) => {
 //GET Current Mood Data
 app.get('/mood', (req, res) => {
   res.json(moodData)
+})
+
+//GET Mood Affirmations
+app.get('/affirmation', (req, res) => {
+  res.json(moodAffirmations)
 })
 
 //GET BIBLE VERSE (UPDATED)

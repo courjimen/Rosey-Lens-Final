@@ -38,9 +38,9 @@ const moodAffirmations = {
     "When you believe you can, in yourself, in your value...you're halfway there. Now is your time to shine."
   ],
   negative: [
-    "You're feeling down. Let's change that.",
-    "You're feeling a bit low. Let's add some positivity.",
-    "You're feeling off. Let's change that.",
+    "Believe in your strength, you are capable of amazing things. Trust in yourself, you've already made it this far.",
+    "It's time to create a life filled with purpose and passion. Don't give up now, shower yourself with love and give yourself the grace you share with others.",
+    "Do small things with great love. Pour into your cup, rest your mind, and take your time finding your way back to happiness.",
     "You're feeling bad vibes. Let's get a moment of peace.",
     "You're feeling less than your usual self. Let's change that."
   ]

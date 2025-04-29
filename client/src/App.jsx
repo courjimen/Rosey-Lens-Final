@@ -12,7 +12,6 @@ import Home from './components/Home'
 import GuestHome from './components/GuestHome'
 import LoginHome from './components/LoginHome'
 
-
 function App() {
   
   return (

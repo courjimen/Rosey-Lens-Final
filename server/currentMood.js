@@ -41,8 +41,8 @@ const moodAffirmations = {
     "Believe in your strength, you are capable of amazing things. Trust in yourself, you've already made it this far.",
     "It's time to create a life filled with purpose and passion. Don't give up now, shower yourself with love and give yourself the grace you share with others.",
     "Do small things with great love. Pour into your cup, rest your mind, and take your time finding your way back to happiness.",
-    "You're feeling bad vibes. Let's get a moment of peace.",
-    "You're feeling less than your usual self. Let's change that."
+    "The journey of a thousand miles begins with one step - Lao Tzu Find the courage to love on yourself today.",
+    "Nothing can dim the light which shines from within - Maya Angelou. Find one thing today that makes you smile."
   ]
 }
 

@@ -1,11 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import '../styles/Selection.css'
 import bibleImage from '../images/bible.svg'
 import songImage from '../images/song.svg'
 import roseImage from "../images/roseImage.webp"
 
 function Selection() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const quizResult = location.state?.quizResult
+  // console.log(quizResult)
+  const userId = location.state?.userId
+  const firstName = location.state?.firstName
+
+  console.log("Selection Component - location.state:", location.state);
+  console.log("Selection Component - quizResult:", quizResult);
+
+  const handleAffirmationClick = () => {
+    navigate('/affirmation', { state: { userId: userId, firstName: firstName, quizResult: quizResult} })
+  }
   return (
     <>
       <div className='selection-container'>
@@ -14,11 +27,11 @@ function Selection() {
 
           {/* affirmation */}
           <div className='affirmation-card'>
-            <Link to='/affirmation'>
+           <button onClick={handleAffirmationClick} className='affirmation-buttom'>
               <h3>Affirmation</h3>
               <img src={roseImage} />
               <p>Enjoy this uplifting message</p>
-            </Link>
+            </button>
           </div>
 
           {/* Bible Verse */}

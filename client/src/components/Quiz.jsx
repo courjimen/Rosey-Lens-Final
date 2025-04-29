@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import roseImage from '../images/roseImage.webp'
 
 function Quiz() {
@@ -20,6 +20,7 @@ function Quiz() {
 
 
   const location = useLocation()
+  const navigate = useNavigate()
   const userId = location.state?.userId
   const firstName = location.state?.firstName
   
@@ -85,6 +86,7 @@ function Quiz() {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
         const responseData = await response.json()
+        console.log("Quiz Response Data:", responseData);
         setQuizResult(responseData)
         setMoodCategory(responseData?.moodCategory || '')
         setQuizCompleted(true)
@@ -94,6 +96,13 @@ function Quiz() {
       }
     }
   }
+
+  useEffect(() => {
+    if(quizCompleted) {
+      console.log("Quiz quizResult (inside handleNextQuestion):", quizResult);
+
+    }
+  }, [quizCompleted, quizResult])
 
   const handlePrevQuestion = () => {
     if (currentQuestionIndex > 0) {
@@ -141,7 +150,9 @@ function Quiz() {
       grayscale = '100%'
       contrast ='60%'
     }
+
 console.log(moodCategory)
+
     return (
       <div className='quiz-completed-container'>
         <h2>Thank you for taking the Quiz! Submit score for your affirmation:</h2>
@@ -157,7 +168,9 @@ console.log(moodCategory)
             <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
           </CardContent>
         </Card>
-        <h2><Link to={{ pathname: '/select', state: { userId: userId, firstName: firstName, quizResult: quizResult }, }}>Pick Affirmation</Link></h2>
+        <h2>
+         <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult } })}> Pick Affirmation</button>
+         </h2>
       </div>
     )
   }

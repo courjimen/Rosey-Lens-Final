@@ -4,7 +4,7 @@ import moodQuestions from './moodQuiz.js'
 import moodData from './currentMood.js'
 import pool from './db.js'
 import fetch from 'node-fetch'
-import { positve, neutral, negative } from './currentMood.js'
+import { positive, neutral, negative } from './currentMood.js'
 
 
 const app = express()
@@ -84,8 +84,8 @@ app.get('/affirmation/:category', (req, res) => {
   }
 
   if (affirmations[category]) {
-    const randomAffirmation = Math.floor(Math.random() * affirmations[category].length)
-    res.json({ affirmation: [category][randomAffirmation] })
+    const randomIndex = Math.floor(Math.random() * affirmations[category].length)
+    res.json({ affirmation: [category][randomIndex] })
   } else {
     res.status(400).json({ error: 'Invalid mood category' })
   }

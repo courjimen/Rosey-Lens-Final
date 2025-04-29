@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import '../styles/Affirmation.css'
 
 function Affirmation() {
@@ -9,6 +9,7 @@ function Affirmation() {
 
   const location = useLocation()
   const moodCategory = location.state?.quizResult?.moodCategory
+  console.log(moodCategory)
 
   useEffect(() => {
     const fetchAffirmation = async () => {
@@ -29,14 +30,29 @@ function Affirmation() {
       } else {
         setError('Unable to grab affirmation.')
         setLoading(false)
-      } 
+      }
     }
     fetchAffirmation()
   }, [moodCategory])
 
-  
+  if (loading) {
+    return <div>Loading your affirmation...</div>
+  }
+
+  if (error) {
+    return <div>Error: {error} </div>
+  }
+
   return (
-    <div>Affirmation</div>
+    <div className='affirmation-container'>
+      <h2>We hope this affirmation brightens your day</h2>
+      <div className='affirmation-card'>
+        <p>{affirmation}</p>
+      </div>
+     <Link to='/user'>Return Home</Link>
+     <Link to='/quiz'>Take another Quiz</Link>
+     <Link to='/share'></Link>
+    </div>
   )
 }
 

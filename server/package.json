@@ -14,7 +14,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "createdb": "psql -f server/db.sql $DATABASE"
+    "createdb": "psql \"$DATABASE\" -f server/db.sql"
   },
   "keywords": [],
   "author": "",

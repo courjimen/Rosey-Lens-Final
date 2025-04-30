@@ -1,14 +1,18 @@
-import pg from 'pg'
+import dotenv from 'dotenv';
+import pkg from 'pg';
 
-//connect to database with credentials
-const pool = new pg.Pool({
-    user: 'tpl1122_12',
-    host: '/tmp',
-    database: 'rosy',
-    port: 5432
+dotenv.config();
+const { Pool } = pkg;
+
+const Database = new Pool ({
+    connectionString: process.env.DATABASE_URI
 })
 
-export default pool
+Database.connect()
+    .then(() => console.log("connected to the database"))
+    .catch(err => console.error("connection error", err));
+
+export default Database;
 
 
 
@@ -27,8 +31,7 @@ export default pool
 
 
 // import pg from 'pg'
-// import 'dotenv/config'
-
+//
 // const { Pool } = pg
 // var url = process.env.DATABASE
 

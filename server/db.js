@@ -2,10 +2,13 @@ import pg from 'pg'
 
 //connect to database with credentials
 const pool = new pg.Pool({
-    user: 'tpl1122_12',
-    host: '/tmp',
-    database: 'rosy',
-    port: 5432
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.DATABASE,
+    port: process.env.PRT || 5432,
+    ssl: {
+        rejectUnauthorized: false
+    }
 })
 
 export default pool

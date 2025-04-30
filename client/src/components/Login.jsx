@@ -14,7 +14,7 @@ function Login() {
       const lastName = decoded.family_name
       const email = decoded.email
 
-      const response = await fetch('/login', {
+      const response = await fetch('/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ function Login() {
 
       if (!response.ok) {
         console.error('Error sending user data:', response.status)
-        navigate('/home', { state: { firstName: firstName } })
+        navigate('/', { state: { firstName: firstName } })
         return
       }
 
@@ -38,13 +38,13 @@ function Login() {
 
         } catch (error) {
         console.error('Error decoding token:', error)
-          navigate('/home', {state: {firstName: 'User' } })
+          navigate('/', {state: {firstName: 'User' } })
         }
       }
 
       const handleGoogleLoginFailure = (error) => {
         console.log('Login failed', error)
-        navigate('/home', { state: { firstName: 'User' } })
+        navigate('/', { state: { firstName: 'User' } })
       }
 
   

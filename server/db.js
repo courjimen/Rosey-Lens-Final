@@ -1,6 +1,35 @@
-import pg from 'pg'
-const { Pool } = pg
+import pkg from 'pg';
+const { Pool } = pkg;
+import 'dotenv/config';
 
+var url = process.env.DATABASE; // Or process.env.DATABASE_URL
+
+    const pool = new Pool({
+        connectionString: url,
+        ssl: {
+            rejectUnauthorized: false,
+        },
+    })
+    console.log("Connection to database successful!")
+  
+
+export default pool;
+// import pg from 'pg'
+// import 'dotenv/config'
+
+// const { Pool } = pg
+// var url = process.env.DATABASE
+
+// const pool = new Pool ({
+//     connectionString: url,
+//     ssl: {
+//         rejectUnauthorized: false
+//     }
+// })
+
+// console.log(url)
+
+// export default pool
 
 //connect to database with credentials
 // const pool = new pg.Pool({
@@ -13,12 +42,3 @@ const { Pool } = pg
 //         rejectUnauthorized: false
 //     }
 // })
-
-const pool = new Pool ({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
-})
-
-export default pool

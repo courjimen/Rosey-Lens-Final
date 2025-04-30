@@ -1,19 +1,31 @@
-import pkg from 'pg';
-const { Pool } = pkg;
-import 'dotenv/config';
+import pg from 'pg'
 
-var url = process.env.DATABASE;
-
-const pool = new Pool({
-    port: 5432,
-    connectionString: url,
-    // ssl: {
-    //     rejectUnauthorized: false,
-    // },
+//connect to database with credentials
+const pool = new pg.Pool({
+    user: 'tpl1122_12',
+    host: '/tmp',
+    database: 'rosy',
+    port: 5432
 })
-console.log("Connection to database successful!")
 
-export default pool;
+export default pool
+
+
+
+
+
+// var url = process.env.DATABASE;
+
+// const pool = new Pool({
+//     port: 5432,
+//     connectionString: url,
+//     // ssl: {
+//     //     rejectUnauthorized: false,
+//     // },
+// })
+// console.log("Connection to database successful!")
+
+
 // import pg from 'pg'
 // import 'dotenv/config'
 
@@ -31,13 +43,7 @@ export default pool;
 
 // export default pool
 
-//connect to database with credentials
-// const pool = new pg.Pool({
-//     user: process.env.PGUSER,
-//     host: process.env.PGHOST,
-//     database: process.env.PGDATABASE,
-//     password: process.env.PGPASSWORD,
-//     port: 5432,
+
 //     ssl: {
 //         rejectUnauthorized: false
 //     }

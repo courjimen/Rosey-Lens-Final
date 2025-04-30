@@ -1,5 +1,5 @@
 import pg from 'pg'
-import { Pool } from 'pg'
+const { Pool } = pg
 
 
 //connect to database with credentials

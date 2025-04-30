@@ -5,12 +5,19 @@ import moodData from './currentMood.js'
 import pool from './db.js'
 import fetch from 'node-fetch'
 import { positive, neutral, negative } from './currentMood.js'
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express()
 const port = process.env.PORT || 3000
 
 app.use(express.json())
 app.use(cors())
+//deployment code
+const staticPath = path.join(__dirname, '..', 'client', 'dist');
+app.use(express.static(staticPath));
 
 //POST NEW USER (UPDATED)
 app.post('/newuser', async (req, res) => {
@@ -178,6 +185,10 @@ app.get('/quiz', async (req, res) => {
       res.sendStatus(500)
   }
 })
+
+app.get(/^\/(?!api\/)(.*)$/, (req, res) => {
+  res.sendFile(path.join(staticPath, 'index.html'));
+});
 
 app.listen(port, () => {
   console.log(`Server started on ${port}`)

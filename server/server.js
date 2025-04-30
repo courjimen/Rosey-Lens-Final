@@ -7,7 +7,7 @@ import fetch from 'node-fetch'
 import { positive, neutral, negative } from './currentMood.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { promises as fs } from 'fs'
+// import { promises as fs } from 'fs'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -193,25 +193,25 @@ app.get(/^\/(?!api\/)(.*)$/, (req, res) => {
 });
 
 //RUN DB.SQL ON RENDER
-async function initializeDatabase() {
-  try {
-    const sql = await fs.readFile('./db.sql', 'utf8');
+// async function initializeDatabase() {
+//   try {
+//     const sql = await fs.readFile('./db.sql', 'utf8');
 
-    const statements = sql.split(';');
-    for (const statement of statements) {
-      const trimmedStatement = statement.trim();
-      if (trimmedStatement) {
-        await pool.query(trimmedStatement);
-        console.log(`Executed SQL: ${trimmedStatement}`);
-      }
-    }
-    console.log('Database initialization complete.');
-  } catch (error) {
-    console.error('Error initializing database:', error);
-  }
-}
+//     const statements = sql.split(';');
+//     for (const statement of statements) {
+//       const trimmedStatement = statement.trim();
+//       if (trimmedStatement) {
+//         await pool.query(trimmedStatement);
+//         console.log(`Executed SQL: ${trimmedStatement}`);
+//       }
+//     }
+//     console.log('Database initialization complete.');
+//   } catch (error) {
+//     console.error('Error initializing database:', error);
+//   }
+// }
 
-initializeDatabase()
+// initializeDatabase()
 
 app.listen(port, () => {
   console.log(`Server started on ${port}`)

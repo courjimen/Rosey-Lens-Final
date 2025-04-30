@@ -27,7 +27,7 @@ function App() {
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/select" element={<Selection />} />
         <Route path="/affirmation" element={<Affirmation />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/guest" element={<GuestHome />} />
         <Route path="/user" element={<LoginHome />} />
         <Route path="/verse" element={<Verse />} />

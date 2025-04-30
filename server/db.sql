@@ -1,12 +1,12 @@
 -- Table of Users
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     user_id SERIAL PRIMARY KEY, 
     firstname TEXT NOT NULL, 
     lastname TEXT,
     email VARCHAR(125) UNIQUE NOT NULL);
 
 --Table Quiz_Scores
-CREATE TABLE quiz_scores (
+CREATE TABLE IF NOT EXISTS quiz_scores (
     id SERIAL PRIMARY KEY, 
     user_id INT NOT NULL REFERENCES users(user_id), 
     score INT NOT NULL, 
@@ -15,7 +15,7 @@ CREATE TABLE quiz_scores (
     message TEXT NOT NULL);
 
 --Table of Favorites
-CREATE TABLE favorites (
+CREATE TABLE IF NOT EXISTS favorites (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES users(user_id),
     favorite_type VARCHAR(50) NOT NULL,

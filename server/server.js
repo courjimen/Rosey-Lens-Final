@@ -186,8 +186,20 @@ app.get('/quiz', async (req, res) => {
   }
 })
 
+//deploy on render
 app.get(/^\/(?!api\/)(.*)$/, (req, res) => {
   res.sendFile(path.join(staticPath, 'index.html'));
+});
+
+//deploy on render
+app.get('/api/auth/google-client-id', (req, res) => {
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  if (clientId) {
+    res.json({ clientId });
+  } else {
+    console.error('GOOGLE_CLIENT_ID environment variable not set.');
+    res.status(500).json({ error: 'Google Client ID not configured on the server.' });
+  }
 });
 
 app.listen(port, () => {

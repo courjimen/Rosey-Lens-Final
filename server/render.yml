@@ -3,7 +3,7 @@ services:
     plan: free
     type: web
     env: node
-    repo: https://github.com/daaimah123/2024H2FinalProjectTemplateRender
+    repo: https://github.com/courjimen/Rosy-Lens-Final.git
     buildCommand: cd client && npm install && npm run build && cd ../server && npm install
     startCommand: cd server && node server.js
     envVars:

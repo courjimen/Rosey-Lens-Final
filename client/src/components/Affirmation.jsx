@@ -15,7 +15,7 @@ function Affirmation() {
     const fetchAffirmation = async () => {
       if (moodCategory) {
         try {
-          const response = await fetch(`http://localhost:3000/affirmation/${moodCategory}`)
+          const response = await fetch(`/affirmation/${moodCategory}`)
           if (!response.ok) {
             throw new Error(`HTTP error. status: ${response.status}`)
           }

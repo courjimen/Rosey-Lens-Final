@@ -32,7 +32,7 @@ function Quiz() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const res = await fetch('http://localhost:3000/question')
+        const res = await fetch('/question')
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`)
         }
@@ -75,7 +75,7 @@ function Quiz() {
           setError('User ID not provided')
           return
         }
-        const response = await fetch('http://localhost:3000/quiz', {
+        const response = await fetch('/quiz', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

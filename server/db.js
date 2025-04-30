@@ -6,7 +6,7 @@ const pool = new pg.Pool({
     host: process.env.PGHOST,
     database: process.env.PGDATABASE,
     password: process.env.PGPASSWORD,
-    port: process.env.PGPORT || 5432,
+    port: 5432,
     ssl: {
         rejectUnauthorized: false
     }

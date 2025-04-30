@@ -14,7 +14,7 @@ function Login() {
       const lastName = decoded.family_name
       const email = decoded.email
 
-      const response = await fetch('/user', {
+      const response = await fetch('/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -4,14 +4,15 @@ import 'dotenv/config';
 
 var url = process.env.DATABASE;
 
-    const pool = new Pool({
-        connectionString: url,
-        ssl: {
-            rejectUnauthorized: false,
-        },
-    })
-    console.log("Connection to database successful!")
-  
+const pool = new Pool({
+    port: 5432,
+    connectionString: url,
+    ssl: {
+        rejectUnauthorized: false,
+    },
+})
+console.log("Connection to database successful!")
+
 
 export default pool;
 // import pg from 'pg'

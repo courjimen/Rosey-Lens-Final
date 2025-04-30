@@ -2,7 +2,7 @@ import pkg from 'pg';
 const { Pool } = pkg;
 import 'dotenv/config';
 
-var url = process.env.DATABASE; // Or process.env.DATABASE_URL
+var url = process.env.DATABASE;
 
     const pool = new Pool({
         connectionString: url,

@@ -19,6 +19,7 @@ function Quiz() {
   const [quizResult, setQuizResult] = useState(null);
   const [moodCategory, setMoodCategory] = useState('');
   const [totalScore, setTotalScore] = useState(0);
+  const [bibleVerse, setBibleVerse] = useState(null)
 
 
   const location = useLocation()
@@ -79,7 +80,7 @@ function Quiz() {
           setQuizResult({ answers, mood: message, userId: 0 });
           setMoodCategory(moodCategory || '');
           setQuizCompleted(true);
-          return quizDone(totalScore);
+          return
         }
         const response = await fetch('http://localhost:3000/quiz', {
           method: 'POST',
@@ -95,6 +96,7 @@ function Quiz() {
         console.log("Quiz Response Data:", responseData);
         setQuizResult(responseData)
         setMoodCategory(responseData?.moodCategory || '')
+        setBibleVerse(responseData?.bibleVerse || null)
         setQuizCompleted(true)
       } catch (error) {
         console.error('Error submitting quiz:', error)
@@ -102,13 +104,6 @@ function Quiz() {
       }
     }
   }
-
-  useEffect(() => {
-    if (quizCompleted) {
-      console.log("Quiz quizResult (inside handleNextQuestion):", quizResult);
-
-    }
-  }, [quizCompleted, quizResult])
 
   const handlePrevQuestion = () => {
     if (currentQuestionIndex > 0) {
@@ -170,11 +165,11 @@ function Quiz() {
               src={roseImage}
               alt="Rose representing your mood"
             />
-            <Typography variant="body1">Your score: {totalScore}</Typography>
+            <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
           </CardContent>
         </Card>
         <h2>
-          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory } })}> Pick Affirmation</button>
+          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory, bibleVerse } })}> Pick Affirmation</button>
         </h2>
       </div>
     )
@@ -183,47 +178,8 @@ function Quiz() {
   
   //QUIZ COMPLETE AND SUBMITTED
   if (quizCompleted) {
-    return quizDone(totalScore);
+    return quizDone(totalScore)
 }
-
-
-  //   let imageOpacity = '100%'
-  //   let grayscale = '0%'
-  //   let contrast = '100%'
-
-  //   if (moodCategory === 'neutral') {
-  //     imageOpacity = '50%'
-  //     grayscale = '50%'
-  //     contrast = '80%'
-  //   } else if (moodCategory === 'negative') {
-  //     imageOpacity = '10%'
-  //     grayscale = '100%'
-  //     contrast = '60%'
-  //   }
-
-  //   console.log(moodCategory)
-
-  //   return (
-  //     <div className='quiz-completed-container'>
-  //       <h2>Thank you for taking the Quiz! Submit score for your affirmation:</h2>
-  //       <Card className='completed-card'>
-  //         <CardHeader title="Quiz Completed!" className='completed-header' />
-  //         <CardContent className='completed-content'>
-  //           <Typography variant="body1">Your mood: {quizResult?.mood}</Typography>
-  //           <img
-  //             className={`quiz-rose mood-${moodCategory}`}
-  //             src={roseImage}
-  //             alt="Rose representing your mood"
-  //           />
-  //           <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
-  //         </CardContent>
-  //       </Card>
-  //       <h2>
-  //         <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult } })}> Pick Affirmation</button>
-  //       </h2>
-  //     </div>
-  //   )
-  // }
 
   const currentQuestion = questionData[currentQuestionIndex]
 

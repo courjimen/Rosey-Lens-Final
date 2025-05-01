@@ -12,6 +12,7 @@ function Selection() {
   // console.log(quizResult)
   const userId = location.state?.userId
   const firstName = location.state?.firstName
+  const bibleVerse = location.state?.bibleVerse
 
   console.log("Selection Component - location.state:", location.state);
   console.log("Selection Component - quizResult:", quizResult);
@@ -21,7 +22,7 @@ function Selection() {
   }
 
   const handleBibleVerse = () => {
-    navigate('/verse', { state: { userId: userId, firstName: firstName, quizResult: quizResult } })
+    navigate('/verse', { state: { userId: userId, firstName: firstName, quizResult: quizResult, bibleVerse } })
   }
   return (
     <>

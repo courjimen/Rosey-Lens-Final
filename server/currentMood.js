@@ -31,7 +31,7 @@ export const loving = [
 ]
 
 export const uplifting = [
-"Matt 6:26-28", "Matt 6:27", "Psa 37:23", "Psa 139:10", "Pro 16:3", "2 Tim 3:16-17", "Psa 119:105", "Nah 1:7", "Matt 11:29-30", "Matt 11:28", "Hab 3:4", "John 14:1", "Phil 4:6"
+"Matt 6:26-28", "Mat 6:27", "Psa 37:23", "Psa 139:10", "Pro 16:3", "2 Tim 3:16-17", "Psa 119:105", "Nah 1:7", "Matt 11:29-30", "Matt 11:28", "Hab 3:4", "John 14:1", "Phil 4:6"
 ]
 
 export const encouraging =[

@@ -12,12 +12,17 @@ function Selection() {
   // console.log(quizResult)
   const userId = location.state?.userId
   const firstName = location.state?.firstName
+  const bibleVerse = location.state?.bibleVerse
 
   console.log("Selection Component - location.state:", location.state);
   console.log("Selection Component - quizResult:", quizResult);
 
   const handleAffirmationClick = () => {
-    navigate('/affirmation', { state: { userId: userId, firstName: firstName, quizResult: quizResult} })
+    navigate('/affirmation', { state: { userId: userId, firstName: firstName, quizResult: quizResult } })
+  }
+
+  const handleBibleVerse = () => {
+    navigate('/verse', { state: { userId: userId, firstName: firstName, quizResult: quizResult, bibleVerse } })
   }
   return (
     <>
@@ -27,20 +32,18 @@ function Selection() {
 
           {/* affirmation */}
           <div className='affirmation-card'>
-           <button onClick={handleAffirmationClick} className='affirmation-buttom'>
-              <h3>Affirmation</h3>
-              <img src={roseImage} />
-              <p>Enjoy this uplifting message</p>
+            <h3>Affirmation</h3>
+            <img src={roseImage} />
+            <button onClick={handleAffirmationClick}> <p>Enjoy this uplifting message</p>
             </button>
           </div>
 
           {/* Bible Verse */}
           <div className='affirmation-card'>
-            <Link to='/verse'>
-              <h3>Bible Verse</h3>
-              <img src={bibleImage} />
-              <p>Receive an encouraging verse</p>
-            </Link>
+            <h3>Bible Verse</h3>
+            <img src={bibleImage} />
+            <button onClick={handleBibleVerse}> <p>Receive an encouraging verse</p>
+            </button>
           </div>
 
           {/* Peaceful Song */}

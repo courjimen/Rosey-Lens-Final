@@ -2,9 +2,11 @@ import express from 'express'
 import cors from 'cors'
 import moodQuestions from './moodQuiz.js'
 import moodData from './currentMood.js'
+import { calculateScore } from './calculateScore.js'
 import pool from './db.js'
 import fetch from 'node-fetch'
 import { positive, neutral, negative } from './currentMood.js'
+import { loving, uplifting, encouraging } from './currentMood.js'
 
 
 const app = express()
@@ -26,8 +28,8 @@ app.post('/newuser', async (req, res) => {
     if (userCheck.rows.length > 0) {
       return res.status(200).json({ message: 'User logged in', user: userCheck.rows[0] })
     } else {
-    const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
-    res.status(201).json({ message: "User created", user: result.rows[0] })
+      const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
+      res.status(201).json({ message: "User created", user: result.rows[0] })
     }
   } catch (err) {
     console.error('Error creating user: ', err)
@@ -38,11 +40,11 @@ app.post('/newuser', async (req, res) => {
 //See users
 app.get('/users', async (req, res) => {
   try {
-      const result = await pool.query('SELECT * FROM users')
-      res.json(result.rows)
+    const result = await pool.query('SELECT * FROM users')
+    res.json(result.rows)
   } catch (err) {
-      console.error('Error :', err)
-      res.sendStatus(500)
+    console.error('Error :', err)
+    res.sendStatus(500)
   }
 })
 
@@ -55,8 +57,8 @@ app.post('/login', async (req, res) => {
     if (userCheck.rows.length > 0) {
       return res.status(200).json({ message: 'User logged in', user: userCheck.rows[0] })
     } else {
-    const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
-    res.status(201).json({ message: "User created", user: result.rows[0] })
+      const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
+      res.status(201).json({ message: "User created", user: result.rows[0] })
     }
   } catch (err) {
     console.error('Error creating user: ', err)
@@ -89,98 +91,100 @@ app.get('/affirmation/:category', (req, res) => {
   } else {
     res.status(400).json({ error: 'Invalid mood category' })
   }
-  
+
 })
+// NEW FETECH BIBLE VERSE
+const fetchRandomVerse = async (moodCategory) => {
+  let verseReference = '';
 
-//GET BIBLE VERSE (UPDATED)
-app.get('/bible', async (req, res) => {
-  const searchTerm = req.query.search
-  const bibleVersion = 'asv'
-
-  if(!searchTerm) {
-    return res.status(400).send('Could not search verses')
+  if (moodCategory === 'positive') {
+      verseReference = uplifting[Math.floor(Math.random() * uplifting.length)];
+  } else if (moodCategory === 'neutral') {
+      verseReference = encouraging[Math.floor(Math.random() * encouraging.length)];
+  } else if (moodCategory === 'negative') {
+      verseReference = loving[Math.floor(Math.random() * loving.length)];
   }
 
-  const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&search=${searchTerm}`
+  if (!verseReference) {
+      return null;
+  }
+
+  const bibleVersion = 'net';
+  const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&reference=${verseReference}`;
 
   try {
-    const apiResponse = await fetch(apiUrl)
-    if (!apiResponse.ok) {
-      return res.status(apiResponse.status).send(`Error from Bible API: ${apiResponse.statusText}`)
-    }
-    const data = await apiResponse.json()
+      const apiResponse = await fetch(apiUrl);
+      if (!apiResponse.ok) {
+          console.error(`Error fetching Bible verse (status ${apiResponse.status}): ${apiResponse.statusText}`);
+          return null;
+      }
+      const data = await apiResponse.json();
 
-//selects random verse
-    if (data && data.results && data.results.length > 0) {
-      const randomIndex = Math.floor(Math.random() * data.results.length)
-      const randomVerse = data.results[randomIndex]
-      res.json({ verse:randomVerse })
-    } else {
-      res.status(404).send('No verses found')
-    }
-    
+      if (data && data.results && data.results.length > 0) {
+          const verseData = data.results[0];
+          if (verseData) {
+              const versesText = {};
+              if (verseData.verses && verseData.verses.net) {
+                  for (const chapter in verseData.verses.net) {
+                      if (!versesText[chapter]) {
+                          versesText[chapter] = {};
+                      }
+                      for (const verseNum in verseData.verses.net[chapter]) {
+                          versesText[chapter][verseNum] = verseData.verses.net[chapter][verseNum].text;
+                      }
+                  }
+              }
+              return {
+                  book_name: verseData.book_name,
+                  chapter_verse: verseData.chapter_verse,
+                  verses: versesText
+              };
+          }
+      }
+      return null;
   } catch (err) {
-    console.error('Error fetching Bible verse: ', err)
-    res.status(500).send('Error retrieving Bible verse')
+      console.error('Error fetching Bible verse: ', err);
+      return null;
   }
-})
+};
 
-//POST QUIZ SUBMISSION (UPDATED)
+//NEW POST QUIZ
 app.post('/quiz', async (req, res) => {
   try {
-    const { user_id, answers } = req.body
-    let totalScore = 0
+      const { user_id, answers } = req.body;
 
-    //Calculate score
-    for (const questionId in answers) {
-      const answer = answers[questionId]
-      const question = moodQuestions.find(q => q.id === parseInt(questionId))
+      const { moodCategory, message, totalScore } = calculateScore(answers);
 
-      if (question && question.score && question.score[answer] !== undefined) {
-          totalScore += question.score[answer]
-        }
-      }
+      const quizResult = await pool.query(
+          'INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *',
+          [user_id, totalScore, moodCategory, message]
+      );
 
-    let moodCategory = ''
-    let message = ''
+      const bibleVerseData = await fetchRandomVerse(moodCategory);
 
-    if (totalScore > 4) {
-      moodCategory = 'positive'
-      message = moodData.positive[Math.floor(Math.random() * moodData.positive.length)]
-    } else if (totalScore < 4 && totalScore > -10) {
-      moodCategory = 'neutral'
-      message = moodData.neutral[Math.floor(Math.random() * moodData.neutral.length)]
-    } else {
-      moodCategory = 'negative'
-      message = moodData.negative[Math.floor(Math.random() * moodData.negative.length)]
-    }
-
-    const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *', [user_id, totalScore, moodCategory, message]
-    );
-    const quizResult = result.rows[0]
-
-    res.status(201).json({
-      message: 'Quiz submitted successfully',
-      totalScore,
-      mood: message,
-      quizResult: quizResult,
-      moodCategory: moodCategory,
-    });
+      res.status(201).json({
+          message: 'Quiz submitted successfully',
+          totalScore,
+          mood: message,
+          quizResult: quizResult.rows[0],
+          moodCategory,
+          bibleVerse: bibleVerseData,
+      });
 
   } catch (error) {
-    console.error('Error submitting quiz:', error);
-    res.status(500).json({ error: 'Failed to submit quiz', message: error.message });
+      console.error('Error submitting quiz:', error);
+      res.status(500).json({ error: 'Failed to submit quiz', message: error.message });
   }
 });
 
 //See quiz scores
 app.get('/quiz', async (req, res) => {
   try {
-      const result = await pool.query('SELECT * FROM quiz_scores')
-      res.json(result.rows)
+    const result = await pool.query('SELECT * FROM quiz_scores')
+    res.json(result.rows)
   } catch (err) {
-      console.error('Error :', err)
-      res.sendStatus(500)
+    console.error('Error :', err)
+    res.sendStatus(500)
   }
 })
 

@@ -22,6 +22,19 @@ export const negative = [
   "Nothing can dim the light which shines from within - Maya Angelou. Find one thing today that makes you smile."
 ]
 
+//Bible search terms 
+export const loving = [
+  "1 Corin 13:4", "1 John 3:16", 
+]
+
+export const uplifting = [
+
+]
+
+export const encouraging =[
+"1 Corin 13:7"
+]
+
 const moodData = {
   positive: [
     "You're feeling so radiant.",

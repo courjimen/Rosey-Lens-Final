@@ -95,14 +95,14 @@ app.get('/affirmation/:category', (req, res) => {
 
 //GET BIBLE VERSE (UPDATED)
 app.get('/bible', async (req, res) => {
-  const searchTerm = "love"
-  const bibleVersion = 'asv'
+  const verse = "Gal 5:22-23"
+  const bibleVersion = 'net'
 
-  if (!searchTerm) {
+  if (!verse) {
     return res.status(400).send('Could not search verses')
   }
 
-  const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&search=${searchTerm}`
+  const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&reference=${verse}`
 
   try {
     const apiResponse = await fetch(apiUrl)
@@ -114,12 +114,34 @@ app.get('/bible', async (req, res) => {
     //selects random verse
     if (data && data.results && data.results.length > 0) {
       const randomIndex = Math.floor(Math.random() * data.results.length)
-      const randomVerse = data.results[randomIndex]
-      res.json({ verse: randomVerse })
+      const randomVerseData = data.results[randomIndex]
+
+      if (randomVerseData) {
+        const bookName = randomVerseData.book_name
+        const chapterVerse = randomVerseData.chapter_verse
+        const versesText = {}
+
+        if (randomVerseData.verses && randomVerseData.verses.net) {
+          for (const chapter in randomVerseData.verses.net) {
+            if (!versesText[chapter]) {
+              versesText[chapter] = {}
+            }
+            for (const verseNum in randomVerseData.verses.net[chapter]) {
+              versesText[chapter][verseNum] = randomVerseData.verses.net[chapter][verseNum].text
+            }
+          }
+        }
+        res.json({
+          book_name: bookName,
+          chapter_verse: chapterVerse,
+          verses: versesText
+        })
+      } else {
+        res.status(404).send('No verse data found')
+      }
     } else {
       res.status(404).send('No verses found')
     }
-
   } catch (err) {
     console.error('Error fetching Bible verse: ', err)
     res.status(500).send('Error retrieving Bible verse')
@@ -130,8 +152,8 @@ app.get('/bible', async (req, res) => {
 app.post('/quiz', async (req, res) => {
   try {
     const { user_id, answers } = req.body
-  
-    const {moodCategory, message, totalScore} = calculateScore(answers);
+
+    const { moodCategory, message, totalScore } = calculateScore(answers);
 
     const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *', [user_id, totalScore, moodCategory, message]
     );

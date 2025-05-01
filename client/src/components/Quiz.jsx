@@ -105,6 +105,12 @@ function Quiz() {
     }
   }
 
+  useEffect(() => {
+    if (quizCompleted) {
+      console.log("Quiz results: ", quizResult)
+    }
+  }, [quizCompleted, quizResult])
+
   const handlePrevQuestion = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1)
@@ -165,11 +171,11 @@ function Quiz() {
               src={roseImage}
               alt="Rose representing your mood"
             />
-            <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
+            <Typography variant="body1">Your score: {totalScore}</Typography>
           </CardContent>
         </Card>
         <h2>
-          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory, bibleVerse } })}> Pick Affirmation</button>
+          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory, bibleVerse, totalScore } })}> Pick Affirmation</button>
         </h2>
       </div>
     )

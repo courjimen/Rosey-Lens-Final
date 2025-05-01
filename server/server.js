@@ -95,7 +95,7 @@ app.get('/affirmation/:category', (req, res) => {
 
 //GET BIBLE VERSE (UPDATED)
 app.get('/bible', async (req, res) => {
-  const verse = "Gal 5:22-23"
+  const verse = "Phil 4:9"
   const bibleVersion = 'net'
 
   if (!verse) {

@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import moodQuestions from './moodQuiz.js'
 import moodData from './currentMood.js'
+import { calculateScore } from './calculateScore.js'
 import pool from './db.js'
 import fetch from 'node-fetch'
 import { positive, neutral, negative } from './currentMood.js'
@@ -26,8 +27,8 @@ app.post('/newuser', async (req, res) => {
     if (userCheck.rows.length > 0) {
       return res.status(200).json({ message: 'User logged in', user: userCheck.rows[0] })
     } else {
-    const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
-    res.status(201).json({ message: "User created", user: result.rows[0] })
+      const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
+      res.status(201).json({ message: "User created", user: result.rows[0] })
     }
   } catch (err) {
     console.error('Error creating user: ', err)
@@ -38,11 +39,11 @@ app.post('/newuser', async (req, res) => {
 //See users
 app.get('/users', async (req, res) => {
   try {
-      const result = await pool.query('SELECT * FROM users')
-      res.json(result.rows)
+    const result = await pool.query('SELECT * FROM users')
+    res.json(result.rows)
   } catch (err) {
-      console.error('Error :', err)
-      res.sendStatus(500)
+    console.error('Error :', err)
+    res.sendStatus(500)
   }
 })
 
@@ -55,8 +56,8 @@ app.post('/login', async (req, res) => {
     if (userCheck.rows.length > 0) {
       return res.status(200).json({ message: 'User logged in', user: userCheck.rows[0] })
     } else {
-    const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
-    res.status(201).json({ message: "User created", user: result.rows[0] })
+      const result = await pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2, $3) RETURNING *', [firstname, lastname, email])
+      res.status(201).json({ message: "User created", user: result.rows[0] })
     }
   } catch (err) {
     console.error('Error creating user: ', err)
@@ -89,15 +90,15 @@ app.get('/affirmation/:category', (req, res) => {
   } else {
     res.status(400).json({ error: 'Invalid mood category' })
   }
-  
+
 })
 
 //GET BIBLE VERSE (UPDATED)
 app.get('/bible', async (req, res) => {
-  const searchTerm = req.query.search
+  const searchTerm = "love"
   const bibleVersion = 'asv'
 
-  if(!searchTerm) {
+  if (!searchTerm) {
     return res.status(400).send('Could not search verses')
   }
 
@@ -110,15 +111,15 @@ app.get('/bible', async (req, res) => {
     }
     const data = await apiResponse.json()
 
-//selects random verse
+    //selects random verse
     if (data && data.results && data.results.length > 0) {
       const randomIndex = Math.floor(Math.random() * data.results.length)
       const randomVerse = data.results[randomIndex]
-      res.json({ verse:randomVerse })
+      res.json({ verse: randomVerse })
     } else {
       res.status(404).send('No verses found')
     }
-    
+
   } catch (err) {
     console.error('Error fetching Bible verse: ', err)
     res.status(500).send('Error retrieving Bible verse')
@@ -129,35 +130,12 @@ app.get('/bible', async (req, res) => {
 app.post('/quiz', async (req, res) => {
   try {
     const { user_id, answers } = req.body
-    let totalScore = 0
-
-    //Calculate score
-    for (const questionId in answers) {
-      const answer = answers[questionId]
-      const question = moodQuestions.find(q => q.id === parseInt(questionId))
-
-      if (question && question.score && question.score[answer] !== undefined) {
-          totalScore += question.score[answer]
-        }
-      }
-
-    let moodCategory = ''
-    let message = ''
-
-    if (totalScore > 4) {
-      moodCategory = 'positive'
-      message = moodData.positive[Math.floor(Math.random() * moodData.positive.length)]
-    } else if (totalScore < 4 && totalScore > -10) {
-      moodCategory = 'neutral'
-      message = moodData.neutral[Math.floor(Math.random() * moodData.neutral.length)]
-    } else {
-      moodCategory = 'negative'
-      message = moodData.negative[Math.floor(Math.random() * moodData.negative.length)]
-    }
+  
+    const {moodCategory, message, totalScore} = calculateScore(answers);
 
     const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *', [user_id, totalScore, moodCategory, message]
     );
-    const quizResult = result.rows[0]
+    const quizResult = result.rows[0];
 
     res.status(201).json({
       message: 'Quiz submitted successfully',
@@ -176,11 +154,11 @@ app.post('/quiz', async (req, res) => {
 //See quiz scores
 app.get('/quiz', async (req, res) => {
   try {
-      const result = await pool.query('SELECT * FROM quiz_scores')
-      res.json(result.rows)
+    const result = await pool.query('SELECT * FROM quiz_scores')
+    res.json(result.rows)
   } catch (err) {
-      console.error('Error :', err)
-      res.sendStatus(500)
+    console.error('Error :', err)
+    res.sendStatus(500)
   }
 })
 

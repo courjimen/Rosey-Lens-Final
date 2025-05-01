@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import roseImage from '../images/roseImage.webp'
+import roseImage from '../images/roseImage.webp';
+import { calculateScore } from '../../../server/calculateScore'
 
 function Quiz() {
   const [questionData, setQuestionData] = useState(null)
@@ -16,14 +17,15 @@ function Quiz() {
   const [answers, setAnswers] = useState({})
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [quizResult, setQuizResult] = useState(null);
-  const [moodCategory, setMoodCategory] = useState('')
+  const [moodCategory, setMoodCategory] = useState('');
+  const [totalScore, setTotalScore] = useState(0);
 
 
   const location = useLocation()
   const navigate = useNavigate()
   const userId = location.state?.userId
   const firstName = location.state?.firstName
-  
+
 
   console.log('Quiz - Location:', location);
   console.log('Quiz - userId:', userId);
@@ -72,8 +74,12 @@ function Quiz() {
     } else {
       try {
         if (!userId) {
-          setError('User ID not provided')
-          return
+          const {moodCategory, message} = calculateScore(answers);
+          setTotalScore(calculateScore(answers).totalScore);
+          setQuizResult({ answers, mood: message, userId: 0 });
+          setMoodCategory(moodCategory || '');
+          setQuizCompleted(true);
+          return quizDone(totalScore);
         }
         const response = await fetch('http://localhost:3000/quiz', {
           method: 'POST',
@@ -98,7 +104,7 @@ function Quiz() {
   }
 
   useEffect(() => {
-    if(quizCompleted) {
+    if (quizCompleted) {
       console.log("Quiz quizResult (inside handleNextQuestion):", quizResult);
 
     }
@@ -135,8 +141,7 @@ function Quiz() {
     )
   }
 
-  //QUIZ COMPLETE AND SUBMITTED
-  if (quizCompleted) {
+  const quizDone = () => {
     let imageOpacity = '100%'
     let grayscale = '0%'
     let contrast = '100%'
@@ -148,10 +153,10 @@ function Quiz() {
     } else if (moodCategory === 'negative') {
       imageOpacity = '10%'
       grayscale = '100%'
-      contrast ='60%'
+      contrast = '60%'
     }
 
-console.log(moodCategory)
+    console.log(moodCategory)
 
     return (
       <div className='quiz-completed-container'>
@@ -165,15 +170,60 @@ console.log(moodCategory)
               src={roseImage}
               alt="Rose representing your mood"
             />
-            <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
+            <Typography variant="body1">Your score: {totalScore}</Typography>
           </CardContent>
         </Card>
         <h2>
-         <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult } })}> Pick Affirmation</button>
-         </h2>
+          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory } })}> Pick Affirmation</button>
+        </h2>
       </div>
     )
   }
+
+  
+  //QUIZ COMPLETE AND SUBMITTED
+  if (quizCompleted) {
+    return quizDone(totalScore);
+}
+
+
+  //   let imageOpacity = '100%'
+  //   let grayscale = '0%'
+  //   let contrast = '100%'
+
+  //   if (moodCategory === 'neutral') {
+  //     imageOpacity = '50%'
+  //     grayscale = '50%'
+  //     contrast = '80%'
+  //   } else if (moodCategory === 'negative') {
+  //     imageOpacity = '10%'
+  //     grayscale = '100%'
+  //     contrast = '60%'
+  //   }
+
+  //   console.log(moodCategory)
+
+  //   return (
+  //     <div className='quiz-completed-container'>
+  //       <h2>Thank you for taking the Quiz! Submit score for your affirmation:</h2>
+  //       <Card className='completed-card'>
+  //         <CardHeader title="Quiz Completed!" className='completed-header' />
+  //         <CardContent className='completed-content'>
+  //           <Typography variant="body1">Your mood: {quizResult?.mood}</Typography>
+  //           <img
+  //             className={`quiz-rose mood-${moodCategory}`}
+  //             src={roseImage}
+  //             alt="Rose representing your mood"
+  //           />
+  //           <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
+  //         </CardContent>
+  //       </Card>
+  //       <h2>
+  //         <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult } })}> Pick Affirmation</button>
+  //       </h2>
+  //     </div>
+  //   )
+  // }
 
   const currentQuestion = questionData[currentQuestionIndex]
 

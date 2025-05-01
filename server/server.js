@@ -7,7 +7,8 @@ import fetch from 'node-fetch'
 import { positive, neutral, negative } from './currentMood.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
-// import { promises as fs } from 'fs'
+import { positive, neutral, negative } from './currentMood.js'
+import { loving, uplifting, encouraging } from './currentMood.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,6 +17,11 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 app.use(cors())
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  next();
+});
+
 //deployment code
 const staticPath = path.join(__dirname, '..', 'client', 'dist');
 app.use(express.static(staticPath));
@@ -95,84 +101,87 @@ app.get('/affirmation/:category', (req, res) => {
   
 })
 
-//GET BIBLE VERSE (UPDATED)
-app.get('/bible', async (req, res) => {
-  const searchTerm = req.query.search
-  const bibleVersion = 'asv'
+// NEW FETECH BIBLE VERSE
+const fetchRandomVerse = async (moodCategory) => {
+  let verseReference = '';
 
-  if(!searchTerm) {
-    return res.status(400).send('Could not search verses')
+  if (moodCategory === 'positive') {
+      verseReference = uplifting[Math.floor(Math.random() * uplifting.length)];
+  } else if (moodCategory === 'neutral') {
+      verseReference = encouraging[Math.floor(Math.random() * encouraging.length)];
+  } else if (moodCategory === 'negative') {
+      verseReference = loving[Math.floor(Math.random() * loving.length)];
   }
 
-  const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&search=${searchTerm}`
+  if (!verseReference) {
+      return null;
+  }
+
+  const bibleVersion = 'net';
+  const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&reference=${verseReference}`;
 
   try {
-    const apiResponse = await fetch(apiUrl)
-    if (!apiResponse.ok) {
-      return res.status(apiResponse.status).send(`Error from Bible API: ${apiResponse.statusText}`)
-    }
-    const data = await apiResponse.json()
+      const apiResponse = await fetch(apiUrl);
+      if (!apiResponse.ok) {
+          console.error(`Error fetching Bible verse (status ${apiResponse.status}): ${apiResponse.statusText}`);
+          return null;
+      }
+      const data = await apiResponse.json();
 
-//selects random verse
-    if (data && data.results && data.results.length > 0) {
-      const randomIndex = Math.floor(Math.random() * data.results.length)
-      const randomVerse = data.results[randomIndex]
-      res.json({ verse:randomVerse })
-    } else {
-      res.status(404).send('No verses found')
-    }
-    
+      if (data && data.results && data.results.length > 0) {
+          const verseData = data.results[0];
+          if (verseData) {
+              const versesText = {};
+              if (verseData.verses && verseData.verses.net) {
+                  for (const chapter in verseData.verses.net) {
+                      if (!versesText[chapter]) {
+                          versesText[chapter] = {};
+                      }
+                      for (const verseNum in verseData.verses.net[chapter]) {
+                          versesText[chapter][verseNum] = verseData.verses.net[chapter][verseNum].text;
+                      }
+                  }
+              }
+              return {
+                  book_name: verseData.book_name,
+                  chapter_verse: verseData.chapter_verse,
+                  verses: versesText
+              };
+          }
+      }
+      return null;
   } catch (err) {
-    console.error('Error fetching Bible verse: ', err)
-    res.status(500).send('Error retrieving Bible verse')
+      console.error('Error fetching Bible verse: ', err);
+      return null;
   }
-})
+};
 
-//POST QUIZ SUBMISSION (UPDATED)
+//NEW POST QUIZ
 app.post('/quiz', async (req, res) => {
   try {
-    const { user_id, answers } = req.body
-    let totalScore = 0
+      const { user_id, answers } = req.body;
 
-    //Calculate score
-    for (const questionId in answers) {
-      const answer = answers[questionId]
-      const question = moodQuestions.find(q => q.id === parseInt(questionId))
+      const { moodCategory, message, totalScore } = calculateScore(answers);
 
-      if (question && question.score && question.score[answer] !== undefined) {
-          totalScore += question.score[answer]
-        }
-      }
+      const quizResult = await pool.query(
+          'INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *',
+          [user_id, totalScore, moodCategory, message]
+      );
 
-    let moodCategory = ''
-    let message = ''
+      const bibleVerseData = await fetchRandomVerse(moodCategory);
 
-    if (totalScore > 4) {
-      moodCategory = 'positive'
-      message = moodData.positive[Math.floor(Math.random() * moodData.positive.length)]
-    } else if (totalScore < 4 && totalScore > -10) {
-      moodCategory = 'neutral'
-      message = moodData.neutral[Math.floor(Math.random() * moodData.neutral.length)]
-    } else {
-      moodCategory = 'negative'
-      message = moodData.negative[Math.floor(Math.random() * moodData.negative.length)]
-    }
-
-    const result = await pool.query('INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *', [user_id, totalScore, moodCategory, message]
-    );
-    const quizResult = result.rows[0]
-
-    res.status(201).json({
-      message: 'Quiz submitted successfully',
-      totalScore,
-      mood: message,
-      quizResult: quizResult,
-      moodCategory: moodCategory,
-    });
+      res.status(201).json({
+          message: 'Quiz submitted successfully',
+          totalScore,
+          mood: message,
+          quizResult: quizResult.rows[0],
+          moodCategory,
+          bibleVerse: bibleVerseData,
+      });
 
   } catch (error) {
-    console.error('Error submitting quiz:', error);
-    res.status(500).json({ error: 'Failed to submit quiz', message: error.message });
+      console.error('Error submitting quiz:', error);
+      res.status(500).json({ error: 'Failed to submit quiz', message: error.message });
   }
 });
 
@@ -191,27 +200,6 @@ app.get('/quiz', async (req, res) => {
 app.get(/^\/(?!api\/)(.*)$/, (req, res) => {
   res.sendFile(path.join(staticPath, 'index.html'));
 });
-
-//RUN DB.SQL ON RENDER
-// async function initializeDatabase() {
-//   try {
-//     const sql = await fs.readFile('./db.sql', 'utf8');
-
-//     const statements = sql.split(';');
-//     for (const statement of statements) {
-//       const trimmedStatement = statement.trim();
-//       if (trimmedStatement) {
-//         await pool.query(trimmedStatement);
-//         console.log(`Executed SQL: ${trimmedStatement}`);
-//       }
-//     }
-//     console.log('Database initialization complete.');
-//   } catch (error) {
-//     console.error('Error initializing database:', error);
-//   }
-// }
-
-// initializeDatabase()
 
 app.listen(port, () => {
   console.log(`Server started on ${port}`)

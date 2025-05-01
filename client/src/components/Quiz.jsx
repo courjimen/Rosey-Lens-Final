@@ -161,7 +161,8 @@ function Quiz() {
 
     return (
       <div className='quiz-completed-container'>
-        <h2>Thank you for taking the Quiz! Submit score for your affirmation:</h2>
+       
+          {userId ? (<h2>Thank you for taking the Quiz! Submit score for your affirmation</h2>) : (<h2>Check out your score below, create an account to view your affirmations!</h2>)}
         <Card className='completed-card'>
           <CardHeader title="Quiz Completed!" className='completed-header' />
           <CardContent className='completed-content'>
@@ -175,7 +176,10 @@ function Quiz() {
           </CardContent>
         </Card>
         <h2>
-          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory, bibleVerse, totalScore } })}> Pick Affirmation</button>
+        {userId ? (
+          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory, bibleVerse, totalScore } })}> Pick Affirmation</button> ) : (
+          <button onClick={() => navigate('/new')}>Create an Account</button>
+        )}
         </h2>
       </div>
     )

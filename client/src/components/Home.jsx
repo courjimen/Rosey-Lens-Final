@@ -13,6 +13,7 @@ function Home() {
      <p className='description'>Based on your mood we give you positive <br/> uplifting affirmations, bible verses, or songs!</p>
      <div className='login-options'>
      <p className='login'><Link to="/login" className='red-text'>Login</Link> with Google</p>
+     <p className='login'><Link to="/new" className='red-text'>Create an Account</Link> </p>
      <p className='guest'>Continue as <Link to='/guest' className='red-text'>Guest</Link></p>
      </div>
     </div>

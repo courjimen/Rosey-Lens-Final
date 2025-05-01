@@ -3,7 +3,7 @@ import '../styles/MoodHistory.css'
 
 function MoodHistory() {
   return (
-    <div>MoodHistory</div>
+    <h2> Mood History Feature Coming Soon!</h2>
   )
 }
 

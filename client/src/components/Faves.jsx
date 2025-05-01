@@ -3,7 +3,7 @@ import '../styles/Faves.css'
 
 function Faves() {
   return (
-    <div>Faves</div>
+    <h2> Favorites Feature Coming Soon!</h2>
   )
 }
 

@@ -3,7 +3,7 @@ import '../styles/RevealRose.css'
 
 function RevealRose() {
   return (
-    <div>RevealRose</div>
+    <h2> Rose Reveal Animation Coming Soon!</h2>
   )
 }
 

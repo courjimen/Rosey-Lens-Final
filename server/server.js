@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import moodQuestions from './moodQuiz.js'
-import moodData from './currentMood.js'
+import moodData, { encouraging, loving, uplifting } from './currentMood.js'
 import { calculateScore } from './calculateScore.js'
 import pool from './db.js'
 import fetch from 'node-fetch'
@@ -94,15 +94,30 @@ app.get('/affirmation/:category', (req, res) => {
 })
 
 //GET BIBLE VERSE (UPDATED)
-app.get('/bible', async (req, res) => {
-  const verse = "Phil 4:9"
+app.get('/bible/:mood', async (req, res) => {
+  const { mood } = req.params
   const bibleVersion = 'net'
+  let versesToSearch = []
 
-  if (!verse) {
-    return res.status(400).send('Could not search verses')
+  if (mood === 'positive') {
+    versesToSearch = loving
+  } else if (mood === 'neutral') {
+    versesToSearch = uplifting
+  } else if (mood === 'negative') {
+    versesToSearch = encouraging
+  } else {
+    return res.status(400).send('Unable to provide verse due to no mood category')
   }
 
-  const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&reference=${verse}`
+  if (versesToSearch.length === 0) {
+    return res.status(404).sendDate('No bible verses found for this mood')
+  }
+
+//RANDOMIZED VERSES
+  const randomIndex = Math.floor(Math.random() * data.results.length)
+  const verseRef = versesToSearch[randomIndex]
+
+  const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&reference=${verseRef}`
 
   try {
     const apiResponse = await fetch(apiUrl)
@@ -113,8 +128,7 @@ app.get('/bible', async (req, res) => {
 
     //selects random verse
     if (data && data.results && data.results.length > 0) {
-      const randomIndex = Math.floor(Math.random() * data.results.length)
-      const randomVerseData = data.results[randomIndex]
+      const randomVerseData = data.results[0].verse
 
       if (randomVerseData) {
         const bookName = randomVerseData.book_name
@@ -140,7 +154,7 @@ app.get('/bible', async (req, res) => {
         res.status(404).send('No verse data found')
       }
     } else {
-      res.status(404).send('No verses found')
+      res.status(404).send('No verses found for the reference:', verseRef)
     }
   } catch (err) {
     console.error('Error fetching Bible verse: ', err)

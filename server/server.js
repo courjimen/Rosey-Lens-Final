@@ -7,6 +7,7 @@ import fetch from 'node-fetch'
 import { positive, neutral, negative, loving, uplifting, encouraging } from './currentMood.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { calculateScore } from './calculateScore.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

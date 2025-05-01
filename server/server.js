@@ -4,11 +4,9 @@ import moodQuestions from './moodQuiz.js'
 import moodData from './currentMood.js'
 import pool from './db.js'
 import fetch from 'node-fetch'
-import { positive, neutral, negative } from './currentMood.js'
+import { positive, neutral, negative, loving, uplifting, encouraging } from './currentMood.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { positive, neutral, negative } from './currentMood.js'
-import { loving, uplifting, encouraging } from './currentMood.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -33,7 +33,7 @@ function GuestHome() {
             </div>
 
             <div>
-            <button><Link to='/home'>Return Home</Link></button>
+            <button><Link to='/'>Return Home</Link></button>
             <button onClick={handleStartQuiz}><FontAwesomeIcon icon={faArrowRight}/></button>
             </div>
         </div>

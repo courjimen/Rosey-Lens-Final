@@ -21,3 +21,8 @@ CREATE TABLE IF NOT EXISTS favorites (
     favorite_type VARCHAR(50) NOT NULL,
     item_id INT NOT NULL,
     UNIQUE (user_id, favorite_type, item_id));
+
+--Table of Guests
+CREATE TABLE guest (
+    user_id SERIAL PRIMARY KEY, 
+    firstname TEXT NOT NULL);

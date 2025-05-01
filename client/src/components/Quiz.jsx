@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import roseImage from '../images/roseImage.webp'
+import roseImage from '../images/roseImage.webp';
+import { calculateScore } from '../../../server/calculateScore'
 
 function Quiz() {
   const [questionData, setQuestionData] = useState(null)
@@ -16,14 +17,16 @@ function Quiz() {
   const [answers, setAnswers] = useState({})
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [quizResult, setQuizResult] = useState(null);
-  const [moodCategory, setMoodCategory] = useState('')
+  const [moodCategory, setMoodCategory] = useState('');
+  const [totalScore, setTotalScore] = useState(0);
+  const [bibleVerse, setBibleVerse] = useState(null)
 
 
   const location = useLocation()
   const navigate = useNavigate()
   const userId = location.state?.userId
   const firstName = location.state?.firstName
-  
+
 
   console.log('Quiz - Location:', location);
   console.log('Quiz - userId:', userId);
@@ -72,7 +75,11 @@ function Quiz() {
     } else {
       try {
         if (!userId) {
-          setError('User ID not provided')
+          const {moodCategory, message} = calculateScore(answers);
+          setTotalScore(calculateScore(answers).totalScore);
+          setQuizResult({ answers, mood: message, userId: 0 });
+          setMoodCategory(moodCategory || '');
+          setQuizCompleted(true);
           return
         }
         const response = await fetch('/quiz', {
@@ -89,6 +96,7 @@ function Quiz() {
         console.log("Quiz Response Data:", responseData);
         setQuizResult(responseData)
         setMoodCategory(responseData?.moodCategory || '')
+        setBibleVerse(responseData?.bibleVerse || null)
         setQuizCompleted(true)
       } catch (error) {
         console.error('Error submitting quiz:', error)
@@ -98,9 +106,8 @@ function Quiz() {
   }
 
   useEffect(() => {
-    if(quizCompleted) {
-      console.log("Quiz quizResult (inside handleNextQuestion):", quizResult);
-
+    if (quizCompleted) {
+      console.log("Quiz results: ", quizResult)
     }
   }, [quizCompleted, quizResult])
 
@@ -135,8 +142,7 @@ function Quiz() {
     )
   }
 
-  //QUIZ COMPLETE AND SUBMITTED
-  if (quizCompleted) {
+  const quizDone = () => {
     let imageOpacity = '100%'
     let grayscale = '0%'
     let contrast = '100%'
@@ -148,14 +154,15 @@ function Quiz() {
     } else if (moodCategory === 'negative') {
       imageOpacity = '10%'
       grayscale = '100%'
-      contrast ='60%'
+      contrast = '60%'
     }
 
-console.log(moodCategory)
+    console.log(moodCategory)
 
     return (
       <div className='quiz-completed-container'>
-        <h2>Thank you for taking the Quiz! Submit score for your affirmation:</h2>
+       
+          {userId ? (<h2>Thank you for taking the Quiz! Submit score for your affirmation</h2>) : (<h2>Check out your score below, create an account to view your affirmations!</h2>)}
         <Card className='completed-card'>
           <CardHeader title="Quiz Completed!" className='completed-header' />
           <CardContent className='completed-content'>
@@ -165,15 +172,24 @@ console.log(moodCategory)
               src={roseImage}
               alt="Rose representing your mood"
             />
-            <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
+            <Typography variant="body1">Your score: {totalScore}</Typography>
           </CardContent>
         </Card>
         <h2>
-         <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult } })}> Pick Affirmation</button>
-         </h2>
+        {userId ? (
+          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory, bibleVerse, totalScore } })}> Pick Affirmation</button> ) : (
+          <button onClick={() => navigate('/new')}>Create an Account</button>
+        )}
+        </h2>
       </div>
     )
   }
+
+  
+  //QUIZ COMPLETE AND SUBMITTED
+  if (quizCompleted) {
+    return quizDone(totalScore)
+}
 
   const currentQuestion = questionData[currentQuestionIndex]
 

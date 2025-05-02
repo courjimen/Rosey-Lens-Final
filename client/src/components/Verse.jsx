@@ -1,4 +1,3 @@
-import React, {useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import '../styles/Affirmation.css'
 

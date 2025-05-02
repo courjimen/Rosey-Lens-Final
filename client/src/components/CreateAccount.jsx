@@ -80,7 +80,7 @@ function CreateAccount() {
       </div>
 
       <div className='link-container'>
-        <Link to='/'>Return Home</Link>
+        <Link to='/' className='text'>Return Home</Link>
       </div>
     </div>
   )

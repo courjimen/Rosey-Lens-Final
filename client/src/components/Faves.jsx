@@ -74,7 +74,7 @@ function Faves() {
             </div>
           ) : (
             <div>
-              You saved this: "{favorite.item_id}" (Type: {favorite.favorite_type})
+              You saved this {favorite.favorite_type}: "{favorite.item_id}"
             </div>
           )}
         </div>

@@ -36,6 +36,7 @@ app.post('/newuser', async (req, res) => {
     res.sendStatus(500)
   }
 })
+
 //POST FAVORITES
 app.post('/faves', async (req, res) => {
     const { user_id, favorite_type, item_id } = req.body

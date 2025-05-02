@@ -8,6 +8,7 @@ import '../styles/Faves.css'
 function Faves() {
   const location = useLocation()
   const userId = location.state?.userId
+  const firstName = location.state?.firstName
 
   const [userFaves, setUserFaves] = useState([])
 
@@ -62,9 +63,9 @@ function Faves() {
           <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' onClick={() => deleteFave(favorite.item_id)} />
           You saved this {favorite.favorite_type}: "{favorite.item_id}"
         </div>
-        )
+      )
       )}
-      <Link to='/user'>Return Home</Link>
+      <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
     </div>
   )
 }

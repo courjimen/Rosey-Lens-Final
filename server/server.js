@@ -257,7 +257,7 @@ app.get('/quiz', async (req, res) => {
   }
 })
 
-//deploy on render
+//REGEX USAGE
 app.get(/^\/(?!api\/)(.*)$/, (req, res) => {
   res.sendFile(path.join(staticPath, 'index.html'));
 });

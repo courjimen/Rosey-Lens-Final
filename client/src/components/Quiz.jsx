@@ -172,7 +172,7 @@ function Quiz() {
               src={roseImage}
               alt="Rose representing your mood"
             />
-            <Typography variant="body1">Your score: {totalScore}</Typography>
+            <Typography variant="body1">Your score: {quizResult.totalScore}</Typography>
           </CardContent>
         </Card>
         <h2>
@@ -188,7 +188,7 @@ function Quiz() {
   
   //QUIZ COMPLETE AND SUBMITTED
   if (quizCompleted) {
-    return quizDone(totalScore)
+    return quizDone(quizResult.totalScore)
 }
 
   const currentQuestion = questionData[currentQuestionIndex]

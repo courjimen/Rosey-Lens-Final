@@ -13,6 +13,7 @@ function Affirmation() {
   const location = useLocation()
   const moodCategory = location.state?.quizResult?.moodCategory
   const userId = location.state?.userId
+  const firstName = location.state?.firstName
 
   console.log('Mood category in affirmation:', moodCategory)
   console.log('User ID:', userId)
@@ -55,14 +56,14 @@ function Affirmation() {
         },
         body: JSON.stringify({
           user_id: userId,
-          favorite_type: 'affirmation',
+          favorite_type: 'Affirmation',
           item_id: affirmation,
         }),
       })
       console.log(response)
       if (response.ok) {
         setIsFave(true)
-        console.log('Affirmation favorited successfully!')
+        console.log('Item favorited successfully!')
       } else {
         const errorData = await response.json()
         console.error('Failed to fave affirmation:', errorData)
@@ -92,9 +93,9 @@ function Affirmation() {
       </div>
 
        <div className='links'> 
-        <Link to='/user'>Return Home</Link>
-        <Link to='/quiz'>Take another Quiz</Link>
-        <Link to='/share'></Link>
+        <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
+        <Link to='/quiz' state={{ userId: userId, firstName: firstName }}>Take another Quiz</Link>
+        <Link to='/share' state={{ userId: userId, firstName: firstName }}></Link>
         </div>
     </div>
   )

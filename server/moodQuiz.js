@@ -8,7 +8,7 @@ const moodQuestions = [
     },
     { 
       id: 2, 
-      text: 'In terms of energy level, are you feelilng like you are...',
+      text: 'In terms of energy levels, are you feelilng like you are...',
       options: ['Ready to tackle the world!', 'Just coasting', 'Totally running on empty'],
       score: {'Ready to tackle the world!': 2, 'Just coasting': 0, 'Totally running on empty': -2} 
     },
@@ -16,7 +16,7 @@ const moodQuestions = [
       id: 3, 
       text: 'What has your general outlook been like today?',
       options: ['Feeling really positive', 'Kind of neutral tbh', 'Honestly negative and down'],
-      score: {'Feeling really positive': 2, 'Kind of neutral tbh': 0, 'Honestly negative and down': -2}
+      score: {'Feeling really positive': 2, 'Kind of neutral to be honest': 0, 'Honestly negative and down': -2}
     },
     { 
       id: 4, 

@@ -64,7 +64,7 @@ function Affirmation() {
       console.log(response)
       if (response.ok) {
         setIsFave(true)
-        console.log('Item favorited successfully!')
+        alert('Affirmation favorited successfully!')
       } else {
         const errorData = await response.json()
         console.error('Failed to fave affirmation:', errorData)

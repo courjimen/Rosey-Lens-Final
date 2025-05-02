@@ -52,19 +52,17 @@
   }
 
   .rose-affirmation {
-    opacity: 0.3; 
-    animation: fadeInOut 2s ease-in-out infinite alternate;}
+    opacity: 1; 
+    animation: fadeInOut 5s ease-in-out infinite alternate;
+    height: 350px;
+    width: 350px
+  }
   
   @keyframes fadeInOut {
     from {
-      opacity: 0.3; 
+      opacity: 0.2; 
     to {
       opacity: 1; 
     }
   }
 }
-
-  .rose-affirmation {
-    height: 350px;
-    width: 350px
-  }

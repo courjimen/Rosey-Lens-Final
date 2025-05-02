@@ -83,17 +83,19 @@ function Affirmation() {
   return (
     <div className='affirmation-container'>
       <h2>We hope this affirmation brightens your day</h2>
+     
       <div className='affirmation-card'>
         <p>{affirmation}</p>
         <button className='fave-button' onClick={handleFave}>
           <FontAwesomeIcon icon={isFave ? fasStarSolid : faStarRegular} size='lg' />
         </button>
       </div>
-      <div className='link-container'>
+
+       <div className='links'> 
         <Link to='/user'>Return Home</Link>
         <Link to='/quiz'>Take another Quiz</Link>
         <Link to='/share'></Link>
-      </div>
+        </div>
     </div>
   )
 }

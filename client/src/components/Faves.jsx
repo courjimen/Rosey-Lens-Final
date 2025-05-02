@@ -33,8 +33,25 @@ function Faves() {
     fetchUserFaves()
   }, [userId])
 
-  const deleteFave = async () => {
-    const response = await fetch(`http://localhost:3000/faves/${item_id}/`)
+  const deleteFave = async (faveItemId) => {
+    if (!userId) {
+      console.log('User not logged in.')
+      return
+    }
+    try {
+      const response = await fetch(`http://localhost:3000/user/${userId}faves/${faveItemId}/`, {
+        method: 'DELETE',
+      })
+      if (response.status === 204) {
+        setUserFaves(userFaves.filter((favorite) => favorite.item_id !== faveItemId))
+      } else if (response.status === 404) {
+        console.error('Fave not found.')
+      } else {
+        console.error('Failed to delete favorite:', response.status)
+      }
+    } catch (error) {
+      console.error('Error removing item from favorites')
+    }
   }
 
   return (
@@ -42,10 +59,12 @@ function Faves() {
       <h2>Your Favorite Affirmations</h2>
       {userFaves.map((favorite, index) => (
         <div key={index} className='fave-item'>
-          You saved this: {favorite.favorite_type}, Item ID: {favorite.item_id}
+          <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' onClick={() => deleteFave(favorite.item_id)} />
+          You saved this: {favorite.favorite_type}: "{favorite.item_id}"
         </div>
-      )
+        )
       )}
+      <Link to='/user'>Go Back</Link>
     </div>
   )
 }

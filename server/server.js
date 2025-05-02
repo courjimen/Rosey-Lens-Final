@@ -53,13 +53,19 @@ app.post('/faves', async (req, res) => {
       res.status(500).json({ error: 'Failed to add fave', details: error.message })
     }
   })
-  
-// //GET FAVORITES 
-// app.get('faves/affirmations', async (req, res) => {
-//   try {
-//     const result = await pool.query('SELECT ')
-//   }
-// })
+
+//GET FAVORITES 
+app.get('/users/:user_id/faves', async (req, res) => {
+  const { user_id } = req.params
+
+  try {
+    const result = await pool.query('SELECT favorite_type, item_i FROM favorites WHERE user_id = $1', [user_id])
+    res.status(200).json(result.rows)
+  } catch (error) {
+    console.error('Error retreiving faves: ', error)
+    res.status(500).json({ error: 'Failed to retrieve favorites', details: error.message })
+  }
+})
 
 //See users
 app.get('/users', async (req, res) => {

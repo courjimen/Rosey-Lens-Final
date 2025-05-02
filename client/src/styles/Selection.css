@@ -26,7 +26,6 @@
     color: rgb(190, 23, 51);
 }
 
-
 .affirmation-card a {
     text-decoration: none;
     color: inherit;
@@ -51,4 +50,8 @@
 
 .affirmation-card p {
     font-size: 17px;
+}
+
+button {
+    margin-top: 11px;
 }

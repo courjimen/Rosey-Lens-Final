@@ -75,9 +75,9 @@ function Quiz() {
     } else {
       try {
         if (!userId) {
-          const {moodCategory, message} = calculateScore(answers);
-          setTotalScore(calculateScore(answers).totalScore);
-          setQuizResult({ answers, mood: message, userId: 0 });
+          const {moodCategory, message, totalScore} = calculateScore(answers);
+          setTotalScore(totalScore);
+          setQuizResult({ answers, mood: message, userId: 0, totalScore });
           setMoodCategory(moodCategory || '');
           setQuizCompleted(true);
           return
@@ -172,7 +172,7 @@ function Quiz() {
               src={roseImage}
               alt="Rose representing your mood"
             />
-            <Typography variant="body1">Your score: {totalScore}</Typography>
+            <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
           </CardContent>
         </Card>
         <h2>
@@ -188,7 +188,7 @@ function Quiz() {
   
   //QUIZ COMPLETE AND SUBMITTED
   if (quizCompleted) {
-    return quizDone(totalScore)
+    return quizDone(quizResult?.totalScore)
 }
 
   const currentQuestion = questionData[currentQuestionIndex]

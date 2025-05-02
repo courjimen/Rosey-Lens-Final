@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar as fasStarSolid, faStar as faStarRegular } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Affirmation.css'
+import roseImage from '../images/roseImage.webp'
 
 function Affirmation() {
   const [affirmation, setAffirmation] = useState('')
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [isFave, setIsFave] = useState(false)
 
   const location = useLocation()
   const moodCategory = location.state?.quizResult?.moodCategory
+  const userId = location.state?.userId
+  const firstName = location.state?.firstName
+
   console.log('Mood category in affirmation:', moodCategory)
+  console.log('User ID:', userId)
 
   useEffect(() => {
     const fetchAffirmation = async () => {
@@ -35,6 +43,37 @@ function Affirmation() {
     fetchAffirmation()
   }, [moodCategory])
 
+  const handleFave = async () => {
+    if (!userId) {
+      console.log('Please login to favorite.')
+      return
+    }
+
+    try {
+      const response = await fetch('http://localhost:3000/faves', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          favorite_type: 'Affirmation',
+          item_id: affirmation,
+        }),
+      })
+      console.log(response)
+      if (response.ok) {
+        setIsFave(true)
+        console.log('Item favorited successfully!')
+      } else {
+        const errorData = await response.json()
+        console.error('Failed to fave affirmation:', errorData)
+      }
+    } catch (error) {
+      console.error('Error favoriting affirmation:', error)
+    }
+  }
+
   if (loading) {
     return <div>Loading your affirmation...</div>
   }
@@ -46,12 +85,20 @@ function Affirmation() {
   return (
     <div className='affirmation-container'>
       <h2>We hope this affirmation brightens your day</h2>
+     
       <div className='affirmation-card'>
         <p>{affirmation}</p>
+        <button className='fave-button' onClick={handleFave}>
+          <FontAwesomeIcon icon={isFave ? fasStarSolid : faStarRegular} size='lg' />
+        </button>
       </div>
-     <Link to='/user'>Return Home</Link>
-     <Link to='/quiz'>Take another Quiz</Link>
-     <Link to='/share'></Link>
+
+       <div className='links'> 
+        <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
+        <Link to='/quiz' state={{ userId: userId, firstName: firstName }}>Take another Quiz</Link>
+        <Link to='/share' state={{ userId: userId, firstName: firstName }}></Link>
+        </div>
+        <img className='rose-affirmation' src={roseImage}/>
     </div>
   )
 }

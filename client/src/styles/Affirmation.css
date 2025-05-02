@@ -1,0 +1,70 @@
+.affirmation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .affirmation-container h2 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  .affirmation-container .links {
+    margin-top: 20px;
+  }
+  
+  .affirmation-container .links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #378d3f;
+  }
+  
+  .affirmation-container .links a:hover {
+    color: #c94165;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .affirmation-card {
+    background-color: #ffe0e6; 
+    border: 1px dashed #191818;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 8px; 
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px; 
+  }
+  
+  .affirmation-card h3 {
+    color: #c94165;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .affirmation-card p {
+    color: #555; 
+    line-height: 1.6; 
+    margin-bottom: 15px;
+  }
+
+  .rose-affirmation {
+    opacity: 0.3; 
+    animation: fadeInOut 2s ease-in-out infinite alternate;}
+  
+  @keyframes fadeInOut {
+    from {
+      opacity: 0.3; 
+    to {
+      opacity: 1; 
+    }
+  }
+}
+
+  .rose-affirmation {
+    height: 350px;
+    width: 350px
+  }

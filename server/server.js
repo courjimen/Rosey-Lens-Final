@@ -39,21 +39,21 @@ app.post('/newuser', async (req, res) => {
 
 //POST FAVORITES
 app.post('/faves', async (req, res) => {
-    const { user_id, favorite_type, item_id } = req.body
+  const { user_id, favorite_type, item_id } = req.body
 
-    try {
-      const result = await pool.query('INSERT INTO favorites (user_id, favorite_type, item_id) VALUES ($1, $2, $3) ON CONFLICT (user_id, favorite_type, item_id) DO NOTHING RETURNING *', [user_id, favorite_type, item_id])
+  try {
+    const result = await pool.query('INSERT INTO favorites (user_id, favorite_type, item_id) VALUES ($1, $2, $3) ON CONFLICT (user_id, favorite_type, item_id) DO NOTHING RETURNING *', [user_id, favorite_type, item_id])
 
-      if (result.rows.length > 0) {
-        res.status(201).json({ message: 'Affirmaation added to faves', favorite: result.rows[0] })
-      } else {
-        res.status(200).json({ message: 'Already in faves' })
-      }
-    } catch (error) {
-      console.error('Error adding affirmation to faves: ', error)
-      res.status(500).json({ error: 'Failed to add fave', details: error.message })
+    if (result.rows.length > 0) {
+      res.status(201).json({ message: 'Affirmaation added to faves', favorite: result.rows[0] })
+    } else {
+      res.status(200).json({ message: 'Already in faves' })
     }
-  })
+  } catch (error) {
+    console.error('Error adding affirmation to faves: ', error)
+    res.status(500).json({ error: 'Failed to add fave', details: error.message })
+  }
+})
 
 //GET FAVORITES 
 app.get('/users/:user_id/faves', async (req, res) => {
@@ -65,6 +65,24 @@ app.get('/users/:user_id/faves', async (req, res) => {
   } catch (error) {
     console.error('Error retreiving faves: ', error)
     res.status(500).json({ error: 'Failed to retrieve favorites', details: error.message })
+  }
+})
+
+//remove fave
+app.delete('/user/:user_id/faves/:item_id', async (req, res) => {
+  const { user_id, item_id } = req.params
+
+  try {
+    await pool.query('DELETE FROM favorites WHERE user_id = $1 AND item_id = $2', [user_id, item_id])
+    
+    if (result.rowCount > 0) {
+      res.status(204).send()
+    } else {
+      res.status(404).json({ error: 'Favorite not found'})
+    }
+  } catch (error) {
+    console.error('Error deleting favorite item:', error)
+    res.status(500).json({ error: 'Failed to remove from favorites', details: error.message })
   }
 })
 
@@ -129,82 +147,82 @@ const fetchRandomVerse = async (moodCategory) => {
   let verseReference = '';
 
   if (moodCategory === 'positive') {
-      verseReference = uplifting[Math.floor(Math.random() * uplifting.length)];
+    verseReference = uplifting[Math.floor(Math.random() * uplifting.length)];
   } else if (moodCategory === 'neutral') {
-      verseReference = encouraging[Math.floor(Math.random() * encouraging.length)];
+    verseReference = encouraging[Math.floor(Math.random() * encouraging.length)];
   } else if (moodCategory === 'negative') {
-      verseReference = loving[Math.floor(Math.random() * loving.length)];
+    verseReference = loving[Math.floor(Math.random() * loving.length)];
   }
 
   if (!verseReference) {
-      return null;
+    return null;
   }
 
   const bibleVersion = 'net';
   const apiUrl = `https://api.biblesupersearch.com/api?bible=${bibleVersion}&reference=${verseReference}`;
 
   try {
-      const apiResponse = await fetch(apiUrl);
-      if (!apiResponse.ok) {
-          console.error(`Error fetching Bible verse (status ${apiResponse.status}): ${apiResponse.statusText}`);
-          return null;
-      }
-      const data = await apiResponse.json();
+    const apiResponse = await fetch(apiUrl);
+    if (!apiResponse.ok) {
+      console.error(`Error fetching Bible verse (status ${apiResponse.status}): ${apiResponse.statusText}`);
+      return null;
+    }
+    const data = await apiResponse.json();
 
-      if (data && data.results && data.results.length > 0) {
-          const verseData = data.results[0];
-          if (verseData) {
-              const versesText = {};
-              if (verseData.verses && verseData.verses.net) {
-                  for (const chapter in verseData.verses.net) {
-                      if (!versesText[chapter]) {
-                          versesText[chapter] = {};
-                      }
-                      for (const verseNum in verseData.verses.net[chapter]) {
-                          versesText[chapter][verseNum] = verseData.verses.net[chapter][verseNum].text;
-                      }
-                  }
-              }
-              return {
-                  book_name: verseData.book_name,
-                  chapter_verse: verseData.chapter_verse,
-                  verses: versesText
-              };
+    if (data && data.results && data.results.length > 0) {
+      const verseData = data.results[0];
+      if (verseData) {
+        const versesText = {};
+        if (verseData.verses && verseData.verses.net) {
+          for (const chapter in verseData.verses.net) {
+            if (!versesText[chapter]) {
+              versesText[chapter] = {};
+            }
+            for (const verseNum in verseData.verses.net[chapter]) {
+              versesText[chapter][verseNum] = verseData.verses.net[chapter][verseNum].text;
+            }
           }
+        }
+        return {
+          book_name: verseData.book_name,
+          chapter_verse: verseData.chapter_verse,
+          verses: versesText
+        };
       }
-      return null;
+    }
+    return null;
   } catch (err) {
-      console.error('Error fetching Bible verse: ', err);
-      return null;
+    console.error('Error fetching Bible verse: ', err);
+    return null;
   }
 };
 
 //NEW POST QUIZ
 app.post('/quiz', async (req, res) => {
   try {
-      const { user_id, answers } = req.body;
+    const { user_id, answers } = req.body;
 
-      const { moodCategory, message, totalScore } = calculateScore(answers);
+    const { moodCategory, message, totalScore } = calculateScore(answers);
 
-      const quizResult = await pool.query(
-          'INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *',
-          [user_id, totalScore, moodCategory, message]
-      );
+    const quizResult = await pool.query(
+      'INSERT INTO quiz_scores (user_id, score, date_completed, mood_category, message) VALUES ($1, $2, NOW(), $3, $4) RETURNING *',
+      [user_id, totalScore, moodCategory, message]
+    );
 
-      const bibleVerseData = await fetchRandomVerse(moodCategory);
+    const bibleVerseData = await fetchRandomVerse(moodCategory);
 
-      res.status(201).json({
-          message: 'Quiz submitted successfully',
-          totalScore,
-          mood: message,
-          quizResult: quizResult.rows[0],
-          moodCategory,
-          bibleVerse: bibleVerseData,
-      });
+    res.status(201).json({
+      message: 'Quiz submitted successfully',
+      totalScore,
+      mood: message,
+      quizResult: quizResult.rows[0],
+      moodCategory,
+      bibleVerse: bibleVerseData,
+    });
 
   } catch (error) {
-      console.error('Error submitting quiz:', error);
-      res.status(500).json({ error: 'Failed to submit quiz', message: error.message });
+    console.error('Error submitting quiz:', error);
+    res.status(500).json({ error: 'Failed to submit quiz', message: error.message });
   }
 });
 

@@ -33,12 +33,16 @@ function Faves() {
     fetchUserFaves()
   }, [userId])
 
+  const deleteFave = async () => {
+    const response = await fetch(`http://localhost:3000/faves/${item_id}/`)
+  }
+
   return (
-    <div>
+    <div className='faves-page'>
       <h2>Your Favorite Affirmations</h2>
       {userFaves.map((favorite, index) => (
-        <div key={index}>
-          Type: {favorite.favorite_type}, Item ID: {favorite.item_id}
+        <div key={index} className='fave-item'>
+          You saved this: {favorite.favorite_type}, Item ID: {favorite.item_id}
         </div>
       )
       )}

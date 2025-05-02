@@ -60,7 +60,7 @@ app.get('/users/:user_id/faves', async (req, res) => {
   const { user_id } = req.params
 
   try {
-    const result = await pool.query('SELECT favorite_type, item_i FROM favorites WHERE user_id = $1', [user_id])
+    const result = await pool.query('SELECT favorite_type, item_id FROM favorites WHERE user_id = $1', [user_id])
     res.status(200).json(result.rows)
   } catch (error) {
     console.error('Error retreiving faves: ', error)

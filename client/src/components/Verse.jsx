@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as fasStarSolid, faStar as faStarRegular } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Affirmation.css'
+import roseImage from '../images/roseImage.webp'
 
 function Verse() {
     const [isFavorited, setIsFavorited] = useState(false)
@@ -84,7 +85,7 @@ function Verse() {
             <h2>We hope this Bible verse brightens your day</h2>
             <div className='affirmation-card'>
                 <h3>{bibleVerseData.book_name} {bibleVerseData.chapter_verse}</h3>
-                <p>{verseTextDisplay}</p>
+                <p>"{verseTextDisplay}"</p>
                 <button className='fave-button' onClick={handleFave}>
                     <FontAwesomeIcon icon={isFavorited ? fasStarSolid : faStarRegular} size='lg' />
                 </button>
@@ -95,6 +96,7 @@ function Verse() {
                 <Link to='/quiz' state={{ userId: userId, firstName: firstName }}>Take another Quiz</Link>
                 <Link to='/share' state={{ userId: userId, firstName: firstName }}></Link>
             </div>
+            <img className='rose-affirmation' src={roseImage}/>
         </div>
     );
 }

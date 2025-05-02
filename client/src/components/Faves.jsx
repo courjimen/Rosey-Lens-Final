@@ -79,7 +79,9 @@ function Faves() {
           )}
         </div>
       ))}
+       <div className='home-button'>
       <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
+      </div>
     </div>
   )
 }

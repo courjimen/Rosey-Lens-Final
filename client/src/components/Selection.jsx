@@ -51,7 +51,7 @@ function Selection() {
             <Link to='/song'>
               <h3>Song</h3>
               <img className='song-image' src={songImage} />
-              <p>Find a song with a peaceful vibe </p>
+              <button><p>Find a song with a peaceful vibe </p></button>
             </Link>
           </div>
         </div>

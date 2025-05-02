@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as fasStarSolid, faStar as faStarRegular } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Affirmation.css'
+import roseImage from '../images/roseImage.webp'
 
 function Affirmation() {
   const [affirmation, setAffirmation] = useState('')
@@ -97,6 +98,7 @@ function Affirmation() {
         <Link to='/quiz' state={{ userId: userId, firstName: firstName }}>Take another Quiz</Link>
         <Link to='/share' state={{ userId: userId, firstName: firstName }}></Link>
         </div>
+        <img className='rose-affirmation' src={roseImage}/>
     </div>
   )
 }

@@ -7,7 +7,7 @@ import '../styles/Faves.css'
 
 function Faves() {
   const location = useLocation()
-  const userId = location.state?.user_id
+  const userId = location.state?.userId
 
   const [userFaves, setUserFaves] = useState([])
 

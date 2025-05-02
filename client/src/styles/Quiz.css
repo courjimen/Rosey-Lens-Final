@@ -35,7 +35,7 @@
     font-size: 16px;
     margin-bottom: 12px;
     display: block;
-    color: #0a0a0a;
+    color: #181717;
   }
   
   /* Style for the radio input*/
@@ -46,7 +46,7 @@
   
   /* Space between the radio button and label text */
   .radio-label span:last-child {
-      margin-left: 5px;
+      margin-left: 15px;
   }
 
   .button-container {

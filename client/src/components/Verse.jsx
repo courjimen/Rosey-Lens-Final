@@ -53,7 +53,7 @@ function Verse() {
             console.log(response)
             if (response.ok) {
                 setIsFavorited(true)
-                console.log('Bible Verse favorited successfully!')
+                alert('Bible Verse favorited successfully!')
             } else {
                 const errorData = await response.json()
                 console.error('Failed to fave verse:', errorData)

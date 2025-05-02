@@ -19,7 +19,7 @@ import moodData from "./currentMood.js";
     if (totalScore > 4) {
       moodCategory = 'positive'
       message = moodData.positive[Math.floor(Math.random() * moodData.positive.length)]
-    } else if (totalScore < 4 && totalScore > 0) {
+    } else if (0 < totalScore < 5) {
       moodCategory = 'neutral'
       message = moodData.neutral[Math.floor(Math.random() * moodData.neutral.length)]
     } else {

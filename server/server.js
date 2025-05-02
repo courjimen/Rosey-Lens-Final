@@ -38,29 +38,43 @@ app.post('/newuser', async (req, res) => {
 })
 
 //POST FAVORITES
+//POST FAVORITES
 app.post('/faves', async (req, res) => {
-  const { user_id, favorite_type, item_id } = req.body
+  const { user_id, favorite_type, item_id, book_name, verse_text } = req.body;
 
   try {
-    const result = await pool.query('INSERT INTO favorites (user_id, favorite_type, item_id) VALUES ($1, $2, $3) ON CONFLICT (user_id, favorite_type, item_id) DO NOTHING RETURNING *', [user_id, favorite_type, item_id])
+    let query;
+    let values;
+
+    if (favorite_type === 'Bible Verse') {
+      query = 'INSERT INTO favorites (user_id, favorite_type, item_id, book_name, verse_text) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (user_id, favorite_type, item_id) DO NOTHING RETURNING *';
+      values = [user_id, favorite_type, item_id, book_name, verse_text];
+    } else if (favorite_type === 'Affirmation') {
+      query = 'INSERT INTO favorites (user_id, favorite_type, item_id) VALUES ($1, $2, $3) ON CONFLICT (user_id, favorite_type, item_id) DO NOTHING RETURNING *';
+      values = [user_id, favorite_type, item_id];
+    } else {
+      return res.status(400).json({ error: 'Invalid favorite_type' });
+    }
+
+    const result = await pool.query(query, values);
 
     if (result.rows.length > 0) {
-      res.status(201).json({ message: 'Affirmaation added to faves', favorite: result.rows[0] })
+      res.status(201).json({ message: 'Item added to faves', favorite: result.rows[0] });
     } else {
-      res.status(200).json({ message: 'Already in faves' })
+      res.status(200).json({ message: 'Already in faves' });
     }
   } catch (error) {
-    console.error('Error adding affirmation to faves: ', error)
-    res.status(500).json({ error: 'Failed to add fave', details: error.message })
+    console.error('Error adding item to faves: ', error);
+    res.status(500).json({ error: 'Failed to add fave', details: error.message });
   }
-})
+});
 
 //GET FAVORITES 
 app.get('/users/:user_id/faves', async (req, res) => {
   const { user_id } = req.params
 
   try {
-    const result = await pool.query('SELECT favorite_type, item_id FROM favorites WHERE user_id = $1', [user_id])
+    const result = await pool.query('SELECT favorite_type, item_id, book_name, verse_text FROM favorites WHERE user_id = $1', [user_id])
     res.status(200).json(result.rows)
   } catch (error) {
     console.error('Error retreiving faves: ', error)

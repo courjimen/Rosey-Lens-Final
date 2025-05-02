@@ -20,7 +20,9 @@ CREATE TABLE favorites (
     user_id INT NOT NULL REFERENCES users(user_id),
     favorite_type VARCHAR(50) NOT NULL,
     item_id TYPE TEXT,
-    UNIQUE (user_id, favorite_type, item_id));
+    book_name VARCHAR(100),
+    verse_text TEXT,
+    UNIQUE (user_id, item_id));
 
 --Table of Guests
 CREATE TABLE guest (

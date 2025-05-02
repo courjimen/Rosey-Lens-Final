@@ -28,7 +28,9 @@ CREATE TABLE public.favorites (
     id integer NOT NULL,
     user_id integer NOT NULL,
     favorite_type character varying(50) NOT NULL,
-    item_id integer NOT NULL
+    item_id text NOT NULL,
+    book_name character varying(100),
+    verse_text text
 );
 
 
@@ -55,6 +57,18 @@ ALTER TABLE public.favorites_id_seq OWNER TO tpl1122_12;
 
 ALTER SEQUENCE public.favorites_id_seq OWNED BY public.favorites.id;
 
+
+--
+-- Name: guest; Type: TABLE; Schema: public; Owner: tpl1122_12
+--
+
+CREATE TABLE public.guest (
+    user_id integer NOT NULL,
+    firstname text NOT NULL
+);
+
+
+ALTER TABLE public.guest OWNER TO tpl1122_12;
 
 --
 -- Name: guest_scores; Type: TABLE; Schema: public; Owner: tpl1122_12
@@ -92,6 +106,28 @@ ALTER TABLE public.guest_scores_id_seq OWNER TO tpl1122_12;
 --
 
 ALTER SEQUENCE public.guest_scores_id_seq OWNED BY public.guest_scores.id;
+
+
+--
+-- Name: guest_user_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl1122_12
+--
+
+CREATE SEQUENCE public.guest_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.guest_user_id_seq OWNER TO tpl1122_12;
+
+--
+-- Name: guest_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tpl1122_12
+--
+
+ALTER SEQUENCE public.guest_user_id_seq OWNED BY public.guest.user_id;
 
 
 --
@@ -176,6 +212,13 @@ ALTER TABLE ONLY public.favorites ALTER COLUMN id SET DEFAULT nextval('public.fa
 
 
 --
+-- Name: guest user_id; Type: DEFAULT; Schema: public; Owner: tpl1122_12
+--
+
+ALTER TABLE ONLY public.guest ALTER COLUMN user_id SET DEFAULT nextval('public.guest_user_id_seq'::regclass);
+
+
+--
 -- Name: guest_scores id; Type: DEFAULT; Schema: public; Owner: tpl1122_12
 --
 
@@ -200,7 +243,22 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: tpl1122_12
 --
 
-COPY public.favorites (id, user_id, favorite_type, item_id) FROM stdin;
+COPY public.favorites (id, user_id, favorite_type, item_id, book_name, verse_text) FROM stdin;
+1	5	affirmation	It's time to create a life filled with purpose and passion. Don't give up now, shower yourself with love and give yourself the grace you share with others.	\N	\N
+2	5	affirmation	Nothing can dim the light which shines from within - Maya Angelou. Find one thing today that makes you smile.	\N	\N
+6	1	affirmation	Trust your path, you are exactly where you need to be. Have faith in the journey, for it is unfolding perfectly to guide you towards your destiny.	\N	\N
+7	1	affirmation	Make each day your masterpiece. You have a kindness and positive vibe that will carry you to new heights this week! Keep being what you want to see in the world	\N	\N
+16	5	Bible Verse	37:23	Psalms	The LORD grants success to the one whose behavior he finds commendable.
+18	5	Affirmation	The way you navigate challenges with such grace is a testament to your inner fortitude, serving as a powerful example for those around you. Keep moving forward.	\N	\N
+20	1	Bible Verse	2:4	Habakkuk	Look, the one whose desires are not upright will faint from exhaustion, but the person of integrity will live because of his faithfulness.
+\.
+
+
+--
+-- Data for Name: guest; Type: TABLE DATA; Schema: public; Owner: tpl1122_12
+--
+
+COPY public.guest (user_id, firstname) FROM stdin;
 \.
 
 
@@ -252,6 +310,54 @@ COPY public.quiz_scores (id, user_id, score, date_completed, mood_category, mess
 37	5	4	2025-04-29 01:21:21.055357-04	negative	You're feeling a bit low. Let's add some positivity.
 38	1	4	2025-04-30 12:28:39.456383-04	negative	You're feeling a bit low. Let's add some positivity.
 39	1	2	2025-04-30 17:57:06.758576-04	neutral	You're feeling alright, and a touch of joy is coming your way.
+40	1	4	2025-04-30 22:30:53.988451-04	negative	You're feeling less than your usual self. Let's change that.
+42	1	4	2025-04-30 23:21:06.076125-04	negative	You're feeling down. Let's change that.
+43	1	8	2025-04-30 23:28:19.650136-04	positive	You're feeling truly bright.
+44	1	2	2025-04-30 23:47:50.552632-04	neutral	You're feeling bleh, here's a boost of positivity.
+45	1	6	2025-05-01 01:07:47.768345-04	positive	You're feeling such good energy.
+46	1	4	2025-05-01 01:35:07.126886-04	negative	You're feeling less than your usual self. Let's change that.
+47	1	4	2025-05-01 01:40:28.303519-04	negative	You're feeling less than your usual self. Let's change that.
+48	1	6	2025-05-01 02:43:28.846114-04	positive	You're feeling truly bright.
+49	1	6	2025-05-01 02:43:30.225809-04	positive	You're feeling so radiant.
+50	5	2	2025-05-01 02:48:15.440716-04	neutral	You're feeling alright, and a touch of joy is coming your way.
+51	1	0	2025-05-01 02:51:01.868291-04	neutral	You're feeling alright, and a touch of joy is coming your way.
+52	5	4	2025-05-01 03:18:06.52249-04	negative	You're feeling bad vibes. Let's get a moment of peace.
+53	5	4	2025-05-01 03:19:21.200155-04	negative	You're feeling off. Let's change that.
+54	5	6	2025-05-01 03:19:24.353799-04	positive	You're feeling such good energy.
+55	5	-8	2025-05-01 03:20:00.546591-04	negative	You're feeling a bit low. Let's add some positivity.
+56	5	2	2025-05-01 03:20:36.334586-04	neutral	You're feeling a bit strained, and a little extra brightness is on its way.
+57	5	8	2025-05-01 03:22:18.154435-04	positive	You're feeling like pure sunshine.
+58	1	-6	2025-05-01 03:23:45.450593-04	negative	You're feeling a bit low. Let's add some positivity.
+59	1	0	2025-05-01 03:57:23.54262-04	negative	You're feeling a bit low. Let's add some positivity.
+60	5	2	2025-05-01 04:27:00.72196-04	neutral	You're feeling neutral, grab a sprinkle of good vibes.
+61	5	4	2025-05-01 22:04:59.209525-04	negative	You're feeling less than your usual self. Let's change that.
+62	5	2	2025-05-01 23:12:23.071205-04	neutral	You're feeling neutral, grab a sprinkle of good vibes.
+63	1	2	2025-05-01 23:46:43.051951-04	neutral	You're feeling bleh, here's a boost of positivity.
+64	5	0	2025-05-02 00:24:20.02562-04	negative	You're feeling less than your usual self. Let's change that.
+65	5	0	2025-05-02 00:24:23.106766-04	negative	You're feeling off. Let's change that.
+66	5	0	2025-05-02 00:30:34.700424-04	negative	You're feeling down. Let's change that.
+67	5	0	2025-05-02 00:30:35.583205-04	negative	You're feeling off. Let's change that.
+68	5	-2	2025-05-02 00:30:36.435846-04	negative	You're feeling less than your usual self. Let's change that.
+69	5	2	2025-05-02 00:30:37.174487-04	neutral	You're feeling well, let's add some positive energy to your mood.
+70	1	8	2025-05-02 00:54:51.748924-04	positive	You're feeling such good energy.
+71	1	8	2025-05-02 01:09:00.410621-04	positive	You're feeling like pure sunshine.
+72	1	6	2025-05-02 01:10:23.117763-04	positive	You're feeling truly bright.
+73	5	8	2025-05-02 01:13:53.637789-04	positive	You're feeling like pure sunshine.
+74	5	6	2025-05-02 01:17:21.475992-04	positive	You're feeling so radiant.
+75	5	8	2025-05-02 01:19:37.548879-04	positive	You're feeling truly bright.
+76	5	-4	2025-05-02 01:20:17.605307-04	negative	You're feeling down. Let's change that.
+77	5	-8	2025-05-02 01:23:02.024243-04	negative	You're feeling off. Let's change that.
+78	5	8	2025-05-02 01:37:48.6283-04	positive	You're feeling like pure sunshine.
+79	5	-2	2025-05-02 01:40:31.947385-04	negative	You're feeling less than your usual self. Let's change that.
+80	5	8	2025-05-02 02:04:20.175014-04	positive	You're feeling such good energy.
+81	5	2	2025-05-02 02:10:32.261773-04	neutral	You're feeling alright, and a touch of joy is coming your way.
+82	5	6	2025-05-02 02:31:10.814555-04	positive	You're feeling truly bright.
+83	5	2	2025-05-02 02:35:42.904566-04	neutral	You're feeling well, let's add some positive energy to your mood.
+84	5	2	2025-05-02 02:38:15.182983-04	neutral	You're feeling bleh, here's a boost of positivity.
+85	5	6	2025-05-02 02:53:19.472366-04	positive	You're feeling truly bright.
+86	1	2	2025-05-02 03:19:52.408893-04	neutral	You're feeling well, let's add some positive energy to your mood.
+87	1	6	2025-05-02 03:29:45.947579-04	positive	You're feeling truly bright.
+88	1	-2	2025-05-02 03:35:29.623409-04	neutral	You're feeling bleh, here's a boost of positivity.
 \.
 
 
@@ -271,7 +377,7 @@ COPY public.users (user_id, firstname, lastname, email) FROM stdin;
 -- Name: favorites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl1122_12
 --
 
-SELECT pg_catalog.setval('public.favorites_id_seq', 1, false);
+SELECT pg_catalog.setval('public.favorites_id_seq', 22, true);
 
 
 --
@@ -282,10 +388,17 @@ SELECT pg_catalog.setval('public.guest_scores_id_seq', 5, true);
 
 
 --
+-- Name: guest_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl1122_12
+--
+
+SELECT pg_catalog.setval('public.guest_user_id_seq', 1, false);
+
+
+--
 -- Name: quiz_scores_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl1122_12
 --
 
-SELECT pg_catalog.setval('public.quiz_scores_id_seq', 39, true);
+SELECT pg_catalog.setval('public.quiz_scores_id_seq', 88, true);
 
 
 --
@@ -309,6 +422,14 @@ ALTER TABLE ONLY public.favorites
 
 ALTER TABLE ONLY public.favorites
     ADD CONSTRAINT favorites_user_id_favorite_type_item_id_key UNIQUE (user_id, favorite_type, item_id);
+
+
+--
+-- Name: guest guest_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl1122_12
+--
+
+ALTER TABLE ONLY public.guest
+    ADD CONSTRAINT guest_pkey PRIMARY KEY (user_id);
 
 
 --

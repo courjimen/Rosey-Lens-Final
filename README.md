@@ -93,6 +93,8 @@ What you can expect to see:
 
 ![](./images/wireframes.png)
 
+Demo of Rosy Lens (MVP): 
+
 # FAQs
 **Q: Am I able to see my history as a guest?**
 

@@ -73,8 +73,7 @@ app.delete('/user/:user_id/faves/:item_id', async (req, res) => {
   const { user_id, item_id } = req.params
 
   try {
-    await pool.query('DELETE FROM favorites WHERE user_id = $1 AND item_id = $2', [user_id, item_id])
-    
+    const result =  await pool.query('DELETE FROM favorites WHERE user_id = $1 AND item_id = $2', [user_id, item_id])
     if (result.rowCount > 0) {
       res.status(204).send()
     } else {

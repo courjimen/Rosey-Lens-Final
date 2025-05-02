@@ -39,7 +39,7 @@ function Faves() {
       return
     }
     try {
-      const response = await fetch(`http://localhost:3000/user/${userId}faves/${faveItemId}/`, {
+      const response = await fetch(`http://localhost:3000/user/${userId}/faves/${faveItemId}/`, {
         method: 'DELETE',
       })
       if (response.status === 204) {
@@ -60,11 +60,11 @@ function Faves() {
       {userFaves.map((favorite, index) => (
         <div key={index} className='fave-item'>
           <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' onClick={() => deleteFave(favorite.item_id)} />
-          You saved this: {favorite.favorite_type}: "{favorite.item_id}"
+          You saved this {favorite.favorite_type}: "{favorite.item_id}"
         </div>
         )
       )}
-      <Link to='/user'>Go Back</Link>
+      <Link to='/user'>Return Home</Link>
     </div>
   )
 }

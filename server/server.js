@@ -36,6 +36,30 @@ app.post('/newuser', async (req, res) => {
     res.sendStatus(500)
   }
 })
+//POST FAVORITES
+app.post('/faves', async (req, res) => {
+    const { user_id, favorite_type, item_id } = req.body
+
+    try {
+      const result = await pool.query('INSERT INTO favorites (user_id, favorite_type, item_id) VALUES ($1, $2, $3) ON CONFLICT (user_id, favorite_type, item_id) DO NOTHING RETURNING *', [user_id, favorite_type, item_id])
+
+      if (result.rows.length > 0) {
+        res.status(201).json({ message: 'Affirmaation added to faves', favorite: result.rows[0] })
+      } else {
+        res.status(200).json({ message: 'Already in faves' })
+      }
+    } catch (error) {
+      console.error('Error adding affirmation to faves: ', error)
+      res.status(500).json({ error: 'Failed to add fave', details: error.message })
+    }
+  })
+  
+// //GET FAVORITES 
+// app.get('faves/affirmations', async (req, res) => {
+//   try {
+//     const result = await pool.query('SELECT ')
+//   }
+// })
 
 //See users
 app.get('/users', async (req, res) => {

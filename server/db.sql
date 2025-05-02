@@ -24,5 +24,7 @@ CREATE TABLE favorites (
 
 --Table of Guests
 CREATE TABLE guest (
-    user_id SERIAL PRIMARY KEY, 
-    firstname TEXT NOT NULL);
+   user_id SERIAL PRIMARY KEY, 
+    firstname TEXT NOT NULL, 
+    lastname TEXT,
+    email VARCHAR(125) UNIQUE NOT NULL);

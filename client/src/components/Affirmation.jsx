@@ -50,7 +50,7 @@ function Affirmation() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/faves', {
+      const response = await fetch('/faves', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

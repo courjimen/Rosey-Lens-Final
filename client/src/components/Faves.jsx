@@ -16,7 +16,7 @@ function Faves() {
     const fetchUserFaves = async () => {
       if (userId) {
         try {
-          const response = await fetch(`http://localhost:3000/users/${userId}/faves`)
+          const response = await fetch(`/users/${userId}/faves`)
 
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
@@ -40,7 +40,7 @@ function Faves() {
       return
     }
     try {
-      const response = await fetch(`http://localhost:3000/user/${userId}/faves/${faveItemId}/`, {
+      const response = await fetch(`/user/${userId}/faves/${faveItemId}/`, {
         method: 'DELETE',
       })
       if (response.status === 204) {

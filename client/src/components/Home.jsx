@@ -18,9 +18,9 @@ function Home() {
      </div>
 
     <div className='login-options'>
-     <p className='login'><Link to="/login" className='red-text'>Login</Link> with<br/> Google</p>
-     <p className='acct'><Link to="/new" className='red-text'>Create <br/> Account</Link> </p> 
-     <p className='guest'>Continue as <Link to='/guest' className='red-text'><br/>Guest</Link></p>
+     <p><Link className='green-text button-link' to="/login">Login with<br/> Google</Link></p> 
+     <p><Link className='green-text button-link' to="/new">Create <br/> Account</Link> </p> 
+     <p><Link className='green-text button-link' to='/guest'>Continue as <br/>Guest</Link></p>
      </div>
 
     </div>

@@ -1,5 +1,6 @@
 .home-page-container {
     text-align: center;
+    margin-top: 10%;
 }
 
 .red-text {
@@ -15,6 +16,22 @@ p.description {
     font-size: 30px;
 }
 
+.green-text {
+    color: #127b37;
+}
+
+.button-link {
+    border: none;
+    padding: 0;
+    background: none;
+    font-size: inherit;
+}
+
+button:hover {
+    font-size: 25px;
+    background-color: lightpink;
+}
+
 .login-options {
     display: flex;
     justify-content: space-around;
@@ -23,6 +40,8 @@ p.description {
     font-size: 20px;
     width: screen max-content;
 }
+
+
 
 @media screen and (max-width: 900px) {
     .home-page-container {

@@ -65,11 +65,10 @@ function Verse() {
     if (!bibleVerseData) {
         return (
             <div className='affirmation-container'>
-                <h2>Oops!</h2>
-                <p>No Bible verse was found.</p>
-                <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
-                <Link to='/quiz' state={{ userId: userId, firstName: firstName }}>Take another Quiz</Link>
-                <Link to='/share' state={{ userId: userId, firstName: firstName }}></Link>
+                <h2>Oops! No Bible verse was found.</h2>
+                <div className='links'>
+                <Link className='green-text'to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
+                </div>
             </div>
         );
     }
@@ -92,8 +91,8 @@ function Verse() {
             </div>
 
             <div className='links'>
-                <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
-                <Link to='/quiz' state={{ userId: userId, firstName: firstName }}>Take another Quiz</Link>
+                <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link> <div className='green-text'>||</div>
+                <Link to='/quiz' state={{ userId: userId, firstName: firstName }}> Retake Quiz</Link>
                 <Link to='/share' state={{ userId: userId, firstName: firstName }}></Link>
             </div>
             <img className='rose-affirmation' src={roseImage}/>

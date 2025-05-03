@@ -29,7 +29,6 @@ function Selection() {
       <div className='selection-container'>
         <h2>Pick one option for a sweet surprise</h2>
         <div className='affirmation-options'>
-
           {/* affirmation */}
           <div className='affirmation-card'>
             <h3>Affirmation</h3>

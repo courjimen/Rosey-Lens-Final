@@ -94,8 +94,8 @@ function Affirmation() {
       </div>
 
        <div className='links'> 
-        <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
-        <Link to='/quiz' state={{ userId: userId, firstName: firstName }}>Take another Quiz</Link>
+        <Link className='return-link'to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link> <div className='green-text'>||</div>
+        <Link className='quiz-link' to='/quiz' state={{ userId: userId, firstName: firstName }}> Retake Quiz</Link>
         <Link to='/share' state={{ userId: userId, firstName: firstName }}></Link>
         </div>
         <img className='rose-affirmation' src={roseImage}/>

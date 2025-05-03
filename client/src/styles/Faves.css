@@ -46,3 +46,7 @@
 .fave-item>div {
     flex-grow: 1;
 }
+
+.home-button {
+    font-size: 25px;
+}

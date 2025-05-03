@@ -77,7 +77,7 @@ This will start both the server and the client. You should be able to see the ap
 - **Positive deliverable** provides affirmation, *song or bible verse based on user input/responses
 - **Rose visual** animation that changes vibrancy/health based on initial mood selection
 - ***Watering interaction** User selects which deliverable they would like to receive and this is the big reveal
-- ***Rose animation** e.g., color subtly changing to more vibrant/healthy and display of affirmation 
+- ***Rose animation** e.g., rose subtly changing from wilted to vibrant/healthy
 - **Shareable Card** an option to share link or visual snippet to social media platforms
 
 *<u>Nice to haves:</u> Upcoming features that will be implemented at a later date
@@ -126,8 +126,6 @@ Demo of Rosy Lens (MVP):
 | Guest Quiz Score | Create Account Form|
 | ------ | ------|
 | ![](./client/src/images/GuestScore.png) | ![](./client/src/images/CreateAcct.png)
-
-
 
 # FAQs
 **Q: Am I able to see affirmations as a guest?**

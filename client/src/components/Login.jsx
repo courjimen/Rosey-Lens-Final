@@ -49,7 +49,7 @@ function Login() {
 
   
   return (
-    <div className='login-container'>
+    <div className='logged-in-container'>
       <h2>Sign in below:</h2>
       <GoogleLogin onSuccess={handleGoogleLoginSuccess} onError={handleGoogleLoginFailure}/>
     </div>

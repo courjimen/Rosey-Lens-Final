@@ -1,7 +1,7 @@
 .home-page-container {
     text-align: center;
-    border-color: red;
 }
+
 .red-text {
     color: red;
 }
@@ -11,14 +11,53 @@
     width: 200px;
 }
 
-.description {
+p.description {
     font-size: 30px;
 }
+
 .login-options {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    text-align: center;
     margin-top: 10px;
     font-size: 20px;
+    width: screen max-content;
 }
 
+@media screen and (max-width: 900px) {
+    .home-page-container {
+        text-align: center;
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+    }
+    h1 {
+        font-size: 25px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+
+    .red-text {
+        color: red;
+    }
+    
+    .rose {
+        height: 125px;
+        width: 125px;
+    }
+    
+    p.description {
+        font-size: 25px;
+        text-align:;
+    }
+    
+    .login-options {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 20px;
+        width: screen max-content;
+    }
+}

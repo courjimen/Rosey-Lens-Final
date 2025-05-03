@@ -6,7 +6,7 @@
     color: red;
 }
 
-.rose {
+.login-rose {
     height: 300px;
     width: 300px;
 }
@@ -14,7 +14,7 @@
 .description {
     font-size: 30px;
 }
-.login-options {
+.logged-in-options {
     display: flex;
     justify-content:space-around;
     margin-left: 250px;

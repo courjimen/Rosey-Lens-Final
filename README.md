@@ -127,8 +127,6 @@ Demo of Rosy Lens (MVP):
 | ------ | ------|
 | ![](./client/src/images/GuestScore.png) | ![](./client/src/images/CreateAcct.png)
 
-
-
 # FAQs
 **Q: Am I able to see affirmations as a guest?**
 

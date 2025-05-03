@@ -26,9 +26,9 @@ function LoginHome() {
     <div className='home-page-container'>
       <h1>Welcome to <span className='red-text'>Rosy Lens</span> {firstName}</h1>
       <h2>Self care is in the air!</h2>
-      <img className='rose' src={roseImage} />
+      <img className='login-rose' src={roseImage} />
       <p className='description'>Based on your mood we give you positive <br /> uplifting affirmations, bible verses, or songs!</p>
-      <div className='login-options'>
+      <div className='logged-in-options'>
 
       {/* Mood History Link */}
         <p className='login'>

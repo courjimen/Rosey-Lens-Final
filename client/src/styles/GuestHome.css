@@ -9,7 +9,7 @@
     font-family: sans-serif;
   }
   
-  .form-wrapper {
+  .guest-wrapper {
     background-color: #ffe0e0; 
     padding: 20px;
     border-radius: 10px;
@@ -19,12 +19,12 @@
     max-width: 300px; 
   }
   
-  .form-wrapper p{
+  .guest-wrapper p{
       margin-bottom: 10px;
       font-size: 18px;
   }
   
-  .form-wrapper input {
+  .guest-wrapper input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -66,5 +66,14 @@
   .guest-home svg {
     width: 20px;
     height: 20px;
+  }
+
+  .guest-nav-buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  .return-button {
+    margin-right: 50px;
   }
   

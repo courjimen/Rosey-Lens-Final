@@ -4,10 +4,17 @@
     align-items: center;
     padding: 20px;
 }
+
+.selection-container h2 {
+    font-size: 35px;
+}
+
 .affirmation-options {
     display: flex;
     gap: 30px;
     margin-top: 30px;
+    width: 100%;
+    justify-content: center;
 }
 
 .affirmation-card {
@@ -15,11 +22,15 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    font-size: 35px;
     padding: 20px;
-    border: 2px;
+    border: 2px dashed rgb(4, 26, 1);
     border-radius: 8px;
-    border-style: dashed;
     background-color: rgb(249, 204, 211);
+    width: calc(33% - 60px);
+    min-width: 200px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 .affirmation-card:hover {
@@ -32,26 +43,76 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
 }
 
 .affirmation-card img {
-    height: 100px;
+    max-height: 100px;
+    width: auto;
 }
 
 .song-image {
-    height: 100px;
+    max-height: 100px;
+    width: auto;
 }
 
 .affirmation-card h3 {
-    margin-top: 0;
+    margin-top: 10px;
     margin-bottom: 10px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .affirmation-card p {
-    font-size: 17px;
+    font-size: 16px;
 }
 
 button {
     margin-top: 11px;
 }
+
+@media screen and (max-width: 800px) {
+    .selection-container h2 {
+        font-size: 35px;
+    }
+.affirmation-options {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.affirmation-card {
+    width: 80%;
+    min-width: auto;
+}
+.affirmation-card h3 {
+    font-size: 25px;
+}
+.affirmation-card p {
+    font-size: 17px;
+}
+}
+
+@media screen and (max-width: 500px) {
+    .selection-container h2 {
+        font-size: 35px;
+    }
+
+    .affirmation-options {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .affirmation-card {
+        width: 80%;
+        min-width: auto;
+    }
+    .affirmation-card h3 {
+        font-size: 22px;
+    }
+    .affirmation-card p {
+        font-size: 17px;
+    }
+    }

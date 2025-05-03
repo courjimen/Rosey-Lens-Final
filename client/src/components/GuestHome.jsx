@@ -23,7 +23,7 @@ function GuestHome() {
 
     return (
         <div className='guest-home'>
-            <div className='form-wrapper'>
+            <div className='guest-wrapper'>
             Please enter your name:
             <input 
             type='text'
@@ -32,9 +32,9 @@ function GuestHome() {
             />
             </div>
 
-            <div>
-            <button><Link to='/'>Return Home</Link></button>
-            <button onClick={handleStartQuiz}><FontAwesomeIcon icon={faArrowRight}/></button>
+            <div className='guest-nav-buttons'>
+            <button className='return-button'><Link to='/'>Return Home</Link></button>
+            <button className='arrow-button' onClick={handleStartQuiz}><FontAwesomeIcon icon={faArrowRight}/></button>
             </div>
         </div>
     )

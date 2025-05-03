@@ -33,11 +33,7 @@ git clone https://github.com/courjimen/Rosy-Lens-Final.git
 
 Cd into client and run the following commands:
 ```bash
-npm install -D vitest @testing-library/react @testing-library/jest-dom
-```
-
-```bash
-npm install react-router-dom @mui/material @emotion/react @emotion/styled
+npm install -D vitest jest babel-jest @babel/preset-env @babel/preset-react @testing-library/react @testing-library/jest-dom react-router-dom @react-oauth/google@latest @mui/material @emotion/react @emotion/styled @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons dotenv
 ```
 <br/>
 
@@ -81,7 +77,7 @@ This will start both the server and the client. You should be able to see the ap
 - **Positive deliverable** provides affirmation, *song or bible verse based on user input/responses
 - **Rose visual** animation that changes vibrancy/health based on initial mood selection
 - ***Watering interaction** User selects which deliverable they would like to receive and this is the big reveal
-- ***Rose animation** e.g., color subtly changing to more vibrant/healthy and display of affirmation 
+- ***Rose animation** e.g., rose subtly changing from wilted to vibrant/healthy
 - **Shareable Card** an option to share link or visual snippet to social media platforms
 
 *<u>Nice to haves:</u> Upcoming features that will be implemented at a later date
@@ -93,8 +89,46 @@ What you can expect to see:
 
 ![](./images/wireframes.png)
 
+Demo of Rosy Lens (MVP): 
+### Here's what you can expect to see for the main home page
+![](./client/src/images/Home.png)
+
+### You can choose to login with Google or as a Guest this is where each link will take you to the respective pages
+| Login Page | Guest Page |
+| ------ | ------|
+| ![](./client/src/images/Login.png) | ![](./client/src/images/Guest.png)
+
+### Moving as a logged in user this will be your home page:
+![](./client/src/images/LoginHome.png)
+
+### You will take your quiz:
+![](./client/src/images/LoginQuiz.png)
+
+### After you'll receive a score and depending on how high or low it will return a corresponding rose and phrase:
+| Positive | Negative |
+| ------ | ------|
+| ![](./client/src/images/PositiveQuiz.png) | ![](./client/src/images/LoginScore.png) | 
+
+### Once you click pick an affirmation you'll got to the selection page:
+![](./client/src/images/Selection.png)
+
+### You'll be able to select either an affirmation or bible verse:
+| Select Affirmation | Affirmation | Bible Verse |
+| ------ | ------| ------|
+| ![](./client/src/images/SelectAffirmation.png) | ![](./client/src/images/Affirmation.png) | ![](./client/src/images/Verse.png) |
+
+### You will have the option (as a logged in user) to save your favorite items:
+| Favorite Alert | Favorite List |
+| ------ | ------|
+| ![](./client/src/images/FavoriteAlert.png) | ![](./client/src/images/Favorites.png) |
+
+### Finally for the guest flow, after entering your name you'll also take the quiz and have the option to create an account to view affirmations:
+| Guest Quiz Score | Create Account Form|
+| ------ | ------|
+| ![](./client/src/images/GuestScore.png) | ![](./client/src/images/CreateAcct.png)
+
 # FAQs
-**Q: Am I able to see my history as a guest?**
+**Q: Am I able to see affirmations as a guest?**
 
 A: No, as of now that feature is only available to logged in users who create account.
 

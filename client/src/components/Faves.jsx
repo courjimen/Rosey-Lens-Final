@@ -60,7 +60,6 @@ function Faves() {
       <h2>Your Favorite Affirmations</h2>
       {userFaves.map((favorite, index) => (
         <div key={index} className='fave-item'>
-          <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' onClick={() => deleteFave(favorite.item_id)} />
           {favorite.favorite_type === 'Bible Verse' ? (
             <div>
               You saved this Bible Verse:
@@ -77,10 +76,11 @@ function Faves() {
               You saved this {favorite.favorite_type}: "{favorite.item_id}"
             </div>
           )}
+          <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' onClick={() => deleteFave(favorite.item_id)} />
         </div>
       ))}
-       <div className='home-button'>
-      <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
+      <div className='home-button'>
+        <Link to='/user' state={{ userId: userId, firstName: firstName }}>Return Home</Link>
       </div>
     </div>
   )

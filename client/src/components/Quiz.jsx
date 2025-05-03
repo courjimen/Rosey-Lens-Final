@@ -161,7 +161,6 @@ function Quiz() {
 
     return (
       <div className='quiz-completed-container'>
-       
           {userId ? (<h2>Thank you for taking the Quiz! Submit score for your affirmation</h2>) : (<h2>Check out your score below, create an account to view your affirmations!</h2>)}
         <Card className='completed-card'>
           <CardHeader title="Quiz Completed!" className='completed-header' />
@@ -199,12 +198,12 @@ function Quiz() {
         <h1>Hi, {firstName}</h1>
         <h3>Answer the questions below to rate your mood:</h3>
         <CardHeader>
-          <Typography className='quiz-title'>
-            Question {currentQuestionIndex + 1} / {questionData.length}
+        <Typography className='quiz-title'>
+           Question {currentQuestionIndex + 1} / {questionData.length}
           </Typography>
         </CardHeader>
         <CardContent>
-          <p className='question-text'>{currentQuestion.text}</p>
+       <p className='question-text'> <span className='span-question'>{currentQuestion.text}</span></p>
           <RadioGroup
             aria-label={`question-${currentQuestion.id}`}
             name={`question-${currentQuestion.id}`}

@@ -4,11 +4,17 @@
     align-items: center;
     padding: 20px;
     font-family: sans-serif;
+    margin-top: 10%;
   }
   
   .affirmation-container h2 {
-    margin-bottom: 15px;
+    font-size: 35px;
+    margin-bottom: 30px;
     color: #333;
+  }
+
+  .affirmation-container p  {
+    font-size: 25px;
   }
   .affirmation-container .links {
     margin-top: 20px;
@@ -16,6 +22,8 @@
   
   .affirmation-container .links a {
     margin: 0 10px;
+    font-size: 35px;
+    align-items: center;
     text-decoration: none;
     color: #378d3f;
   }
@@ -33,7 +41,6 @@
     margin-bottom: 20px;
     text-align: center;
     border-radius: 8px; 
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 600px; 
   }
@@ -43,19 +50,28 @@
     margin-top: 0;
     margin-bottom: 10px;
     font-weight: bold;
+    font-size: 25px;
   }
   
   .affirmation-card p {
     color: #555; 
     line-height: 1.6; 
     margin-bottom: 15px;
+    font-size: 20px;
+  }
+
+  .links {
+    font-size: 35px;
+    display: flex;
+    align-items: center;
   }
 
   .rose-affirmation {
     opacity: 1; 
     animation: fadeInOut 5s ease-in-out infinite alternate;
-    height: 350px;
-    width: 350px
+    height: 250px;
+    width: 250px;
+    margin-top: 20px
   }
   
   @keyframes fadeInOut {
@@ -65,4 +81,55 @@
       opacity: 1; 
     }
   }
+}
+
+@media screen and (max-width: 500px) {
+  .affirmation-card {
+    background-color: #ffe0e6; 
+    border: 1px dashed #191818;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 8px; 
+    width: 100%;
+    max-width: 500px; 
+  }
+  
+  .affirmation-card h3 {
+    color: #c94165;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .affirmation-card p {
+    color: #555; 
+    line-height: 1.6; 
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+
+  .links {
+    display: flex;
+    font-size: 18px;
+    align-items: center;
+  }
+
+  .rose-affirmation {
+    opacity: 1; 
+    animation: fadeInOut 5s ease-in-out infinite alternate;
+    height: 250px;
+    width: 250px;
+    margin-top: 20px
+  }
+  
+  @keyframes fadeInOut {
+    from {
+      opacity: 0.2; 
+    to {
+      opacity: 1; 
+    }
+  }
+}
 }

@@ -44,7 +44,6 @@ app.post('/newuser', async (req, res) => {
 })
 
 //POST FAVORITES
-//POST FAVORITES
 app.post('/faves', async (req, res) => {
   const { user_id, favorite_type, item_id, book_name, verse_text } = req.body;
 

@@ -19,6 +19,8 @@ Prior to running this project, here are the pre-reqs you'll need. Please make su
 * **PostgreSQL** This is where we'll keep all our user's mood data. Make sure it's up and running! Mock data is provided in my db.sql file to get you started ✅
 * **Vitest** For running unit tests _(cd into client and use the command **npm test** to run test files)_
 
+If you would like to see the deployed version of my app, [check it out on Render](https://rosy-lens-final-dy9u.onrender.com)
+
 # Installation Instructions
 Below is a step-by-step to run my project locally ⭐️
 

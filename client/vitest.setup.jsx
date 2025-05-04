@@ -1,6 +1,7 @@
 // vitest.setup.js
 import { vi } from 'vitest';
 import React from 'react';
+import 'dotenv/config'
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
@@ -8,6 +9,10 @@ vi.mock('react-router-dom', async () => {
 
   const MockLink = ({ to, children, ...rest }) => (
     <a href={to} {...rest}>{children}</a>
+  );
+
+  const MockBrowserRouter = ({ children }) => (
+    <div>{children}</div>
   );
 
   return {
@@ -21,5 +26,12 @@ vi.mock('react-router-dom', async () => {
     })),
     useNavigate: () => useNavigateMock,
     Link: MockLink,
+    BrowserRouter: MockBrowserRouter,
   };
 });
+
+vi.mock('jwt-decode', () => ({
+  jwtDecode: vi.fn(),
+}));
+
+global.fetch = vi.fn();

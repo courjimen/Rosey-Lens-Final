@@ -4,7 +4,7 @@ import { describe, it } from 'vitest'
 import Selection from '../components/Selection.jsx'
 
 describe('Selection component renders', () => {
-    it('renders Selection'), () => {
+    it('renders Selection', () => {
         render(<Selection />)
-    }
+    })
 })

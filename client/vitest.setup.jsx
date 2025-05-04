@@ -1,7 +1,6 @@
 // vitest.setup.js
 import { vi } from 'vitest';
 import React from 'react';
-import 'dotenv/config'
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');

@@ -4,6 +4,7 @@ import Affirmation from '../components/Affirmation.jsx';
 
 describe('Affirmation component renders', () => {
     it('renders header text', async () => {
+        //mock data
         vi.mock('react-router-dom', () => ({
             ...vi.importActual('react-router-dom'),
             useLocation: vi.fn(() => ({

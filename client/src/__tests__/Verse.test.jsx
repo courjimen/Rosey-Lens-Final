@@ -4,7 +4,7 @@ import { describe, it } from 'vitest'
 import Verse from '../components/Verse.jsx'
 
 describe('Verse component renders', () => {
-    it('renders GuestHome'), () => {
+    it('renders GuestHome', () => {
         render(<Verse />)
-    }
+    })
 })

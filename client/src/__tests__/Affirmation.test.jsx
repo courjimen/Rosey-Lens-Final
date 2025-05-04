@@ -1,14 +1,12 @@
-import React from 'react'
-import { render, screen } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
-import Affirmation from '../components/Affirmation.jsx'
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import Affirmation from '../components/Affirmation.jsx';
+import { vi } from 'vitest';
 
-describe('Affirmation component renders', () => {
-    it('renders Fave Button'), () => {
-        render(
-            <BrowserRouter>
-                <Affirmation />
-            </BrowserRouter>)
-        expect(screen.getByRole('button')).toBeInTheDocument()
-    }
+
+describe('App renders', () => {
+    it('renders', () => {
+        render(<Affirmation />);
+        // expect(screen.getByText('Hello')).toBeDefined()
+    })
 })

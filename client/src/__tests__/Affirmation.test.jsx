@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import Affirmation from '../components/Affirmation.jsx';
 
-
 describe('Affirmation component renders', () => {
     it('renders header text', async () => {
         vi.mock('react-router-dom', () => ({

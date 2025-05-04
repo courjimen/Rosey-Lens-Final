@@ -6,6 +6,6 @@ import { TestComponent } from "../components/TestComponent";
 describe('App renders', () => {
     it('renders', () => {
         render(<TestComponent />);
-        expect(screen.getByText('asoldjk')).toBeDefined()
+        expect(screen.getByText('Hello')).toBeDefined()
     })
 })

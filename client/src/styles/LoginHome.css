@@ -26,6 +26,7 @@
 }
 .green-text {
     color: #127b37;
+    text-decoration: none;
 }
 
 .button-link {
@@ -33,10 +34,20 @@
     padding: 0;
     background: none;
     font-size: inherit;
+    text-decoration: none;
 }
 
 button:hover {
     font-size: 25px;
+    background-color: lightpink;
+}
+
+.logout {
+    font-size: 20px;
+    margin-left: 75%;
+}
+
+.logout :hover {
     background-color: lightpink;
 }
 

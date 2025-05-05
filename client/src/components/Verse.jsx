@@ -10,6 +10,7 @@ function Verse() {
 
     const location = useLocation()
     const bibleVerseData = location.state?.bibleVerse
+    const moodCategory = location.state?.moodCategory
     const userId = location.state?.userId
     const firstName = location.state?.firstName
 

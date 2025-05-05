@@ -24,6 +24,7 @@ function LoginHome() {
 
   return (
     <div className='login-home-page-container'>
+      {/* Sign Out Link added */}
       <div className='logout'>
         <Link className='green-text button link' to='/'>Sign Out</Link>
       </div>

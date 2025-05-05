@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Selection from '../components/Selection.jsx';
-import { BrowserRouter, useLocation, useNavigate, Link } from 'react-router-dom';
+import { BrowserRouter, useLocation } from 'react-router-dom';
 
 const mockLocation = (state) => ({
     pathname: '/selection',

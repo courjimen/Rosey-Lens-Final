@@ -24,7 +24,7 @@ function Login() {
 
       if (!response.ok) {
         console.error('Error sending user data:', response.status)
-        navigate('/home', { state: { firstName: firstName } })
+        navigate('/', { state: { firstName: firstName } })
         return
       }
 
@@ -38,18 +38,18 @@ function Login() {
 
         } catch (error) {
         console.error('Error decoding token:', error)
-          navigate('/home', {state: {firstName: 'User' } })
+          navigate('/', {state: {firstName: 'User' } })
         }
       }
 
       const handleGoogleLoginFailure = (error) => {
         console.log('Login failed', error)
-        navigate('/home', { state: { firstName: 'User' } })
+        navigate('/', { state: { firstName: 'User' } })
       }
 
   
   return (
-    <div className='login-container'>
+    <div className='logged-in-container'>
       <h2>Sign in below:</h2>
       <GoogleLogin onSuccess={handleGoogleLoginSuccess} onError={handleGoogleLoginFailure}/>
     </div>

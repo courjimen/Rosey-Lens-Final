@@ -2,8 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f8d2d2;
+    min-height: auto;
+    background-color: #f7caca;
+    margin-top: 10%;
   }
   
   .quiz-card {
@@ -13,29 +14,31 @@
     margin: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
-    background-color: #fff;
+    background-color: #e3a7a7;
   }
   
+  .quiz-card h3 {
+    margin-bottom: -30px;
+  }
+
   .quiz-title {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 25px;
     text-align: center;
     color: #333;
   }
-  
+
   .question-text {
-    font-size: 35px;
-    margin-bottom: 25px;
+    font-size: 20px;
     line-height: 1.5;
     color: #444;
     background-color: #f8d2d2;
   }
   
   .radio-label {
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 12px;
     display: block;
-    color: #0a0a0a;
+    color: #181717;
   }
   
   /* Style for the radio input*/
@@ -46,7 +49,7 @@
   
   /* Space between the radio button and label text */
   .radio-label span:last-child {
-      margin-left: 5px;
+      margin-left: 15px;
   }
 
   .button-container {
@@ -88,7 +91,7 @@
     background-color: #f7cdcd;
     color: #f7cdcd;
     cursor: not-allowed;
-    box-shadow: none; /* Remove shadow for disabled state */
+    box-shadow: none;
   }
   
   .submit-button:disabled:hover {
@@ -114,21 +117,21 @@
     justify-content: center;
     min-height: 100vh;
     padding: 20px;
+    background-color: #f7caca
   }
-  
+
   .completed-card {
-      background-color: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 20px;
-      text-align: center;
-      max-width: 500px;
-      width: 95%;
-      margin-top: 20px;
-  }
-  
+    background-color: #f6caca;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 95%;
+    margin-top: 20px;
+}
   .completed-header{
-      color: #4caf50;
+      color: #058609;
       font-size: 24px;
       margin-bottom: 10px;
   }
@@ -136,5 +139,43 @@
   .completed-content {
       font-size: 18px;
       color: #333;
+      margin-top: -15px;
+  }
+
+  .quiz-rose {
+    height: 125px;
+    width: 125px
   }
   
+  .mood-positive {
+    opacity: 1;
+    filter: grayscale(0%) contrast(100%);
+  }
+
+  .mood-neutral {
+    opacity: 0.5;
+    filter: grayscale(50%) contrast(80%);
+  }
+
+  .mood-negative {
+    opacity: 0.1;
+    filter: grayscale(100%) contrast(60%);
+  }
+
+  @media screen and (max-width: 380px) {
+    .quiz-card h3 {
+      margin-bottom: -30px;
+    }
+    .quiz-title {
+      font-size: 25px;
+      text-align: center;
+      color: #333;
+    }
+    
+    .question-text {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #444;
+      background-color: #f8d2d2;
+    }
+  }

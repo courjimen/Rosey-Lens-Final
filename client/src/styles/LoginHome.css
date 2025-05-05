@@ -1,30 +1,32 @@
-.home-page-container {
+.login-home-page-container {
     text-align: center;
     border-color: #fc96da;
+    margin-top: 10% ;
 }
 .red-text {
     color: red;
 }
 
-.rose {
-    height: 300px;
-    width: 300px;
+.login-rose {
+    height: 200px;
+    width: 200px;
 }
 
-.description {
-    font-size: 30px;
+.login-description {
+    font-size: 25px;
 }
-.login-options {
+
+.logged-in-options {
     display: flex;
-    justify-content:space-around;
-    margin-left: 250px;
-    margin-right: 250px;
-    align-items: center;
+    justify-content: space-around;
+    text-align: center;
     margin-top: 10px;
     font-size: 20px;
+    width: screen max-content;
 }
 .green-text {
     color: #127b37;
+    text-decoration: none;
 }
 
 .button-link {
@@ -32,9 +34,35 @@
     padding: 0;
     background: none;
     font-size: inherit;
+    text-decoration: none;
 }
 
 button:hover {
     font-size: 25px;
     background-color: lightpink;
+}
+
+.logout {
+    font-size: 20px;
+    margin-left: 75%;
+}
+
+.logout :hover {
+    background-color: lightpink;
+    font-size: 25px;
+}
+
+@media screen and (max-width: 500px) {
+    .login-rose {
+        height: 125px;
+        width: 125px;
+    }
+
+    .login-description {
+        font-size: 20px;
+    }
+
+    .logged-in-options p {
+        font-size: 15px;
+    }
 }

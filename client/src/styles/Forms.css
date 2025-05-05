@@ -1,5 +1,5 @@
 /* CreateAccount.css */
-.login-container {
+.logged-in-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +9,7 @@
   font-family: sans-serif;
 }
 
-.login-container > div {
+.logged-in-container > div {
   background-color: #ffe0e0;
   padding: 20px;
   border-radius: 10px;
@@ -35,7 +35,6 @@
 
 /* CREATE ACCOUNT */
 .create-account {
-  background-image: url('./images/rosePetal.jpg');
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,15 +97,18 @@ button[type="submit"]:hover {
 }
 
 .link-container a {
-  color: #fbfbfb;
+  color: #0a4d0a;
   text-decoration: none;
-  font-size: 16px;
   transition: color 0.3s ease;
 }
 
 .link-container a:hover {
-  color: #f7f7f7;
+  color: #e90c0c;
   text-decoration: underline;
+}
+
+.text{
+  font-size: 30px;
 }
 
 .input-form>div {

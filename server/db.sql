@@ -19,5 +19,14 @@ CREATE TABLE favorites (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES users(user_id),
     favorite_type VARCHAR(50) NOT NULL,
-    item_id INT NOT NULL,
-    UNIQUE (user_id, favorite_type, item_id));
+    item_id TYPE TEXT,
+    book_name VARCHAR(100),
+    verse_text TEXT,
+    UNIQUE (user_id, item_id));
+
+--Table of Guests
+CREATE TABLE guest (
+   user_id SERIAL PRIMARY KEY, 
+    firstname TEXT NOT NULL, 
+    lastname TEXT,
+    email VARCHAR(125) UNIQUE NOT NULL);

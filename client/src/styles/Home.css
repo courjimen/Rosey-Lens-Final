@@ -1,7 +1,8 @@
 .home-page-container {
     text-align: center;
-    border-color: red;
+    margin-top: 10%;
 }
+
 .red-text {
     color: red;
 }
@@ -11,14 +12,73 @@
     width: 200px;
 }
 
-.description {
+p.description {
     font-size: 30px;
 }
+
+.green-text {
+    color: #127b37;
+}
+
+.button-link {
+    border: none;
+    padding: 0;
+    background: none;
+    font-size: inherit;
+}
+
+button:hover {
+    font-size: 25px;
+    background-color: lightpink;
+}
+
 .login-options {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    text-align: center;
     margin-top: 10px;
     font-size: 20px;
+    width: screen max-content;
 }
 
+
+
+@media screen and (max-width: 900px) {
+    .home-page-container {
+        text-align: center;
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .red-text {
+        color: red;
+    }
+
+    .rose {
+        height: 125px;
+        width: 125px;
+    }
+
+    p.description {
+        font-size: 25px;
+
+    }
+
+    .login-options {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 20px;
+        width: screen max-content;
+    }
+}

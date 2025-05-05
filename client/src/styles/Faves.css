@@ -1,0 +1,52 @@
+.faves-page {
+    padding: 20px;
+    font-family: sans-serif;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+
+.faves-page h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.fave-item {
+    background-color: #ffe0e6;
+    color: #333;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.delete-icon {
+    color: #3a8858;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+.faves-page a {
+    display: block;
+    margin-top: 20px;
+    color: #316e3f;
+    text-decoration: none;
+    text-align: center;
+}
+
+.faves-page a:hover {
+    text-decoration: underline;
+}
+
+/* Style for the text within the bar */
+.fave-item>div {
+    flex-grow: 1;
+}
+
+.home-button {
+    font-size: 25px;
+}

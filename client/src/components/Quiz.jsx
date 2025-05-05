@@ -15,7 +15,9 @@ function Quiz() {
   const [answers, setAnswers] = useState({})
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [quizResult, setQuizResult] = useState(null);
-
+  const [moodCategory, setMoodCategory] = useState('');
+  const [totalScore, setTotalScore] = useState(0);
+  const [bibleVerse, setBibleVerse] = useState(null);
 
   const location = useLocation()
   const userId = location.state?.userId
@@ -50,16 +52,21 @@ function Quiz() {
   }, [])
 
   const handleAnswerChange = (e) => {
-    setSelectedAnswer(e.target.value)
-  }
+    const answer = e.target.value;
+    setSelectedAnswer(answer);
+    setAnswers({
+      ...answers,
+      [questionData[currentQuestionIndex].id]: answer,
+    });
+  };
 
   const handleNextQuestion = async () => {
     if (!selectedAnswer) return
 
-    setAnswers({
-      ...answers,
-      [questionData[currentQuestionIndex].id]: selectedAnswer,
-    })
+    // setAnswers({
+    //   ...answers,
+    //   [questionData[currentQuestionIndex].id]: selectedAnswer,
+    // })
 
     //navigates to next question
     if (currentQuestionIndex < questionData.length - 1) {
@@ -68,9 +75,14 @@ function Quiz() {
     } else {
       try {
         if (!userId) {
-          setError('User ID not provided')
-          return
+          const { moodCategory, message, totalScore } = calculateScore(answers);
+          setTotalScore(totalScore);
+          setQuizResult({ answers, mood: message, userId: 0, totalScore });
+          setMoodCategory(moodCategory || '');
+          setQuizCompleted(true);
+          return;
         }
+        
         const response = await fetch('http://localhost:3000/quiz', {
           method: 'POST',
           headers: {
@@ -81,9 +93,12 @@ function Quiz() {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
-        const responseData = await response.json()
-        setQuizResult(responseData)
-        setQuizCompleted(true)
+        const responseData = await response.json();
+        console.log("Quiz Response Data:", responseData);
+        setQuizResult(responseData);
+        setMoodCategory(responseData?.moodCategory || '');
+        setBibleVerse(responseData?.bibleVerse || null);
+        setQuizCompleted(true);
       } catch (error) {
         console.error('Error submitting quiz:', error)
         setError('Could not submit quiz. Please try again')

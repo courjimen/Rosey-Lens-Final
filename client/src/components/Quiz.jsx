@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { calculateScore } from '../../../server/calculateScore'
+import roseImage from '../images/roseImage.webp'
 
 function Quiz() {
   const [questionData, setQuestionData] = useState(null)
@@ -79,7 +81,6 @@ function Quiz() {
           setTotalScore(totalScore);
           setQuizResult({ answers, mood: message, userId: 0, totalScore });
           setMoodCategory(moodCategory || '');
-          setBibleVerse(responseData?.bibleVerse || null);
           setQuizCompleted(true);
           return;
         }
@@ -137,23 +138,53 @@ function Quiz() {
       </div>
     )
   }
+  const quizDone = () => {
+    let imageOpacity = '100%'
+    let grayscale = '0%'
+    let contrast = '100%'
 
-  //QUIZ COMPLETE AND SUBMITTED
-  if (quizCompleted) {
+    if (moodCategory === 'neutral') {
+      imageOpacity = '50%'
+      grayscale = '50%'
+      contrast = '80%'
+    } else if (moodCategory === 'negative') {
+      imageOpacity = '10%'
+      grayscale = '100%'
+      contrast = '60%'
+    }
+
+    console.log(moodCategory)
+
     return (
       <div className='quiz-completed-container'>
-        <h2>Thank you for taking the Quiz! Submit score for your affirmation:</h2>
+          {userId ? (<h2>Thank you for taking the Quiz! Submit score for your affirmation</h2>) : (<h2>Check out your score below, create an account to view your affirmations!</h2>)}
         <Card className='completed-card'>
           <CardHeader title="Quiz Completed!" className='completed-header' />
           <CardContent className='completed-content'>
             <Typography variant="body1">Your mood: {quizResult?.mood}</Typography>
+            <img
+              className={`quiz-rose mood-${moodCategory}`}
+              src={roseImage}
+              alt="Rose representing your mood"
+            />
             <Typography variant="body1">Your score: {quizResult?.totalScore}</Typography>
           </CardContent>
         </Card>
-        <h2><button onClick={handleQuizSubmit}>Submit Quiz</button></h2>
+        <h2>
+        {userId ? (
+          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory, bibleVerse, totalScore } })}> Pick Affirmation</button> ) : (
+          <button onClick={() => navigate('/new')}>Create an Account</button>
+        )}
+        </h2>
       </div>
     )
   }
+
+  
+  //QUIZ COMPLETE AND SUBMITTED
+  if (quizCompleted) {
+    return quizDone(quizResult?.totalScore)
+}
 
   const currentQuestion = questionData[currentQuestionIndex]
 
@@ -163,12 +194,12 @@ function Quiz() {
         <h1>Hi, {firstName}</h1>
         <h3>Answer the questions below to rate your mood:</h3>
         <CardHeader>
-          <Typography className='quiz-title'>
-            Question {currentQuestionIndex + 1} / {questionData.length}
+        <Typography className='quiz-title'>
+           Question {currentQuestionIndex + 1} / {questionData.length}
           </Typography>
         </CardHeader>
         <CardContent>
-          <p className='question-text'>{currentQuestion.text}</p>
+       <p className='question-text'> <span className='span-question'>{currentQuestion.text}</span></p>
           <RadioGroup
             aria-label={`question-${currentQuestion.id}`}
             name={`question-${currentQuestion.id}`}

@@ -55,7 +55,7 @@ const moodData = {
   ],
   negative: [
     "You're feeling down. Let's change that.",
-    "You're feeling a bit low. Let's add some positivity.",
+    "You're feeling low. Let's add some positivity.",
     "You're feeling off. Let's change that.",
     "You're feeling bad vibes. Let's get a moment of peace.",
     "You're feeling less than your usual self. Let's change that."

@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Quiz.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import roseImage from '../images/roseImage.webp';
 import { calculateScore } from '../../../server/calculateScore'
+import roseImage from '../images/roseImage.webp'
 
 function Quiz() {
   const [questionData, setQuestionData] = useState(null)
@@ -19,14 +19,16 @@ function Quiz() {
   const [quizResult, setQuizResult] = useState(null);
   const [moodCategory, setMoodCategory] = useState('');
   const [totalScore, setTotalScore] = useState(0);
-  const [bibleVerse, setBibleVerse] = useState(null)
-
+  const [bibleVerse, setBibleVerse] = useState(null);
 
   const location = useLocation()
   const navigate = useNavigate()
   const userId = location.state?.userId
   const firstName = location.state?.firstName
-
+  
+  const handleQuizSubmit = () => {
+    navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory: quizResult?.moodCategory} })
+  }
 
   console.log('Quiz - Location:', location);
   console.log('Quiz - userId:', userId);
@@ -57,16 +59,16 @@ function Quiz() {
   }, [])
 
   const handleAnswerChange = (e) => {
-    setSelectedAnswer(e.target.value)
-  }
+    const answer = e.target.value;
+    setSelectedAnswer(answer);
+    setAnswers({
+      ...answers,
+      [questionData[currentQuestionIndex].id]: answer,
+    });
+  };
 
   const handleNextQuestion = async () => {
     if (!selectedAnswer) return
-
-    setAnswers({
-      ...answers,
-      [questionData[currentQuestionIndex].id]: selectedAnswer,
-    })
 
     //navigates to next question
     if (currentQuestionIndex < questionData.length - 1) {
@@ -75,12 +77,12 @@ function Quiz() {
     } else {
       try {
         if (!userId) {
-          const {moodCategory, message, totalScore} = calculateScore(answers);
+          const { moodCategory, message, totalScore } = calculateScore(answers);
           setTotalScore(totalScore);
           setQuizResult({ answers, mood: message, userId: 0, totalScore });
           setMoodCategory(moodCategory || '');
           setQuizCompleted(true);
-          return
+          return;
         }
         const response = await fetch('/quiz', {
           method: 'POST',
@@ -92,24 +94,18 @@ function Quiz() {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
-        const responseData = await response.json()
+        const responseData = await response.json();
         console.log("Quiz Response Data:", responseData);
-        setQuizResult(responseData)
-        setMoodCategory(responseData?.moodCategory || '')
-        setBibleVerse(responseData?.bibleVerse || null)
-        setQuizCompleted(true)
+        setQuizResult(responseData);
+        setMoodCategory(responseData?.moodCategory || '');
+        setBibleVerse(responseData?.bibleVerse || null);
+        setQuizCompleted(true);
       } catch (error) {
         console.error('Error submitting quiz:', error)
         setError('Could not submit quiz. Please try again')
       }
     }
   }
-
-  useEffect(() => {
-    if (quizCompleted) {
-      console.log("Quiz results: ", quizResult)
-    }
-  }, [quizCompleted, quizResult])
 
   const handlePrevQuestion = () => {
     if (currentQuestionIndex > 0) {
@@ -141,7 +137,6 @@ function Quiz() {
       </div>
     )
   }
-
   const quizDone = () => {
     let imageOpacity = '100%'
     let grayscale = '0%'

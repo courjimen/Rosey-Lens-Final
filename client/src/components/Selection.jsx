@@ -18,11 +18,11 @@ function Selection() {
   console.log("Selection Component - quizResult:", quizResult);
 
   const handleAffirmationClick = () => {
-    navigate('/affirmation', { state: { userId: userId, firstName: firstName, quizResult: quizResult } })
+    navigate('/affirmation', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory: quizResult?.moodCategory } })
   }
 
   const handleBibleVerse = () => {
-    navigate('/verse', { state: { userId: userId, firstName: firstName, quizResult: quizResult, bibleVerse } })
+    navigate('/verse', { state: { userId: userId, firstName: firstName, quizResult: quizResult, bibleVerse: quizResult?.bibleVerse, moodCategory: quizResult?.moodCategory } })
   }
   return (
     <>

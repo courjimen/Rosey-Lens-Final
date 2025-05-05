@@ -10,6 +10,7 @@ function Verse() {
 
     const location = useLocation()
     const bibleVerseData = location.state?.bibleVerse
+    const moodCategory = location.state?.moodCategory
     const userId = location.state?.userId
     const firstName = location.state?.firstName
 
@@ -86,7 +87,7 @@ function Verse() {
                 <h3>{bibleVerseData.book_name} {bibleVerseData.chapter_verse}</h3>
                 <p>"{verseTextDisplay}"</p>
                 <button className='fave-button' onClick={handleFave}>
-                    <FontAwesomeIcon icon={isFavorited ? fasStarSolid : faStarRegular} size='lg' />
+                    <FontAwesomeIcon icon={isFavorited ? fasStarSolid : faStarRegular} size='lg' data-testid='fave-button' aria-label='Favorite this verse' />
                 </button>
             </div>
 

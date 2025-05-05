@@ -6,12 +6,13 @@ import '../styles/Affirmation.css'
 import roseImage from '../images/roseImage.webp'
 
 function Affirmation() {
+  const location = useLocation()
   const [affirmation, setAffirmation] = useState('')
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
   const [isFave, setIsFave] = useState(false)
 
-  const location = useLocation()
+
   const moodCategory = location.state?.quizResult?.moodCategory
   const userId = location.state?.userId
   const firstName = location.state?.firstName

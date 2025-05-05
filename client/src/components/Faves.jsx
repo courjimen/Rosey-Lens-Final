@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faV } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Faves.css'
 
 
@@ -76,7 +76,7 @@ function Faves() {
               You saved this {favorite.favorite_type}: "{favorite.item_id}"
             </div>
           )}
-          <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' onClick={() => deleteFave(favorite.item_id)} />
+          <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' onClick={() => deleteFave(favorite.item_id)} data-testid="trash-icon"/>
         </div>
       ))}
       <div className='home-button'>

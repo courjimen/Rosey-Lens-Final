@@ -25,9 +25,9 @@ function Quiz() {
   const navigate = useNavigate()
   const userId = location.state?.userId
   const firstName = location.state?.firstName
-  
+
   const handleQuizSubmit = () => {
-    navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory: quizResult?.moodCategory} })
+    navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory: quizResult?.moodCategory } })
   }
 
   console.log('Quiz - Location:', location);
@@ -156,7 +156,7 @@ function Quiz() {
 
     return (
       <div className='quiz-completed-container'>
-          {userId ? (<h2>Thank you for taking the Quiz! Submit score for your affirmation</h2>) : (<h2>Check out your score below, create an account to view your affirmations!</h2>)}
+        {userId ? (<h2>Thank you for taking the Quiz! Submit score for your affirmation</h2>) : (<h2>Check out your score below, create an account to view your affirmations!</h2>)}
         <Card className='completed-card'>
           <CardHeader title="Quiz Completed!" className='completed-header' />
           <CardContent className='completed-content'>
@@ -170,20 +170,20 @@ function Quiz() {
           </CardContent>
         </Card>
         <h2>
-        {userId ? (
-          <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory, bibleVerse, totalScore } })}> Pick Affirmation</button> ) : (
-          <button onClick={() => navigate('/new')}>Create an Account</button>
-        )}
+          {userId ? (
+            <button onClick={() => navigate('/select', { state: { userId: userId, firstName: firstName, quizResult: quizResult, moodCategory, bibleVerse, totalScore } })}> Pick Affirmation</button>) : (
+            <button onClick={() => navigate('/new')}>Create an Account</button>
+          )}
         </h2>
       </div>
     )
   }
 
-  
+
   //QUIZ COMPLETE AND SUBMITTED
   if (quizCompleted) {
     return quizDone(quizResult?.totalScore)
-}
+  }
 
   const currentQuestion = questionData[currentQuestionIndex]
 
@@ -193,12 +193,12 @@ function Quiz() {
         <h1>Hi, {firstName}</h1>
         <h3>Answer the questions below to rate your mood:</h3>
         <CardHeader>
-        <Typography className='quiz-title'>
-           Question {currentQuestionIndex + 1} / {questionData.length}
+          <Typography className='quiz-title'>
+            Question {currentQuestionIndex + 1} / {questionData.length}
           </Typography>
         </CardHeader>
         <CardContent>
-       <p className='question-text'> <span className='span-question'>{currentQuestion.text}</span></p>
+          <p className='question-text'> <span className='span-question'>{currentQuestion.text}</span></p>
           <RadioGroup
             aria-label={`question-${currentQuestion.id}`}
             name={`question-${currentQuestion.id}`}
